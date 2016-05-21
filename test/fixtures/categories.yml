@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 1
+  jp_name: MyString
+  zh_name: MyString
+  code: MyString
+  tipe: MyString
+
+two:
+  total: 1
+  jp_name: MyString
+  zh_name: MyString
+  code: MyString
+  tipe: MyString

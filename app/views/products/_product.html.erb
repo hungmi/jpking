@@ -1,0 +1,10 @@
+<div class='<%= params[:rowCount] ? "col-xs-#{12/rowCount}" : "col-sm-4 col-xs-6" %> product-card'>
+  <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: product.jp_name %>
+  <%#= product.category.jp_name %>
+  <h5 class="product-item-code"><%= product.item_code %></h5>
+  <h5 class="product-name"><%= link_to product.jp_name, product.links.last.value %></h5>
+  <%= product.zh_name %>
+  <%= product.original_price %>
+  <%= product.retail_price %>
+  <%#= product.stock %>
+</div>

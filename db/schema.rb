@@ -11,10 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519042107) do
+ActiveRecord::Schema.define(version: 20160519143748) do
+
+  create_table "categories", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.integer  "parent_id"
+    t.integer  "total"
+    t.string   "jp_name"
+    t.string   "zh_name"
+    t.string   "code"
+    t.string   "tipe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
+  add_index "categories", ["shop_id"], name: "index_categories_on_shop_id"
+
+  create_table "links", force: :cascade do |t|
+    t.string   "value"
+    t.date     "fetch_time"
+    t.integer  "state",          default: 0
+    t.integer  "fetchable_id"
+    t.string   "fetchable_type"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "links", ["fetchable_type", "fetchable_id"], name: "index_links_on_fetchable_type_and_fetchable_id"
 
   create_table "products", force: :cascade do |t|
-    t.integer  "shop_id"
+    t.integer  "category_id"
     t.string   "jp_name"
     t.string   "zh_name"
     t.integer  "original_price"
@@ -25,6 +52,13 @@ ActiveRecord::Schema.define(version: 20160519042107) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "products", ["shop_id"], name: "index_products_on_shop_id"
+  add_index "products", ["category_id"], name: "index_products_on_category_id"
+
+  create_table "shops", force: :cascade do |t|
+    t.string   "zh_name"
+    t.string   "jp_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

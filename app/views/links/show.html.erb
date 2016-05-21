@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @link.value %>
+</p>
+
+<p>
+  <strong>Fetch time:</strong>
+  <%= @link.fetch_time %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @link.state %>
+</p>
+
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>

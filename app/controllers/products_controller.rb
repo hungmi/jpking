@@ -1,10 +1,18 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_row_count, only: [:index]
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @category = Category.find_by_id(params[:category_id])
+    if @category.present?
+      @children = @category.children
+      @products = Product.all.includes(:links, :category).where(categories: {parent_id: params[:category_id]}) + @category.products
+    else
+      @products = Product.all.includes(:links)
+    end
+    # byebug
   end
 
   # GET /products/1
@@ -70,5 +78,9 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:shop_id, :jp_name, :zh_name, :original_price, :retail_price, :stock, :item_code)
+    end
+
+    def set_row_count
+      params[:rowCount] = params[:rowCount].to_i.between?(1,12) ? params[:rowCount].to_i : nil
     end
 end

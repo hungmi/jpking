@@ -1,39 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Products</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Shop</th>
-      <th>Jp name</th>
-      <th>Zh name</th>
-      <th>Original price</th>
-      <th>Retail price</th>
-      <th>Stock</th>
-      <th>Item code</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.shop %></td>
-        <td><%= product.jp_name %></td>
-        <td><%= product.zh_name %></td>
-        <td><%= product.original_price %></td>
-        <td><%= product.retail_price %></td>
-        <td><%= product.stock %></td>
-        <td><%= product.item_code %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div id="product-index-container">
+  <div class="row">
+    <% if @children.present? %>
+      <% @children.map do |category| %>
+        <%= link_to products_path(category_id: category.id) do %>
+          <div class="col-xs-2 category-card">
+            <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: category.jp_name %>
+            <h5 class="category-name"><%= category.jp_name %></h5>
+            <%= category.zh_name %>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Product', new_product_path %>
+  </div>
+  <div class="row">
+    <%= render "products", products: @products %>
+  </div>
+</div>

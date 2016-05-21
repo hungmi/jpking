@@ -1,0 +1,18 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.category-card {
+  margin-bottom: 30px;
+  text-align: center;
+  &:hover .category-name {
+    color: green;
+  }
+  .category-name {
+    background: rgba(200,200,200,0.2);
+    margin: 0;
+    padding: 10px 0px;
+    color: black;
+    font-size: 24px;
+  }
+}

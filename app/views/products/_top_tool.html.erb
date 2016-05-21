@@ -1,0 +1,6 @@
+<div class="col-xs-12 text-right top-tool">
+  每列顯示數量
+  <% for i in [3,4,6] do %>
+    <span><%= link_to "#{i}個", params.merge(rowCount:i) %></span>
+  <% end %>
+</div>

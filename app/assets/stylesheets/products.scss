@@ -1,3 +1,48 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// .product-name > a {
+//   overflow: hidden;
+//   height: 15px;
+//   display: block;
+// }
+
+#product-index-container {
+  .top-tool {
+    margin-bottom: 20px;
+  }
+
+  .product-card {
+    .product-name {
+      height: 31px;
+      overflow-y: hidden;
+    }
+    margin-bottom: 15px;
+  }
+
+  @media only screen and (min-width : 768px) {
+    .left {
+      position: fixed;
+      height: 91%;
+      overflow-x: auto;
+      left: 0px;
+      padding-left: 40px;
+    }
+    .right {
+      position: fixed;
+      height: 90%;
+      overflow-x: auto;
+      left: 25%;
+      padding-right: 40px;
+    }
+  }
+  
+  @media only screen and (max-width : 767px) {
+      
+  }
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
