@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     @category = Category.find_by_id(params[:category_id])
     if @category.present?
       @children = @category.children
-      @products = Product.all.includes(:links, :category).where(categories: {parent_id: params[:category_id]}) + @category.products
+      @products = Product.all.includes(:links, :category).where(categories: {parent_id: params[:category_id]}) + @category.products.includes(:links)
     else
       @products = Product.all.includes(:links)
     end
