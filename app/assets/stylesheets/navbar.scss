@@ -1,0 +1,64 @@
+#navbar-customize {
+  position: fixed;
+  z-index: 9999;  
+  width: 100%;
+  background-color: pink;
+  border: none;
+  border-radius: 0px;
+  
+  * {
+    color: white;
+  }
+  input {
+    color: black;
+  }
+  h1.navbar-brand {
+    margin: 0px;
+  }
+  .navbar-right {
+    padding: 10px 15px;
+  }
+  .navbar-form {
+    border: none;
+  }
+  .navbar-toggle {
+    border: 2px solid white;
+    span.icon-bar {
+      background-color: white;
+    }
+  }
+
+  li.active a {
+    color: black;
+    background-color: pink;
+  }
+  .btn {
+    background-color: pink;
+    border: 2px solid white;
+    &:hover {
+      background-color: #FF8FA2;
+    }
+    &.link {
+      //margin: 8px 0px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #navbar-customize {
+    top: 0px;
+  }
+  .responsive.container {
+    margin-top: 70px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #navbar-customize {
+    bottom: 0px;
+    margin: 0px;
+  }
+  .responsive.container {
+    margin: 10px 0px 60px 0px;
+  }
+}

@@ -18,8 +18,9 @@
 @import "bootstrap";
 @import "spinner";
 
-html, body {
+html, body, h1, h2, h3, h4, h5 {
   font-family: 'HanHei TC','PingFang TC', 'Helvetica Neue', 'Helvetica', 'STHeitiTC-Light', 'Arial', sans-serif;
+  font-weight: 300;
 }
 
 a:not(.btn) {
@@ -41,5 +42,19 @@ a:not(.btn) {
     left: 50%;
     transform: translate(-50%,-50%);
     font-size: 28px;
+  }
+}
+
+[class*="col-"] {
+  padding: 0px 5px;
+}
+
+.icon-large {
+  font-size: 30px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+      width: 970px;
   }
 }

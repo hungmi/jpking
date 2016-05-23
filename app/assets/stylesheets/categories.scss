@@ -5,14 +5,20 @@
 .category-card {
   margin-bottom: 30px;
   text-align: center;
-  &:hover .category-name {
-    color: green;
+  // margin: 0px 4px;
+  border: 1px solid pink;
+  padding: 0px !important;
+  &:hover {
+    border-color: deeppink;
+    .category-name {
+      color: deeppink;
+    }
   }
   .category-name {
-    background: rgba(200,200,200,0.2);
+    background: rgba(230,230,230,0.5);
     margin: 0;
-    padding: 10px 0px;
-    color: black;
-    font-size: 24px;
+    padding: 10px 10px;
+    color: hotpink;
+    font-size: 15px;
   }
 }

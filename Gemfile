@@ -59,3 +59,8 @@ group :development do
   gem 'better_errors'
 end
 
+group :production do
+  gem "rack-timeout"
+  gem 'rails_12factor'
+  gem 'puma'
+end
