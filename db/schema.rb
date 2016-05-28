@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519143748) do
+ActiveRecord::Schema.define(version: 20160528141058) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.string   "image"
+    t.text     "description"
+    t.integer  "order"
+    t.string   "token"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "attachments", ["imageable_type", "imageable_id"], name: "index_attachments_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.integer  "shop_id"
@@ -25,8 +41,8 @@ ActiveRecord::Schema.define(version: 20160519143748) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
-  add_index "categories", ["shop_id"], name: "index_categories_on_shop_id"
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+  add_index "categories", ["shop_id"], name: "index_categories_on_shop_id", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.string   "value"
@@ -38,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160519143748) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "links", ["fetchable_type", "fetchable_id"], name: "index_links_on_fetchable_type_and_fetchable_id"
+  add_index "links", ["fetchable_type", "fetchable_id"], name: "index_links_on_fetchable_type_and_fetchable_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "category_id"
@@ -52,7 +68,7 @@ ActiveRecord::Schema.define(version: 20160519143748) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "products", ["category_id"], name: "index_products_on_category_id"
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "shops", force: :cascade do |t|
     t.string   "zh_name"
@@ -61,4 +77,6 @@ ActiveRecord::Schema.define(version: 20160519143748) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "categories", "shops"
+  add_foreign_key "products", "categories"
 end

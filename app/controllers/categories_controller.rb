@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.parent_categories
+    @hot_products = Product.all[0..6]
   end
 
   # GET /categories/1

@@ -46,7 +46,7 @@ a:not(.btn) {
 }
 
 [class*="col-"] {
-  padding: 0px 5px;
+  padding: 0px 4px;
 }
 
 .icon-large {
@@ -57,4 +57,9 @@ a:not(.btn) {
   .container {
       width: 970px;
   }
+}
+
+.block-title {
+  margin-bottom: 10px;
+  font-size: 24px;
 }

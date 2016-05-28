@@ -1,11 +1,11 @@
 <div id="product-index-container">
-  <%= render "partials/main_ad" %>
   <div class="row">
     <% if @children.present? %>
       <%= render partial:"categories/category", collection: @children, as: :category %>
     <% end %>
   </div>
   <div class="row">
-    <%= render "products", products: @products %>
+    <%= render 'top_tool' %>
+    <%= render @products, rowCount: params[:rowCount] %>
   </div>
 </div>

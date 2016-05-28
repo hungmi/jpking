@@ -38,6 +38,7 @@ gem 'omniauth-facebook', '3.0.0'
 gem 'mini_magick'
 gem 'fog-aws', '<= 0.1.1'
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
+gem 'figaro'
 gem 'pg'
 # gem 'browser'
 
