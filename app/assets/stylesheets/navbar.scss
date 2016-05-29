@@ -1,8 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Orbitron);
 #navbar-customize {
   position: fixed;
   z-index: 9999;  
   width: 100%;
-  background-color: pink;
+  background-color: mistyrose;
   border: none;
   border-radius: 0px;
   
@@ -14,6 +15,18 @@
   }
   h1.navbar-brand {
     margin: 0px;
+    // font-size: 30px;
+    line-height: 33px;
+    & > a {
+      font-size: 0px; 
+      & > span {
+        &.japan-logo-text {
+          color: hotpink;
+        }
+        font-family: 'Orbitron', sans-serif;
+        font-size: 46px;
+      }
+    }
   }
   .navbar-right {
     padding: 10px 15px;
@@ -40,6 +53,14 @@
     }
     &.link {
       //margin: 8px 0px;
+    }
+    &.help {
+      background-color: floralwhite;
+      color: lightslategray;
+      border: 2px solid lightslategray;
+      &:hover {
+        background-color: white;
+      }
     }
   }
 }

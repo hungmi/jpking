@@ -39,18 +39,31 @@ class EtoileService
 
   def fetch_products_in_this_category(category)
     # loop 此目錄中各分頁的連結，一千樣就有 10 頁
+    @agent = Mechanize.new
+    sign_in(@agent)
     category.links.map do |link|
-      @page = Nokogiri::HTML open(link.value)
-      
-      @page.css(".item_box").map do |item|
+      @page = @agent.get(link.value)  
+      # binding.pry
+      @page.search(".item_box").map do |item|
         # 取得商品資料
-        # item.css(".item_thm img").each do |img|
         product_name_in_link = item.css(".item_name > a") # 產品名稱，包含連結到產品
         params = extract_params product_name_in_link.attr("href").to_s
-        # original_price = item.css(".item_price1 > .price_num")
+        original_price = item.search(".item_price1 p.price_num_small").first.text.gsub(",","")[/\d+/]
+        wholesale_price = item.search(".item_price2 p.price_num_small").first.text.gsub(",","")[/\d+/]
+        special_price = item.search(".item_price3_small").first.text.gsub(",","")[/\d+/]
+        # item.css(".item_thm img").each do |img|
+        # images = item.css(".item_thm > a > img")
         ############
         # 儲存商品及其連結
-        @product = category.products.where( item_code: params[:productCode], jp_name: product_name_in_link.text.strip ).first_or_create
+        if category.products.where( item_code: params[:productCode] ).present?
+          @product = category.products.where( item_code: params[:productCode] ).first
+          @product.original_price = original_price
+          @product.wholesale_price = special_price || wholesale_price
+          @product.save if @product.changed?
+        else
+          @product = category.products.where( item_code: params[:productCode], jp_name: product_name_in_link.text.strip, original_price: original_price, wholesale_price: wholesale_price ).create
+        end
+        # binding.pry
         @product.links.create( value: @request_url + good_strip(product_name_in_link.attr("href").to_s) )
         ############
       end
@@ -58,10 +71,22 @@ class EtoileService
     end
   end
 
-  def renew_products
+  def fetch_product(product)
+    # 此方法是用來抓產品詳細資訊跟尺寸、顏色；大圖不一定要從這邊抓，因為連結可以推斷出來
     # add state to product first, 可購買、已下架
     # 跑到各個目錄的 product list 比對列出的產品連結，這樣 request 最少
     # 也要寫 renew_categories
+    @agent = Mechanize.new
+    sign_in(@agent)
+    @product_page = @agent.get(product.links.last.value)
+    images = @product_page.css("img[id*=image_]")
+    unless @product.attachments.present?
+      images.each do |img|
+        @attachment = @product.attachments.new 
+        @attachment.remote_image_url = img.attr("src")
+        @attachment.save
+      end
+    end
   end
 
   private
@@ -78,5 +103,13 @@ class EtoileService
     def good_strip(href) # 解決直接 strip 網址時，會出現 tab 無法清掉的問題
       params_in_href = href[/[^\?]*$/].strip
       return href[/^[^\?]*/] + "?" + params_in_href
+    end
+
+    def sign_in(agent)
+      sign_in_page = agent.get("http://etonet.etoile.co.jp/ec/app/auth/login")
+      sign_in_form = sign_in_page.form_with(name:"loginform")
+      sign_in_form.username = "799300"
+      sign_in_form.password = "bj680709"
+      sign_in_form.submit
     end
 end

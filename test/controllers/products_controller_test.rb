@@ -18,7 +18,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should create product" do
     assert_difference('Product.count') do
-      post :create, product: { item_code: @product.item_code, jp_name: @product.jp_name, original_price: @product.original_price, retail_price: @product.retail_price, shop_id: @product.shop_id, stock: @product.stock, zh_name: @product.zh_name }
+      post :create, product: { item_code: @product.item_code, jp_name: @product.jp_name, original_price: @product.original_price, wholesale_price: @product.wholesale_price, shop_id: @product.shop_id, stock: @product.stock, zh_name: @product.zh_name }
     end
 
     assert_redirected_to product_path(assigns(:product))
@@ -35,7 +35,7 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "should update product" do
-    patch :update, id: @product, product: { item_code: @product.item_code, jp_name: @product.jp_name, original_price: @product.original_price, retail_price: @product.retail_price, shop_id: @product.shop_id, stock: @product.stock, zh_name: @product.zh_name }
+    patch :update, id: @product, product: { item_code: @product.item_code, jp_name: @product.jp_name, original_price: @product.original_price, wholesale_price: @product.wholesale_price, shop_id: @product.shop_id, stock: @product.stock, zh_name: @product.zh_name }
     assert_redirected_to product_path(assigns(:product))
   end
 

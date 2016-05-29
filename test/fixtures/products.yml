@@ -5,7 +5,7 @@ one:
   jp_name: MyString
   zh_name: MyString
   original_price: 1
-  retail_price: 1
+  wholesale_price: 1
   stock: 1
   item_code: MyString
 
@@ -14,6 +14,6 @@ two:
   jp_name: MyString
   zh_name: MyString
   original_price: 1
-  retail_price: 1
+  wholesale_price: 1
   stock: 1
   item_code: MyString

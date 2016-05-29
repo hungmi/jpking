@@ -61,11 +61,11 @@ ActiveRecord::Schema.define(version: 20160528141058) do
     t.string   "jp_name"
     t.string   "zh_name"
     t.integer  "original_price"
-    t.integer  "retail_price"
+    t.integer  "wholesale_price"
     t.integer  "stock"
     t.string   "item_code"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

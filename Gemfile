@@ -40,6 +40,7 @@ gem 'fog-aws', '<= 0.1.1'
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'figaro'
 gem 'pg'
+gem 'mechanize'
 # gem 'browser'
 
 group :development, :test do
