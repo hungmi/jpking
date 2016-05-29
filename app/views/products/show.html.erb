@@ -1,0 +1,24 @@
+<div class="col-xs-7">
+  <% if @product.attachments_count > 0 %>
+    <div style="position: relative;">
+      <%= image_tag @product.attachments.first.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px;", class:"product-main-image", id:"image-#{@product.attachments.first.id}" %>
+      <% @product.attachments[1..-1].each do |a| %>
+        <%= image_tag a.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px; display: none;", class:"product-main-image", id:"image-#{a.id}" %>
+      <% end %>      
+    </div>
+    <% @product.attachments.each_slice(6) do |a6| %>
+      <div class="row">
+        <% a6.each do |a| %>
+          <div class="col-xs-2 product-thumbs" data-image=<%= "image-#{a.id}" %>>
+            <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
+            <%= a.description %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="col-xs-5">
+  <h5><%= @product.item_code %></h5>
+  <h5><%= @product.jp_name %></h5>
+</div>

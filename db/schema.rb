@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528141058) do
+ActiveRecord::Schema.define(version: 20160529061311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160528141058) do
     t.string   "token"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "source_url"
   end
 
   add_index "attachments", ["imageable_type", "imageable_id"], name: "index_attachments_on_imageable_type_and_imageable_id", using: :btree
@@ -64,8 +65,9 @@ ActiveRecord::Schema.define(version: 20160528141058) do
     t.integer  "wholesale_price"
     t.integer  "stock"
     t.string   "item_code"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "attachments_count", default: 0
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

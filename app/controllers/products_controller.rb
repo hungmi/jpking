@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:edit, :update, :destroy]
   before_action :set_row_count, only: [:index]
 
   # GET /products
@@ -8,9 +8,9 @@ class ProductsController < ApplicationController
     @category = Category.find_by_id(params[:category_id])
     if @category.present?
       @children = @category.children
-      @products = Product.all.includes(:links, :category).where(categories: {parent_id: params[:category_id]}) + @category.products.includes(:links)
+      @products = Product.all.includes(:links, :category, :attachments).where(categories: {parent_id: params[:category_id]}) + @category.products.includes(:links, :attachments)
     else
-      @products = Product.all.includes(:links)
+      @products = Product.all.includes(:links, :attachments)
     end
     # byebug
   end
@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product = Product.includes(:attachments).find(params[:id])
   end
 
   # GET /products/new

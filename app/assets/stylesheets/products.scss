@@ -14,16 +14,18 @@
   }
 
   .product-card {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     .product-name {
       height: 31px;
       overflow-y: hidden;
     }
     .product-item-code {
       position: absolute;
-      top: 0px;
+      // top: 0px;
+      top: 50%;
+      color: white;
       margin: auto;
-      background-color: rgba(130,130,130,0.3);
+      // background-color: rgba(130,130,130,0.3);
       width: 100%;
       line-height: 30px;
       font-size: 20px;
@@ -84,5 +86,16 @@
 }
 
 ::-webkit-scrollbar { 
-    display: none; 
+  display: none; 
+}
+
+// products#show
+
+.product-thumbs {
+  &:hover {
+    border: 1px solid pink;
+  }
+}
+#product-image-spinner {
+  position: absolute;
 }

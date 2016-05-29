@@ -46,13 +46,14 @@ class EtoileService
       # binding.pry
       @page.search(".item_box").map do |item|
         # 取得商品資料
+        binding.pry
         product_name_in_link = item.css(".item_name > a") # 產品名稱，包含連結到產品
         params = extract_params product_name_in_link.attr("href").to_s
         original_price = item.search(".item_price1 p.price_num_small").first.text.gsub(",","")[/\d+/]
         wholesale_price = item.search(".item_price2 p.price_num_small").first.text.gsub(",","")[/\d+/]
         special_price = item.search(".item_price3_small").first.text.gsub(",","")[/\d+/]
         # item.css(".item_thm img").each do |img|
-        # images = item.css(".item_thm > a > img")
+        # image_url_base = item.css(".item_thm > a > img").attr("src").to_s.gsub("productnl","product").gsub("05_","01_")#.gsub("01.jpg","img_num.jpg")
         ############
         # 儲存商品及其連結
         if category.products.where( item_code: params[:productCode] ).present?
@@ -76,17 +77,36 @@ class EtoileService
     # add state to product first, 可購買、已下架
     # 跑到各個目錄的 product list 比對列出的產品連結，這樣 request 最少
     # 也要寫 renew_categories
-    @agent = Mechanize.new
-    sign_in(@agent)
-    @product_page = @agent.get(product.links.last.value)
+
+    # 不必登入也可以拿到清楚的圖
+    # @agent = Mechanize.new
+    # sign_in(@agent)
+
+    @product_page = Nokogiri::HTML open(product.links.last.value)
     images = @product_page.css("img[id*=image_]")
-    unless @product.attachments.present?
-      images.each do |img|
-        @attachment = @product.attachments.new 
-        @attachment.remote_image_url = img.attr("src")
+    images.each do |img|
+      # binding.pry
+      @attachment = product.attachments.new
+      image_url = @request_url + img.attr("src").to_s.gsub("productnl","product").gsub("03_","01_")
+      @attachment.source_url = image_url
+      @attachment.description = img.attr("alt").to_s
+      if @attachment.valid?
+        @attachment.remote_image_url = image_url
         @attachment.save
       end
     end
+  end
+
+  def fetch_products(num)
+    @processed_products = []
+    for i in 1..num do
+      product = Product.all[rand(Product.all.size+1)]
+      @processed_products << product.item_code
+      fetch_product(product)
+      sleep rand(20)
+      i += 1
+    end
+    p @processed_products
   end
 
   private
