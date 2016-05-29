@@ -1,4 +1,4 @@
-<div class="col-xs-7">
+<div class="col-sm-5 col-xs-12">
   <% if @product.attachments_count > 0 %>
     <div style="position: relative;">
       <%= image_tag @product.attachments.first.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px;", class:"product-main-image", id:"image-#{@product.attachments.first.id}" %>
@@ -18,7 +18,27 @@
     <% end %>
   <% end %>
 </div>
-<div class="col-xs-5">
-  <h5><%= @product.item_code %></h5>
-  <h5><%= @product.jp_name %></h5>
+<div class="col-sm-7 col-xs-12" id="product-details-block">
+  <h5>商品編號：<%= @product.item_code %></h5>
+  <h1><%= @product.jp_name %></h1>
+  <div class="detail">
+    <h5 >原產地</h5>
+    <p>日本</p>
+    <h5>材質</h5>
+    <p>ポリエステル 85％， ポリウレタン 15％</p>
+    <h5>特色</h5>
+    <p>キュープ：生地に触れると冷たく感じる「接触冷感」と優れた吸放湿性を持ったサマーシーズンにおすすめの快適素材です。</p>
+  </div>
+  <%= render "partials/add_to_cart" %>
+  <%= render "partials/contact_us" %>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    $(".product-thumbs").hover(function() {
+      console.log($(this).data("image"));
+      $(".product-main-image").hide();
+      $("#" + $(this).data("image")).show();
+    });
+  });
+</script>

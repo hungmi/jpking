@@ -19,6 +19,9 @@
     line-height: 33px;
     & > a {
       font-size: 0px; 
+      &:hover {
+        text-decoration: none;
+      }
       & > span {
         &.japan-logo-text {
           color: hotpink;

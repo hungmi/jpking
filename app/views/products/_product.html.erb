@@ -7,7 +7,7 @@
         <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: product.jp_name %>
       <% end %>
       <%#= product.category.jp_name %>
-      <!-- <h5 class="product-item-code"><%= "#{product.item_code[0..2]}-#{product.item_code[3..-1]}" %></h5> -->
+      <!-- <h5 class="product-item-code"><%#= "#{product.item_code[0..2]}-#{product.item_code[3..-1]}" %></h5> -->
     </div>
   <% end %>
   <span>原</span>
@@ -23,9 +23,6 @@
       <i class="glyphicon glyphicon-heart"></i>
       加入待買
     <% end %>
-    <%= link_to root_path, class: "btn" do %>
-      <i class="glyphicon glyphicon-shopping-cart"></i>
-      加入發財車
-    <% end %>
+    <%= render "partials/add_to_cart" %>
   </div><!-- /input-group -->
 </div>

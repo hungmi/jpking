@@ -40,13 +40,6 @@
     }
     .wish-and-cart {
       margin: auto;
-      a.btn {
-        background-color: pink;
-        color: white;
-        &:hover {
-          background-color: #FF8FA2;
-        }
-      }
     }
     &.col-xs-2 {
       .wish-and-cart a.btn {
@@ -98,4 +91,20 @@
 }
 #product-image-spinner {
   position: absolute;
+}
+#product-details-block {
+  .detail {
+    margin-top: 20px;
+  }
+  @media only screen and (min-width: 481px) {
+    padding: 0px 0px 0px 70px;
+  }
+  .detail {
+    & > h5 {
+      padding-bottom: 3px; border-bottom: 1px solid #ddd;
+    }
+    & > p {
+      font-size: 18px; margin-bottom: 20px;  
+    }
+  }
 }
