@@ -20,7 +20,7 @@
 </div>
 <div class="col-sm-7 col-xs-12" id="product-details-block">
   <h5>商品編號：<%= @product.item_code %></h5>
-  <h1><%= @product.jp_name %></h1>
+  <h1><%= @product.name %></h1>
   <div class="detail">
     <h5 >原產地</h5>
     <p>日本</p>
@@ -29,7 +29,7 @@
     <h5>特色</h5>
     <p>キュープ：生地に触れると冷たく感じる「接触冷感」と優れた吸放湿性を持ったサマーシーズンにおすすめの快適素材です。</p>
   </div>
-  <%= render "partials/add_to_cart" %>
+  <%= render "partials/add_to_cart", product: @product %>
   <%= render "partials/contact_us" %>
 </div>
 

@@ -7,11 +7,15 @@ class Product < ActiveRecord::Base
   validates :item_code, uniqueness: true, allow_blank: true
 
   def their_price
-    original_price ? (original_price*1.08*0.3).round : "無"
+    original_price ? (original_price*1.08*1.05*0.3).round : "無"
   end
 
   def our_price
     wholesale_price ? (wholesale_price*1.08*1.05*0.3).round : "無"
+  end
+
+  def name
+    zh_name ? zh_name : jp_name    
   end
 
   def on_price_com(name)

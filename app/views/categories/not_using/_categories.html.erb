@@ -1,8 +1,8 @@
 <% @categories.map do |parent| %>
-  <p><%= parent.jp_name %></p>
+  <p><%= parent.name %></p>
   <ul>
     <% parent.children.map do |child| %>
-      <li><%= link_to child.jp_name, params.merge(category_id:child.id) %></li>
+      <li><%= link_to child.name, params.merge(category_id:child.id) %></li>
     <% end %>
   </ul>
 <% end %>

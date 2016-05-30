@@ -1,10 +1,22 @@
 Rails.application.routes.draw do
-  root "categories#index"
-  resources :shops
-  resources :categories
+  root "pages#home"
+  resources :categories, except: [:index]
   resources :links
   resources :products
-  get '/guide' => 'pages#guide', as: :guide
+  resources :cart_items
+  # resources :carts
+  controller 'pages' do
+    get '/guide' => :guide, as: :guide
+    get '/cart' => :cart, as: :cart
+    get '/register' => :register, as: :register
+  end
+  controller 'sessions' do
+    get '/login' => :new, as: :login
+    post '/sign_in' => :create, as: :sign_in
+    delete '/logout' => :destroy, as: :logout
+  end
+  resources :users
+  resources :shops
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

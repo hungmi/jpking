@@ -1,0 +1,19 @@
+#login-form {
+  width: 250px;
+  margin: 100px auto;
+}
+.btn-facebook {
+  background-color: #3b5998;
+  color: white;
+  width: 100%;
+  &:hover {
+    background-color: #2d4373;
+    a {
+      color: white;
+    }
+  }
+  i.fa {
+    padding-right: 10px;
+    font-size: 20px;
+  }
+}

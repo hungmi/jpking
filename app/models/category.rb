@@ -10,4 +10,12 @@ class Category < ActiveRecord::Base
   include Fetchable
 
   validates :jp_name, :zh_name, uniqueness: true, allow_blank: true
+
+  # def has_products?
+  #   Category.
+  # end
+
+  def name
+    zh_name ? zh_name : jp_name    
+  end
 end

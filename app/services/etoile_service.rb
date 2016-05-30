@@ -94,19 +94,37 @@ class EtoileService
         @attachment.remote_image_url = image_url
         @attachment.save
       end
+      sleep 2
     end
   end
 
-  def fetch_products(num)
+  def fetch_product_images_of_category(category)
+    category.products.map do |p| # 注意此目錄底下必須有商品
+      fetch_product(p)
+      sleep rand(25)
+    end
+  end
+
+  def fetch_rand_products(num)
     @processed_products = []
-    for i in 1..num do
-      product = Product.all[rand(Product.all.size+1)]
-      @processed_products << product.item_code
-      fetch_product(product)
+    # max = Product.all.size
+    for i in 1..num
+      p "start"
+      target_product = Product.where("attachments_count = 0")[rand(Product.where("attachments_count = 0").size)]
+      fetch_product(target_product)
+      @processed_products << target_product.item_code
+      p "pause"
       sleep rand(20)
-      i += 1
     end
     p @processed_products
+    # for i in 1..max do
+    #   # binding.pry
+    #   product = Product.all[rand(Product.all.size+1)]
+    #   @processed_products << product.item_code
+    #   fetch_product(product)
+    #   sleep rand(20)
+    #   i += 1
+    # end
   end
 
   private

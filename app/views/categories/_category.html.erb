@@ -1,8 +1,8 @@
 <%= link_to products_path(category_id: category.id) do %>
   <div class="col-sm-3 col-xs-3">
     <div class="category-card">
-      <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: category.jp_name %>
-      <h5 class="category-name"><%= category.jp_name %></h5>
+      <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: category.name %>
+      <h5 class="category-name"><%= category.name %></h5>
       <%= category.zh_name %>
     </div>
   </div>

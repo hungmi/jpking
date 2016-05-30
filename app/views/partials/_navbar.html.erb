@@ -41,7 +41,13 @@
         <button type="submit" class="btn btn-default">搜尋</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <%= link_to "登入", root_path, class: "btn btn-default link" %>
+        <% if user_signed_in? %>
+          <%= link_to "發財車", cart_path, class: "btn btn-default link" %>
+          <%= link_to "登出", logout_path, class: "btn btn-default link", method: :delete %>
+        <% else %>
+          <%= link_to "加入會員", register_path, class: "btn btn-default link" %>
+          <%= link_to "登入", login_path, class: "btn btn-default link" %>
+        <% end %>
         <%= link_to "批發須知", guide_path, class: "btn btn-default help" %>
         <!-- <li><a href="#">Link</a></li>
         <li class="dropdown">

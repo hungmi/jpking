@@ -1,0 +1,11 @@
+<div id="login-form">
+  <%= link_to root_path, class: "btn btn-facebook" do %>
+    Facebook 登入
+  <% end %>
+  <hr>
+  <%= simple_form_for :user, url: sign_in_path do |f| %>
+    <%= f.input :username %>
+    <%= f.input :password %>
+    <%= f.submit %>
+  <% end %>
+</div>
