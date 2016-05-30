@@ -2,7 +2,7 @@
   width: 40px;
   height: 40px;
   display: none;
-  left: 50%;
+  left: calc((100% - 40px)/2);
   top: 50%;
   z-index: 9999;
   position: fixed;

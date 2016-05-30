@@ -94,7 +94,7 @@ class EtoileService
         @attachment.remote_image_url = image_url
         @attachment.save
       end
-      sleep 2
+      sleep rand(5)
     end
   end
 

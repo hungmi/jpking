@@ -28,12 +28,16 @@ class CartItemsController < ApplicationController
     @cart_item = current_user.cart.cart_items.new(cart_item_params)
 
     respond_to do |format|
-      if @cart_item.save
-        format.html { redirect_to cart_path, notice: 'Cart item was successfully created.' }
-        format.json { render :show, status: :created, location: @cart_item }
+      if @cart_item.unique?
+        if @cart_item.save
+          format.html { redirect_to cart_path, notice: '成功加入購物車' }
+          format.json { render :show, status: :created, location: @cart_item }
+        else
+          format.html { redirect_to :back, notice: '加入購物車失敗' }
+          format.json { render json: @cart_item.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { redirect_to :back, notice: '加入購物車失敗' }
-        format.json { render json: @cart_item.errors, status: :unprocessable_entity }
+        format.html { redirect_to cart_path, notice: '已加入購物車' }
       end
     end
   end

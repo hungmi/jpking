@@ -4,6 +4,14 @@ class CartItem < ActiveRecord::Base
   belongs_to :cart
   belongs_to :product
 
+  validate :unique?, on: :create
+  # 不知道為啥沒用
+
+  def unique?
+    # binding.pry
+    !self.product_id.in?(self.cart.cart_items.pluck(:product_id))
+  end
+
   def fork
     self.name = self.product.name
     self.price = self.product.our_price
