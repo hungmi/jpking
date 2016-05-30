@@ -8,9 +8,9 @@ class ProductsController < ApplicationController
     @category = Category.find_by_id(params[:category_id])
     if @category.present?
       @children = @category.children
-      @products = Product.all.includes(:links, :category, :attachments).where(categories: {parent_id: params[:category_id]}).where("attachments_count > 0") + @category.products.includes(:links, :attachments).where("attachments_count > 0")
+      @products = Product.all.includes(:links, :category, :attachments).where(categories: {parent_id: params[:category_id]}).where("attachments_count > 0")[0..100] + @category.products.includes(:links, :attachments).where("attachments_count > 0")[0..100]
     else
-      @products = Product.all.includes(:links, :attachments).where("attachments_count > 0")
+      @products = Product.all.includes(:links, :attachments).where("attachments_count > 0")[0..100]
     end
     # byebug
   end

@@ -3,7 +3,7 @@
   height: 40px;
   display: none;
   left: calc((100% - 40px)/2);
-  top: 50%;
+  top: calc((100% - 40px)/2);
   z-index: 9999;
   position: fixed;
   margin: 0 auto;

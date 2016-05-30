@@ -20,7 +20,7 @@ class CartItem < ActiveRecord::Base
   end
 
   def wholesale_amount
-    if self.name.index("（") && self.name.index("）")
+    if self.name.index("（") && self.name.index("）") && self.name.index("x")
       x_pos = self.name.index("x")
       return self.name[x_pos+1..-1][/\d+/].to_i
     else
