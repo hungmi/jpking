@@ -87,13 +87,13 @@ class OrdersController < ApplicationController
     # order_items_attributes = []
     @new_order = current_user.orders.create# if order_items_attributes.present?
     #params[:merge_orders].values.map do |k,v|
-
+    # binding.pry
     params[:merge_orders].map do |token, value|
       if value[:_merge] == "1" && (order = Order.find_by_token(token))
         # binding.pry
         total += order.total
         order.order_items.update_all(order_id: @new_order.id)
-        order.destroy
+        order.reload.destroy
       end
     end
 
@@ -112,10 +112,11 @@ class OrdersController < ApplicationController
     if @new_order.reload.order_items.present?
       #binding.pry
       @new_order.update_column(:total, total)
+      redirect_to @new_order
     else
       @new_order.destroy
+      redirect_to root_path
     end
-    redirect_to orders_path
   end
 
   private

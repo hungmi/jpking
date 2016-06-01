@@ -17,4 +17,15 @@ module ProductsHelper
       end
     end
   end
+  def dead_or_alive_btn(product)
+    if product.alive?
+      add_to_cart_btn(product)
+    else
+      capture do
+        link_to "#", class: "btn btn-disabled", disabled: "disabled" do
+          concat "商品缺貨中"
+        end
+      end
+    end
+  end
 end

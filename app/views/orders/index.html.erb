@@ -3,7 +3,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>合併</th>
+        <th><%= check_box_tag :merge_all %> 合併</th>
         <th>訂單編號</th>
         <th>訂購時間</th>
         <th>總金額</th>
@@ -28,3 +28,16 @@
   </table>
   <%= f.submit "合併" %>
 <% end %>
+
+<script type="text/javascript">
+  $("#merge_all").click(function(){
+    $("input[type='checkbox'][name*='merge_orders']").prop("checked", $(this).prop("checked"))
+  })
+  $("input[type='checkbox'][name*='merge_orders']").click(function(){
+    var merge_all = true
+    $("input[type='checkbox'][name*='merge_orders']").each(function(){
+      merge_all = merge_all * $(this).prop("checked")
+    })
+    $("#merge_all").prop("checked", merge_all)
+  })
+</script>

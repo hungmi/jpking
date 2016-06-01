@@ -6,9 +6,16 @@
   background-color: mistyrose;
   border: none;
   border-radius: 0px;
-  input {
-    color: black;
+  input[type="search"] {
+    border: 2px solid pink;
+    &:focus {
+      box-shadow: none;
+      border: 2px solid hotpink;
+    }
   }
+  // input {
+  //   color: black;
+  // }
   h1.navbar-brand {
     margin: 0px;
     // font-size: 30px;

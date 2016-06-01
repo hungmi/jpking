@@ -12,7 +12,6 @@ class ProductsController < ApplicationController
     else
       @products = Product.all.includes(:links, :attachments).where("attachments_count > 0")[0..100]
     end
-    # byebug
   end
 
   # GET /products/1

@@ -1,5 +1,6 @@
 <div class="col-sm-5 col-xs-12">
   <%= breadcrumb(@product) %>
+
   <% if @product.attachments_count > 0 %>
     <div style="position: relative; margin-top: 20px;">
       <%= image_tag @product.attachments.first.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px;", class:"product-main-image", id:"image-#{@product.attachments.first.id}" %>
@@ -19,8 +20,9 @@
     <% end %>
   <% end %>
 </div>
+
 <div class="col-sm-7 col-xs-12" id="product-details-block">
-  <h5>商品編號：<%= @product.item_code %></h5>
+  <h5 class="better-num">商品編號：<strong><%= @product.item_code %></strong></h5>
   <h1><%= @product.name %></h1>
   <div class="detail">
     <% ["material", "description", "origin", "product_size"].map do |attr_name| %>
@@ -36,7 +38,7 @@
   <span>批發價 NT$</span>
   <span class="our-price"><%= @product.our_price %></span>
   </h4>
-  <%= add_to_cart_btn(@product) %>
+  <%= dead_or_alive_btn(@product) %>
   <%= render "partials/contact_us" %>
 </div>
 

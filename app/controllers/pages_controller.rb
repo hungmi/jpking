@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
   def cart
     @cart = Cart.includes(:cart_items, cart_items: [:product, {product: [:attachments]}]).where(user_id: current_user.id).first
-    @last_product = @cart.cart_items.last.product
+    @last_product = @cart.cart_items.last.try(:product)
   end
 
   def register

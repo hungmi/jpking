@@ -34,12 +34,18 @@
           </ul>
         </li>
       </ul> -->
-      <form class="navbar-form navbar-left hidden-xs" role="search">
+      <%= form_tag products_path, class: "navbar-form navbar-left hidden-xs", role: "search", method: :get do %>
+        <div class="form-group">
+          <%= search_field_tag :search, params[:search], class: "form-control", placeholder: "名稱、編號" %>
+        </div>
+        <%= submit_tag "搜尋", class: "btn btn-pink", name: nil %>
+      <% end %>
+      <!-- <form class="navbar-form navbar-left hidden-xs" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-pink">搜尋</button>
-      </form>
+      </form> -->
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <%= link_to "訂購紀錄", orders_path, class: "btn btn-pink" %>
