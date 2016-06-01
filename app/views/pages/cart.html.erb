@@ -1,7 +1,9 @@
 <h1>
   JPP8發財車
-  <%= link_to "繼續採購", products_path(category_id: @cart.cart_items.last.product.category.id), class: "btn btn-info pull-right" %>
+
+  <%= link_to "繼續採購", category_path(@last_product.category, anchor: @last_product.item_code), class: "btn btn-info pull-right" if @cart.cart_items.present? %>
 </h1>
+<% if @cart.cart_items.present? %>
 <div class="table-responsive">
 <table class="table table-striped">
   <thead>
@@ -18,7 +20,11 @@
       <%= form_for item, url: cart_item_path(item.id) do |f| %>
       <tr>
         <td><%= item.item_code %></td>
-        <td><%= image_tag item.product.attachments.first.image.url, style: "height: 70px;" %></td>
+        <td>
+          <%= link_to item.product do %>
+            <%= image_tag item.product.attachments.first.image.url, class: "img100" %>
+          <% end %>
+        </td>
         <td><%= link_to item.name, item.product %><br>
           <%= link_to "刪除", cart_item_path(item), class: "btn btn-danger", method: :delete, data: { confirm: "從購物車移除#{item.name}？" } %>
           <%= link_to "下次再買", root_path, class: "btn btn-info" %>
@@ -34,6 +40,15 @@
       <% end %>
     <% end %>
   </tbody>
+  <tr>
+    <th>商品編號</th>
+    <th>商品圖片</th>
+    <th>商品名稱</th>
+    <th>數量</th>
+    <th>建議單價</th>
+    <th>平均成本</th>
+    <th>批發總價</th>
+  </tr>
 </table>
 </div>
 <div class="col-sm-6">
@@ -49,8 +64,18 @@
   <h3>預估營業額：<strong><%= @cart.total_revenue %></strong> 元</h3>
   <hr style="border: 1px solid gray;">
   <h3>預估利潤：<strong><%= @cart.total_benefit %></strong> 元</h3>
-  <%= link_to "確認訂單", root_path, class: "btn btn-default btn-large btn-gold" %>
+  <%= link_to "確認訂單", orders_path, method: :post, class: "btn btn-default btn-large btn-gold" %>
 </div>
+<% else %>
+  目前還沒加入任何商品歐～
+  <div class="col-sm-6">
+    <div id="outside">
+      <div id="car"></div>
+      <div id="window"></div>
+      <div id="car-logo"><span style="color: hotpink;"">JP</span><span style="color: white;">P8</span></div>
+    </div>
+  </div>
+<% end %>
 
 <script type="text/javascript">
   $('input[name="cart_item[quantity]"]').change(function(){

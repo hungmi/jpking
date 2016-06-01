@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     @category = Category.find_by_id(params[:category_id])
     if @category.present?
       @children = @category.children
-      @products = Product.all.includes(:links, :category, :attachments).where(categories: {parent_id: params[:category_id]}).where("attachments_count > 0")[0..100] + @category.products.includes(:links, :attachments).where("attachments_count > 0")[0..100]
+      @products = Product.includes(:links, :category, :attachments).where(categories: {parent_id: params[:category_id]}) + @category.products.includes(:links, :attachments)
     else
       @products = Product.all.includes(:links, :attachments).where("attachments_count > 0")[0..100]
     end
@@ -18,7 +18,8 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @product = Product.includes(:attachments).find(params[:id])
+    @product = Product.includes(:attachments).find_by_item_code(params[:item_code]) || Product.includes(:attachments).find_by_id(params[:id])
+    @page_title = @product.name
   end
 
   # GET /products/new

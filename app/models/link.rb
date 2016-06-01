@@ -1,4 +1,6 @@
 class Link < ActiveRecord::Base
+  enum state: { alive: 0, dead: 1 }
+
   belongs_to :fetchable, polymorphic: true
 
   validates :value, uniqueness: true

@@ -1,0 +1,28 @@
+zh-TW:
+  order_state:
+    user:
+      placed: 尚未付款
+      paid: 進貨中
+      jp_ordered: 進貨中
+      stocked: 商品抵台
+      packaged: 請確認物流
+      ready_to_deliver: 已出貨
+      delivered: 已送達
+      cancel: 已取消
+    admin:
+      placed: 尚未付款
+      paid: 待採購
+      jp_ordered: 日本已下單
+      stocked: 已入庫
+      packaged: 已分貨，待收運費
+      ready_to_deliver: 已出貨
+      delivered: 已送達
+      cancel: 他媽的已取消
+
+  activerecord:
+    attributes:
+      product:
+        material: 材質
+        description: 特色
+        product_size: 尺寸
+        origin: 原產地

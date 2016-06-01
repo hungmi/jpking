@@ -1,0 +1,15 @@
+<%= simple_form_for(@order_item) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :order %>
+    <%= f.association :cart_item %>
+    <%= f.input :quantity %>
+    <%= f.input :price %>
+    <%= f.input :state %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

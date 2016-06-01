@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     current_user.create_cart if user_signed_in? && current_user.cart.nil?
   end
 
-  def authenticate_user
+  def authenticate_user!
     redirect_to login_path unless user_signed_in?
   end
 

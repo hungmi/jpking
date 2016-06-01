@@ -63,3 +63,33 @@ a:not(.btn) {
   margin-bottom: 10px;
   font-size: 24px;
 }
+
+img.img100 {
+  width: 100%;
+  height: 100%;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.btn {
+  &.btn-pink {
+    background-color: pink;
+    border: 2px solid white;
+    color: white;
+    &:hover {
+      background-color: #FF8FA2;
+    }
+  }
+  &.help {
+    background-color: floralwhite;
+    color: lightslategray;
+    border: 2px solid lightslategray;
+    &:hover {
+      background-color: white;
+    }
+  }
+}
+
+.better-num {
+  letter-spacing: 0.5px;
+}

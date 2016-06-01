@@ -1,17 +1,21 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:edit, :update, :destroy]
 
   # GET /categories
   # GET /categories.json
   def index
     @categories = Category.parent_categories
-    @hot_products = Product.all[0..6]
+    @hot_products = Product.all.alive[0..6]
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
     # @products = @category.products.includes(:links).where(params.except(:controller, :action, :rowCount).to_query)
+    @category = Category.find_by_jp_name(params[:id])
+    @page_title = @category.name
+    @children = @category.children
+    @products = @category.child_products[0..101] + @category.products.alive
   end
 
   # GET /categories/new

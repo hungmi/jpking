@@ -46,7 +46,6 @@ class EtoileService
       # binding.pry
       @page.search(".item_box").map do |item|
         # 取得商品資料
-        binding.pry
         product_name_in_link = item.css(".item_name > a") # 產品名稱，包含連結到產品
         params = extract_params product_name_in_link.attr("href").to_s
         original_price = item.search(".item_price1 p.price_num_small").first.text.gsub(",","")[/\d+/]
@@ -81,21 +80,44 @@ class EtoileService
     # 不必登入也可以拿到清楚的圖
     # @agent = Mechanize.new
     # sign_in(@agent)
-
-    @product_page = Nokogiri::HTML open(product.links.last.value)
-    images = @product_page.css("img[id*=image_]")
-    images.each do |img|
-      # binding.pry
-      @attachment = product.attachments.new
-      image_url = @request_url + img.attr("src").to_s.gsub("productnl","product").gsub("03_","01_")
-      @attachment.source_url = image_url
-      @attachment.description = img.attr("alt").to_s
-      if @attachment.valid?
-        @attachment.remote_image_url = image_url
-        @attachment.save
+    target_link = product.links.last
+    @product_page = Nokogiri::HTML open(target_link.value)
+    # binding.pry
+    if @product_page.search("p.err_big").present?
+      target_link.dead! && target_link.fetchable.dead!
+    else
+      { 'サイズ' => :product_size, '素材・原材料名・成分' => :material, 'コメント' => :description, '原産国' => :origin }.map do |k,v|
+        find_detail_in_table(k, v, product)
       end
-      sleep rand(5)
+
+      images = @product_page.css("img[id*=image_]")
+      images.each do |img|
+        # binding.pry
+        @attachment = product.attachments.new
+        image_url = @request_url + img.attr("src").to_s.gsub("productnl","product").gsub("03_","01_")
+        @attachment.source_url = image_url
+        @attachment.description = img.attr("alt").to_s
+        if @attachment.valid?
+          @attachment.remote_image_url = image_url
+          @attachment.save
+        end
+        sleep rand(5)
+      end
     end
+  end
+
+  def fetch_rand_products(num)
+    @processed_products = []
+    # max = Product.all.size
+    for i in 1..num
+      p "start"
+      target_product = Product.alive[rand(Product.alive.size)]
+      fetch_product(target_product)
+      @processed_products << target_product.item_code
+      p "pause"
+      sleep rand(20)
+    end
+    p @processed_products
   end
 
   def fetch_product_images_of_category(category)
@@ -105,29 +127,49 @@ class EtoileService
     end
   end
 
-  def fetch_rand_products(num)
-    @processed_products = []
-    # max = Product.all.size
-    for i in 1..num
-      p "start"
-      target_product = Product.where("attachments_count = 0")[rand(Product.where("attachments_count = 0").size)]
-      fetch_product(target_product)
-      @processed_products << target_product.item_code
-      p "pause"
-      sleep rand(20)
+  ################################## 底下為暫時使用 #########################
+
+  def fetch_product_info(product)
+    @product_page = Nokogiri::HTML open(product.links.last.value)
+    material_title = @product_page.search("table.detail_table th[text()*='素材・原材料名・成分']").first
+    if material_title.present?
+      material = material_title.parent.css("td").text
+      product.update_column(:material, material)
     end
-    p @processed_products
-    # for i in 1..max do
-    #   # binding.pry
-    #   product = Product.all[rand(Product.all.size+1)]
-    #   @processed_products << product.item_code
-    #   fetch_product(product)
-    #   sleep rand(20)
-    #   i += 1
-    # end
+
+    product_title = @product_page.search("table.detail_table th[text()*='コメント']").first
+    if product_title.present?
+      description = product_title.parent.css("td").text
+      product.update_column(:description, description)
+    end
   end
 
+  def fetch_rand_exist_products_info(num)
+    @processed_products = []
+    # max = Product.all.size
+    num = Product.only_img.size
+    for i in 1..num
+      p "start"
+      target_product = Product.only_img[i]
+      fetch_product_info(target_product)
+      @processed_products << target_product.item_code
+      p "pause"
+      sleep rand(10)
+    end
+    p @processed_products
+  end
+
+  ################################## 以上為暫時使用 #########################
+
   private
+
+    def find_detail_in_table(detail_title, attr_name, product)
+      td_title = @product_page.search("table.detail_table th[text()*=#{detail_title}]").first
+      if td_title.present?
+        attr_value = td_title.parent.css("td").inner_html
+        product.update_column(attr_name, attr_value)
+      end   
+    end
 
     def extract_params(href)
       parameters = {}

@@ -1,6 +1,6 @@
 class CartItem < ActiveRecord::Base
   before_create :fork
-
+  
   belongs_to :cart
   belongs_to :product
 
@@ -30,6 +30,10 @@ class CartItem < ActiveRecord::Base
 
   def benefit
     self.product.their_price*self.wholesale_amount - self.price
+  end
+
+  def total
+    self.price*self.quantity
   end
 
 end

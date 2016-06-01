@@ -41,6 +41,7 @@ gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'figaro'
 gem 'pg'
 gem 'mechanize'
+# gem 'fastclick-rails'
 # gem 'browser'
 
 group :development, :test do

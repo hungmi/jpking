@@ -18,4 +18,12 @@ class Category < ActiveRecord::Base
   def name
     zh_name ? zh_name : jp_name    
   end
+
+  def child_products
+    sons = Product.includes(:category).where(categories: { parent_id: self.id }).alive
+    self.children.map do |c|
+      sons += Product.includes(:category).where(categories: { parent_id: c.id }).alive
+    end
+    sons
+  end
 end

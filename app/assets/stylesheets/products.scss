@@ -14,7 +14,7 @@
   }
 
   .product-card {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     .product-name {
       height: 31px;
       overflow-y: hidden;
@@ -33,7 +33,7 @@
     }
     .our-price {
       font-size: 20px;
-      color: red;
+      color: hotpink;
     }
     .their-price {
       text-decoration: line-through;
@@ -106,5 +106,13 @@
     & > p {
       font-size: 18px; margin-bottom: 20px;  
     }
+  }
+  .their-price {
+    text-decoration: line-through;
+  }
+  .our-price {
+    font-size: 34px;
+    color: hotpink;
+    font-weight: bold;
   }
 }

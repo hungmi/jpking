@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529123748) do
+ActiveRecord::Schema.define(version: 20160531225033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,33 @@ ActiveRecord::Schema.define(version: 20160529123748) do
 
   add_index "links", ["fetchable_type", "fetchable_id"], name: "index_links_on_fetchable_type_and_fetchable_id", using: :btree
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.string   "name"
+    t.integer  "quantity"
+    t.integer  "price"
+    t.integer  "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "token"
+    t.string   "num"
+    t.integer  "user_id"
+    t.integer  "total"
+    t.integer  "delivery"
+    t.integer  "state",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.integer  "category_id"
     t.string   "jp_name"
@@ -89,6 +116,11 @@ ActiveRecord::Schema.define(version: 20160529123748) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "attachments_count", default: 0
+    t.text     "material"
+    t.text     "description"
+    t.integer  "state",             default: 0
+    t.string   "product_size"
+    t.string   "origin"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -110,6 +142,12 @@ ActiveRecord::Schema.define(version: 20160529123748) do
     t.datetime "updated_at",            null: false
   end
 
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "products"
+  add_foreign_key "carts", "users"
   add_foreign_key "categories", "shops"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
 end

@@ -1,0 +1,30 @@
+<h1>訂單紀錄</h1>
+<%= form_for :merge_orders, url: merge_orders_path do |f| %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>合併</th>
+        <th>訂單編號</th>
+        <th>訂購時間</th>
+        <th>總金額</th>
+        <th>狀態</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <%= f.fields_for order.token do |ff| %>
+        <tr>
+          <td><%= ff.check_box :_merge %></td>
+          <td class="better-num"><%= link_to order.num, order_path(order.token) %> <%= link_to "檢視訂單內容", order_path(order.token) %></td>
+          <td><%= order.order_time %></td>
+          <td class="better-num"><%= order.total %></td>
+          <td><%= order.i18n_state_for_user %></td>
+          <td><%= render_order_state_btns(order) %> <%= link_to "聊聊", root_path, class: "btn btn-link" %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= f.submit "合併" %>
+<% end %>

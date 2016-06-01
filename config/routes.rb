@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
+  resources :order_items
+  resources :orders do
+    member do
+      get "cancel"
+      get "reorder"
+    end
+    collection do
+      post "merge"
+    end
+  end
   root "pages#home"
   resources :categories, except: [:index]
   resources :links
   resources :products
+  get "/:item_code/:product_name" => "products#show", as: :human_product
   resources :cart_items
   # resources :carts
   controller 'pages' do

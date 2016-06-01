@@ -1,6 +1,6 @@
 class Cart < ActiveRecord::Base
   belongs_to :user
-  has_many :cart_items
+  has_many :cart_items, dependent: :destroy
 
   def total_benefit
     benefit = 0
@@ -20,5 +20,17 @@ class Cart < ActiveRecord::Base
       total += item.price*item.quantity
     end
     total
+  end
+
+  def to_order_items
+    order_items_attributes = []
+    self.cart_items.map do |i|
+      attrs = {}
+      [:quantity, :price, :name, :product_id].map do |attr|
+        attrs[attr] = i.send(attr.to_s)
+      end
+      order_items_attributes << attrs
+    end
+    return order_items_attributes
   end
 end

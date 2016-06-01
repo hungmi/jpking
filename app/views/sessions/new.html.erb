@@ -1,4 +1,5 @@
 <div id="login-form">
+  <h1>おかえり</h1>
   <%= link_to root_path, class: "btn btn-facebook" do %>
     Facebook 登入
   <% end %>
@@ -6,6 +7,6 @@
   <%= simple_form_for :user, url: sign_in_path do |f| %>
     <%= f.input :username %>
     <%= f.input :password %>
-    <%= f.submit %>
+    <%= f.submit "登入", class:"btn btn-pink", style: "width: 100%" %>
   <% end %>
 </div>

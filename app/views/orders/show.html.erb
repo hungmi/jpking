@@ -1,0 +1,61 @@
+<h1 class="better-num"><%= "訂單 ##{@order.num}" %>
+  <div class="pull-right" style="font-size: 1px;">
+    <%= render_order_state_btns(@order) %> <%= link_to "聊聊", root_path, class: "btn btn-info" %>
+  </div>
+</h1>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th>訂購時間</th>
+      <td><%= @order.order_time %></td>
+    </tr>
+    <tr>
+      <th>訂購者</th>
+      <td><%= @order.user.name %></td>
+    </tr>
+    <tr>
+      <th>訂單內容</th>
+      <td>
+        <%= form_for @order, url: order_path(@order.token) do |f| %>
+          <table style="width: 100%;">
+            <thead>
+              <th>商品圖片</th>
+              <th>名稱</th>
+              <th>數量</th>
+              <th>總價</th>
+              <th></th>
+            </thead>
+            <tbody>
+              <%= f.fields_for :order_items do |ff| %>
+                <tr>
+                  <td>
+                    <%= link_to ff.object.product do %>
+                      <%= image_tag ff.object.product.attachments.first.image.url, class: "img100" %>
+                    <% end %>
+                  </td>
+                  <td><%= link_to ff.object.name, ff.object.product %></td>
+                  <td><%= ff.number_field :quantity, style: "width: 60px;" %><%= " x #{ff.object.price}" %><br><%= f.submit "更新" %></td>
+                  <td><%= ff.object.total %></td>
+                  <td><%= link_to "移除", order_item_path(ff.object), method: :delete, data: { confirm: "從訂單移除#{ff.object.name}?" }, class: "btn btn-link" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%#= f.submit "更新" %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>總金額</th>
+      <td class="text-right text-danger" style="font-size: 24px;"><strong><%= "NT #{@order.total} 元" %></strong></td>
+    </tr>
+    <tr>
+      <th>狀態</th>
+      <td class="text-right"><%= @order.i18n_state_for_user %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td class="text-right"><%= render_order_state_btns(@order) %> <%= link_to "聊聊", root_path, class: "btn btn-info" %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,4 +1,10 @@
 class Product < ActiveRecord::Base
+  default_scope { order(id: :asc) }
+  scope :ready, -> { where("attachments_count > 0 and products.description IS NOT NULL") }
+  scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
+
+  enum state: { alive: 0, dead: 1 }
+
   belongs_to :category
 
   include Fetchable

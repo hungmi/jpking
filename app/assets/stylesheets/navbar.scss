@@ -6,10 +6,6 @@
   background-color: mistyrose;
   border: none;
   border-radius: 0px;
-  
-  * {
-    color: white;
-  }
   input {
     color: black;
   }
@@ -19,10 +15,11 @@
     line-height: 33px;
     & > a {
       font-size: 0px; 
-      &:hover {
+      &:hover, &:focus {
         text-decoration: none;
       }
       & > span {
+        color: white;
         &.japan-logo-text {
           color: hotpink;
         }
@@ -48,24 +45,6 @@
     color: black;
     background-color: pink;
   }
-  .btn {
-    background-color: pink;
-    border: 2px solid white;
-    &:hover {
-      background-color: #FF8FA2;
-    }
-    &.link {
-      //margin: 8px 0px;
-    }
-    &.help {
-      background-color: floralwhite;
-      color: lightslategray;
-      border: 2px solid lightslategray;
-      &:hover {
-        background-color: white;
-      }
-    }
-  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -74,7 +53,7 @@
     margin-bottom: 10px;
   }
   .responsive.container {
-    margin-top: 65px;
+    margin-top: 90px;
   }
 }
 
