@@ -65,6 +65,8 @@ class EtoileService
         end
         # binding.pry
         @product.links.create( value: @request_url + good_strip(product_name_in_link.attr("href").to_s) )
+        sleep rand(5)
+        fetch_product(@product)
         ############
       end
       sleep rand(20)

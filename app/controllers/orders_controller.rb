@@ -112,7 +112,7 @@ class OrdersController < ApplicationController
     if @new_order.reload.order_items.present?
       #binding.pry
       @new_order.update_column(:total, total)
-      redirect_to @new_order
+      redirect_to order_path(@new_order.token)
     else
       @new_order.destroy
       redirect_to root_path
@@ -122,7 +122,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.includes(:order_items, order_items: [:product, product: [:attachments] ] ).find_by_token(params[:id])
+      @order = Order.includes(:order_items, order_items: [:product, product: [:attachments] ] ).references(:order_items).find_by_token(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

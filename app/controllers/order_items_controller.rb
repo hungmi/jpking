@@ -55,11 +55,18 @@ class OrderItemsController < ApplicationController
   # DELETE /order_items/1.json
   def destroy
     @order = @order_item.order
-    name = @order_item.name
-    @order_item.destroy
-    respond_to do |format|
-      format.html { redirect_to order_path(@order.token), notice: "已刪除#{name}" }
-      format.json { head :no_content }
+    if @order.cancelable?
+      name = @order_item.name
+      @order_item.destroy
+      respond_to do |format|
+        format.html { redirect_to order_path(@order.token), notice: "已刪除#{name}" }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to order_path(@order.token), notice: "很抱歉，已無法更改訂單。" }
+        format.json { head :no_content }
+      end
     end
   end
 

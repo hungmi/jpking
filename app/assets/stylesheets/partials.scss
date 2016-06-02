@@ -1,8 +1,14 @@
 a.add_to_cart.btn {
   background-color: pink;
   color: white;
-  font-size: 20px;
-  padding: 10px 16px;
+  @media only screen and (max-width: 320px) {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+  @media only screen and (min-width: 321px) {
+    font-size: 20px;
+    padding: 10px 16px;
+  }
   &:hover {
     background-color: #FF8FA2;
   }

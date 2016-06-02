@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   default_scope { order(id: :asc) }
-  scope :ready, -> { where("attachments_count > 0 and products.description IS NOT NULL") }
+  scope :ready, -> { where("attachments_count > 0 and products.description IS NOT NULL").alive }
+  scope :not_ready, -> { where.not("attachments_count > 0 and products.description IS NOT NULL").alive }
   scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
 
   enum state: { alive: 0, dead: 1 }
@@ -9,6 +10,9 @@ class Product < ActiveRecord::Base
 
   include Fetchable
   include Imageable
+  # include PgSearch
+
+  # pg_search_scope :search, :against => [:jp_name, :zh_name, :description, :material, :item_code]
 
   validates :item_code, uniqueness: true, allow_blank: true
 
@@ -21,7 +25,7 @@ class Product < ActiveRecord::Base
   end
 
   def name
-    zh_name ? zh_name : jp_name    
+    zh_name.present? ? zh_name : jp_name    
   end
 
   def on_price_com(name)
@@ -35,5 +39,11 @@ class Product < ActiveRecord::Base
       # TODO 商品圖片
     end
     @results
+  end
+
+  def self.search(params)
+    params = params.gsub(" ","|")
+    ready.alive.find_by_sql("SELECT * FROM products WHERE jp_name || zh_name || item_code || description ~* '.*#{params}.*'")
+    # binding.pry
   end
 end

@@ -13,11 +13,12 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-// require fastclick
+//= require fastclick
 //= require turbolinks
 //= require_tree .
 
-// $(document).ready(function() {
+$(document).ready(function() {
+  $("img").lazyload();
 //   $.ajaxSetup({ cache: true });
 //   $.getScript('//connect.facebook.net/zh_TW/sdk.js', function(){
 //     FB.init({
@@ -27,4 +28,4 @@
 //     $('#loginbutton,#feedbutton').removeAttr('disabled');
 //     // FB.getLoginStatus(updateStatusCallback);
 //   });
-// });
+});

@@ -1,0 +1,24 @@
+.embed-container {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  background-color: floralwhite;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.ratio-16-9{
+  padding-bottom:56.25%; /* 9/16*100 */
+}
+
+.ratio-4-3{
+  padding-bottom:75%; /* 3/4*100 */
+}
+
+.ratio-1-1{
+  padding-bottom:100%; /* … */
+}

@@ -7,7 +7,8 @@
   text-align: center;
   // margin: 0px 4px;
   border: 1px solid pink;
-  padding: 0px !important;
+  //position: relative;
+  // padding: 0px !important;
   &:hover {
     border-color: deeppink;
     .category-name {
@@ -15,10 +16,29 @@
     }
   }
   .category-name {
-    background: rgba(230,230,230,0.5);
-    margin: 0;
-    padding: 10px 10px;
-    color: hotpink;
-    font-size: 15px;
+    // background: rgba(230,230,230,0.5);
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    h5 {
+      margin: 0;
+      @media only screen and (max-width: 480px) {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 5px 5px;
+      }
+      @media only screen and (min-width: 481px) {
+        font-size: 15px;
+        line-height: 15px;
+        padding: 10px 10px;
+      }
+      color: hotpink;
+      height: 50px;
+      text-overflow: hidden;
+    }
+  }
+
+  &.ratio-1-1{
+    padding-bottom:calc(100% + 50px); /* … */
   }
 }

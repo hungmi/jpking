@@ -20,7 +20,7 @@
           <td><%= order.order_time %></td>
           <td class="better-num"><%= order.total %></td>
           <td><%= order.i18n_state_for_user %></td>
-          <td><%= render_order_state_btns(order) %> <%= link_to "聊聊", root_path, class: "btn btn-link" %></td>
+          <td><%= render_order_state_btns(order) %> <%= contact_us %></td>
         </tr>
         <% end %>
       <% end %>

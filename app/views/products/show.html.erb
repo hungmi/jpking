@@ -2,20 +2,16 @@
   <%= breadcrumb(@product) %>
 
   <% if @product.attachments_count > 0 %>
-    <div style="position: relative; margin-top: 20px;">
-      <%= image_tag @product.attachments.first.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px;", class:"product-main-image", id:"image-#{@product.attachments.first.id}" %>
+    <div class="product-main-image-container embed-container ratio-1-1">
+      <%= image_tag @product.attachments.first.image.url, style: "width: 100%; height: 100%; padding-bottom: 10px;", class:"product-main-image", id:"image-#{@product.attachments.first.id}" %>
       <% @product.attachments[1..-1].each do |a| %>
         <%= image_tag a.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px; display: none;", class:"product-main-image", id:"image-#{a.id}" %>
       <% end %>      
     </div>
-    <% @product.attachments.each_slice(6) do |a6| %>
-      <div class="row">
-        <% a6.each do |a| %>
-          <div class="col-xs-2 product-thumbs" data-image=<%= "image-#{a.id}" %>>
-            <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
-            <%= a.description %>
-          </div>
-        <% end %>
+    <% @product.attachments.each do |a| %>
+      <div class="col-xs-2 product-thumbs" data-image=<%= "image-#{a.id}" %>>
+        <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
+        <%= a.description %>
       </div>
     <% end %>
   <% end %>
@@ -39,7 +35,7 @@
   <span class="our-price"><%= @product.our_price %></span>
   </h4>
   <%= dead_or_alive_btn(@product) %>
-  <%= render "partials/contact_us" %>
+  <%= contact_us %>
 </div>
 
 <script type="text/javascript">

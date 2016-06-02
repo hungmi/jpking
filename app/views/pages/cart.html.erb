@@ -77,7 +77,7 @@
 <% end %>
 
 <script type="text/javascript">
-  $('input[name="cart_item[quantity]"]').change(function(){
+  $('input[name="cart_item[quantity]"]').bind('keypress change',function(){
     $(this).siblings('input[type="submit"]').removeClass("hidden")
   })
 </script>

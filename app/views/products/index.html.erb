@@ -1,11 +1,13 @@
 <div id="product-index-container">
-  <div class="row">
-    <% if @children.present? %>
-      <%= render partial:"categories/category", collection: @children, as: :category %>
+  <% if @children.present? %>
+    <% @children.each_slice(4) do |c4| %>
+      <div class="row">
+        <%= render partial:"categories/category", collection: c4, as: :category %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
   <div class="row">
-    <%= render 'top_tool' %>
-    <%= render @products, rowCount: params[:rowCount] %>
+    <%= render 'partials/top_tool' %>
+    <%= render @products, rowCount: params[:rowCount].to_i %>
   </div>
 </div>

@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.parent_categories
-    @hot_products = Product.all.alive[0..6]
+    @hot_products = Product.all.includes(:category, :attachments).references(:category, :attachments).alive[0..6]
   end
 
   # GET /categories/1
@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
     @category = Category.find_by_jp_name(params[:id])
     @page_title = @category.name
     @children = @category.children
-    @products = @category.child_products[0..101] + @category.products.alive
+    @products = @category.child_products[0..101] + @category.products.includes(:category, :attachments).preload(attachments: :imageable).alive.references(:category, :attachments)
   end
 
   # GET /categories/new

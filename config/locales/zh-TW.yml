@@ -1,4 +1,10 @@
 zh-TW:
+  product_state:
+    dead: 缺貨中
+    alive: 可訂購
+  link_state:
+    dead: 失效
+    alive: 正常
   order_state:
     user:
       placed: 尚未付款

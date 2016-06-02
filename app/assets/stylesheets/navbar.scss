@@ -8,6 +8,7 @@
   border-radius: 0px;
   input[type="search"] {
     border: 2px solid pink;
+    // width: 400px;
     &:focus {
       box-shadow: none;
       border: 2px solid hotpink;
@@ -40,6 +41,7 @@
   }
   .navbar-form {
     border: none;
+    margin: 10px 0px;
   }
   .navbar-toggle {
     border: 2px solid white;
@@ -51,6 +53,18 @@
   li.active a {
     color: black;
     background-color: pink;
+  }
+}
+
+#navbar-customize input[type="search"] {
+  @media only screen and (min-width: 992px) {
+    width: 400px;
+  }
+  @media only screen and (max-width: 991px) and (min-width: 768px) {
+    width: 200px;
+  }
+  @media only screen and (max-width: 767px) and (min-width: 481px) {
+    width: auto;
   }
 }
 

@@ -1,6 +1,6 @@
 <h1 class="better-num"><%= "訂單 ##{@order.num}" %>
   <div class="pull-right" style="font-size: 1px;">
-    <%= render_order_state_btns(@order) %> <%= link_to "聊聊", root_path, class: "btn btn-info" %>
+    <%= render_order_state_btns(@order) %> <%= contact_us %>
   </div>
 </h1>
 <table class="table table-striped">
@@ -34,9 +34,16 @@
                     <% end %>
                   </td>
                   <td><%= link_to ff.object.name, ff.object.product %></td>
-                  <td><%= ff.number_field :quantity, style: "width: 60px;" %><%= " x #{ff.object.price}" %><br><%= f.submit "更新" %></td>
+                  <td><%= ff.number_field :quantity, style: "width: 60px;" %><%= " x #{ff.object.price}" %><br><%= f.submit "更新", class: "hidden" %></td>
                   <td><%= ff.object.total %></td>
-                  <td><%= link_to "移除", order_item_path(ff.object), method: :delete, data: { confirm: "從訂單移除#{ff.object.name}?" }, class: "btn btn-link" %></td>
+                  <td>
+                    <% if @order.cancelable? %>
+                      <%= link_to order_item_path(ff.object), method: :delete, data: { confirm: "從訂單移除#{ff.object.name}?" }, class: "btn btn-link" do %>
+                        <i class="glyphicon glyphicon-remove"></i>
+                        刪除
+                      <% end %>
+                    <% end %>
+                  </td>
                 </tr>
               <% end %>
             </tbody>
@@ -55,7 +62,13 @@
     </tr>
     <tr>
       <th></th>
-      <td class="text-right"><%= render_order_state_btns(@order) %> <%= link_to "聊聊", root_path, class: "btn btn-info" %></td>
+      <td class="text-right"><%= render_order_state_btns(@order) %> <%= contact_us %></td>
     </tr>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  $("input[id*='_quantity']").bind('keypress change', function(){
+    $(this).siblings("input[type='submit']").removeClass("hidden")
+  })
+</script>

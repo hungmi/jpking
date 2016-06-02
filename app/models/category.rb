@@ -20,9 +20,9 @@ class Category < ActiveRecord::Base
   end
 
   def child_products
-    sons = Product.includes(:category).where(categories: { parent_id: self.id }).alive
+    sons = Product.includes(:category, :attachments).where(categories: { parent_id: self.id }).alive.ready.references(:category, :attachments)
     self.children.map do |c|
-      sons += Product.includes(:category).where(categories: { parent_id: c.id }).alive
+      sons += Product.includes(:category, :attachments).where(categories: { parent_id: c.id }).alive.ready.references(:category, :attachments)
     end
     sons
   end

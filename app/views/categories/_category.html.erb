@@ -1,9 +1,11 @@
 <%= link_to category_path(category.jp_name) do %>
   <div class="col-sm-3 col-xs-3">
-    <div class="category-card">
-      <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: category.name %>
-      <h5 class="category-name"><%= category.name %></h5>
+    <div class="category-card embed-container ratio-1-1">
+      <%= image_tag "https://unsplash.it/500?random", alt: category.name %>
       <%#= category.name %>
+      <div class="category-name">
+        <h5><%= category.name %></h5>
+      </div>
     </div>
   </div>
 <% end %>
