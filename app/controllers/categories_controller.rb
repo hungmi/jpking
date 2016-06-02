@@ -4,18 +4,20 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.parent_categories
-    @hot_products = Product.all.includes(:category, :attachments).references(:category, :attachments).alive[0..6]
+    # @categories = Category.parent_categories
+    # @hot_products = Product.all.includes(:category, :attachments).references(:category, :attachments).alive.limit(7)
+    # 首頁已改為 pages#home
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
     # @products = @category.products.includes(:links).where(params.except(:controller, :action, :rowCount).to_query)
-    @category = Category.find_by_jp_name(params[:id])
+    @category = Category.includes(:children).find_by_jp_name(params[:id])
     @page_title = @category.name
     @children = @category.children
-    @products = @category.child_products[0..101] + @category.products.includes(:category, :attachments).preload(attachments: :imageable).alive.references(:category, :attachments)
+    @products = @category.self_and_child_products.limit(100).offset(100*(current_page - 1))
+    @total_page = (@category.self_and_child_products.size / 100.0).ceil
   end
 
   # GET /categories/new

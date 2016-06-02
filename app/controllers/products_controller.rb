@@ -10,9 +10,11 @@ class ProductsController < ApplicationController
     #   @children = @category.children
     #   @products = Product.includes(:links, :category, :attachments).where(categories: {parent_id: params[:category_id]}) + @category.products.includes(:links, :attachments)
     # else
-    #   @products = Product.all.includes(:links, :attachments).where("attachments_count > 0")[0..100]
+    #   @products = Product.all.includes(:links, :attachments).where("attachments_count > 0").limit(100)
     # end
     @products = Product.search(params[:search])#.alive
+    @total_page = (@products.size / 100.0).ceil
+    # binding.pry
   end
 
   # GET /products/1

@@ -42,3 +42,19 @@
     padding-bottom:calc(100% + 50px); /* … */
   }
 }
+
+#last-page {
+  position: fixed;
+  z-index: 9999;
+  left: 20px;
+  top: 50%;
+  a { font-size: 16px; }
+}
+
+#next-page {
+  position: fixed;
+  z-index: 9999;
+  right: 20px;
+  top: 50%;
+  a { font-size: 16px; }
+}

@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  default_scope { order(id: :asc) }
+  default_scope { order(:id) }
   scope :ready, -> { where("attachments_count > 0 and products.description IS NOT NULL").alive }
   scope :not_ready, -> { where.not("attachments_count > 0 and products.description IS NOT NULL").alive }
   scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
@@ -28,22 +28,27 @@ class Product < ActiveRecord::Base
     zh_name.present? ? zh_name : jp_name    
   end
 
-  def on_price_com(name)
-    name ||= self.jp_name
-    name_uri_code = CGI.escape name.encode("Shift_JIS","UTF-8")
-    url = "http://kakaku.com/search_results/#{name_uri_code}"
-    @page = Nokogiri::HTML open(url)
-    @results = {}
-    @page.css("div.itemInfo").map do |p|
-      @results[p.css("p.itemnameN").text] = p.css(".itemDbox .price .yen").text.delete(",")[/\d+/]
-      # TODO 商品圖片
+  def on_price_com(args = {})
+    name = args[:name] || self.jp_name
+    rate = args[:rate].to_f > 0 ? args[:rate].to_f : 1
+    if name.present?
+      name_uri_code = CGI.escape name.encode("Shift_JIS","UTF-8")
+      url = "http://kakaku.com/search_results/#{name_uri_code}"
+      @page = Nokogiri::HTML open(url)
+      results, prices = [], []
+      @page.css("div.itemInfo").map do |p|
+        prices << (p.css(".itemDbox .price .yen").text.delete(",")[/\d+/].to_i*rate).ceil
+        binding.pry
+        results << { name: p.css("p.itemnameN").text, price: prices.last, link: p.css("div.iviewbtn > a").attr("href").text }
+        # TODO 商品圖片
+      end
+      { name: name, cheapest: { price: prices.min, link: results[prices.index(prices.min)] }, results: results }
     end
-    @results
   end
 
   def self.search(params)
     params = params.gsub(" ","|")
-    ready.alive.find_by_sql("SELECT * FROM products WHERE jp_name || zh_name || item_code || description ~* '.*#{params}.*'")
+    includes(:attachments).ready.alive.references(:attachments).preload(attachments: :imageable).find_by_sql("SELECT * FROM products WHERE jp_name || zh_name || item_code || description ~* '.*#{params}.*'")
     # binding.pry
   end
 end

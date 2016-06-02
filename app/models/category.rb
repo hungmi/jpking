@@ -20,10 +20,15 @@ class Category < ActiveRecord::Base
   end
 
   def child_products
-    sons = Product.includes(:category, :attachments).where(categories: { parent_id: self.id }).alive.ready.references(:category, :attachments)
-    self.children.map do |c|
-      sons += Product.includes(:category, :attachments).where(categories: { parent_id: c.id }).alive.ready.references(:category, :attachments)
-    end
-    sons
+    # sons = Product.includes(:category, :attachments).where(categories: { parent_id: self.id }).alive.ready.references(:category, :attachments)
+    # self.children.map do |c|
+    #   sons += Product.includes(:category, :attachments).where(categories: { parent_id: c.id }).alive.ready.references(:category, :attachments)
+    # end
+    # sons
+    Product.joins(:category).includes(:attachments).where(category_id: self.children.pluck(:id)).references(:attachments).alive
+  end
+
+  def self_and_child_products
+    Product.joins(:category).includes(:attachments).where(category_id: self.children.pluck(:id) << self.id).references(:attachments).alive
   end
 end

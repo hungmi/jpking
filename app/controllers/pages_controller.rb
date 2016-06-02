@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @categories = Category.parent_categories
-    @hot_products = Product.all[0..6]
+    @hot_products = Product.all.limit(7)
   end
 
   def guide
