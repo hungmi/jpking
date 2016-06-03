@@ -3,12 +3,12 @@
 
   <% if @product.attachments_count > 0 %>
     <div class="product-main-image-container embed-container ratio-1-1">
-      <%= image_tag @product.attachments.order(:id).first.image.url, style: "width: 100%; height: 100%; padding-bottom: 10px;", class:"product-main-image", id:"image-#{@product.attachments.order(:id).first.id}" %>
-      <% @product.attachments.order(:id).offset(1).each do |a| %>
+      <%= image_tag @images.first.image.url, style: "width: 100%; height: 100%; padding-bottom: 10px;", class:"product-main-image", id:"image-#{@images.first.id}" %>
+      <% @images.offset(1).each do |a| %>
         <%= image_tag a.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px; display: none;", class:"product-main-image", id:"image-#{a.id}" %>
       <% end %>      
     </div>
-    <% @product.attachments.order(:id).each do |a| %>
+    <% @images.each do |a| %>
       <div class="col-xs-2 product-thumbs" data-image=<%= "image-#{a.id}" %>>
         <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
         <%= a.description %>

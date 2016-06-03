@@ -14,6 +14,13 @@ a.add_to_cart.btn {
   }
 }
 
-#pagination {
-  padding-top: 60px;
+.top.tool {
+  #pagination, #row-counts {
+    padding-top: 60px;
+  }
+}
+.bottom.tool {
+  #pagination, #row-counts {
+    padding-bottom: 60px;
+  }
 }

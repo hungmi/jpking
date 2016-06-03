@@ -12,7 +12,8 @@ class ProductsController < ApplicationController
     # else
     #   @products = Product.all.includes(:links, :attachments).where("attachments_count > 0").limit(100)
     # end
-    @products = Product.search(params[:search])#.alive
+    # @q = Product.ransack(params[:q])#.alive
+    @products = @q.result(distinct: true)#.includes(:category)
     @total_page = (@products.size / 100.0).ceil
     # binding.pry
   end
@@ -20,7 +21,8 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @product = Product.includes(:category, :attachments).references(:category, :attachments).find_by_item_code(params[:item_code]) || Product.includes(:category, :attachments).references(:category, :attachments).find_by_id(params[:id])
+    @product = Product.includes(:category).find_by_item_code(params[:item_code]) || Product.includes(:category).find_by_id(params[:id])
+    @images = @product.attachments.order(:id)
     @page_title = @product.name
   end
 

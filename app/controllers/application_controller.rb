@@ -3,7 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :user_signed_in?, :current_user, :current_page
-  before_action :generate_cart
+  before_action :generate_cart, :set_ransack
+
+  def set_ransack
+    @q = Product.ransack(params[:q])
+    # binding.pry
+  end
 
   def generate_cart
     current_user.create_cart if user_signed_in? && current_user.cart.nil?

@@ -29,7 +29,7 @@ class EtoileService
     how_many_results_text = @first_page.css("h2.default_title").text.strip
     start_pos = how_many_results_text.index("/") + 1
     total_results = how_many_results_text[start_pos..-1].gsub(",","").gsub("件","").strip.to_i
-    
+    category.update_column(:total, total_results)
     page_num = (total_results / params[:dataCount].to_f).ceil
     for i in 2..page_num do
       category.links.create(value: url.gsub(/pageNo=\d+/, "pageNo=#{i}") )

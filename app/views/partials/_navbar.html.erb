@@ -36,11 +36,13 @@
         </li>
       </ul> -->
       <div>
-      <%= form_tag products_path, class: "navbar-form navbar-left hidden-xs", role: "search", method: :get do %>
+      <%= search_form_for @q, class: "navbar-form navbar-left hidden-xs" do |f| %>
+      <%#= form_tag products_path, class: "navbar-form navbar-left hidden-xs", role: "search", method: :get do %>
         <div class="form-group">
-          <%= search_field_tag :search, params[:search], class: "form-control", placeholder: "名稱、編號" %>
+          <%= f.search_field :category_jp_name_or_category_zh_name_or_jp_name_or_zh_name_or_item_code_or_description_cont, class: "form-control" %>
+          <%#= search_field_tag :search, params[:search], class: "form-control", placeholder: "名稱、編號" %>
         </div>
-        <%= submit_tag "搜尋", class: "btn btn-pink", name: nil %>
+        <%= f.submit "搜尋", class: "btn btn-pink", name: nil %>
       <% end %>
       </div>
       <!-- <form class="navbar-form navbar-left hidden-xs" role="search">

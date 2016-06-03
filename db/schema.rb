@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160603180137) do
+ActiveRecord::Schema.define(version: 20160601204525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,9 @@ ActiveRecord::Schema.define(version: 20160603180137) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "source_url"
-    t.integer  "product_id"
   end
 
   add_index "attachments", ["imageable_type", "imageable_id"], name: "index_attachments_on_imageable_type_and_imageable_id", using: :btree
-  add_index "attachments", ["product_id"], name: "index_attachments_on_product_id", using: :btree
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -144,7 +142,6 @@ ActiveRecord::Schema.define(version: 20160603180137) do
     t.datetime "updated_at",            null: false
   end
 
-  add_foreign_key "attachments", "products"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "users"

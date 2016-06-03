@@ -29,6 +29,6 @@ class Category < ActiveRecord::Base
   end
 
   def self_and_child_products
-    Product.joins(:category).includes(:attachments).where(category_id: self.children.pluck(:id) << self.id).references(:attachments).alive
+    Product.joins(:category).where(category_id: self.children.pluck(:id) << self.id).alive
   end
 end

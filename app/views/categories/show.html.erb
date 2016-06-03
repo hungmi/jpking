@@ -9,8 +9,9 @@
     <% end %>
   <% end %>
   <div class="row" id="products">
-    <%= render 'partials/top_tool' %>
+    <%= render 'partials/tool', position: "top" %>
     <%= render @products, rowCount: params[:rowCount].to_i %>
+    <%= render 'partials/tool', position: "bottom" %>
   </div>
 </div>
 <script type="text/javascript">
