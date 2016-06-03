@@ -61,6 +61,11 @@ group :development do
   # gem 'spring'
   gem "bullet"#, :group => "development"
   gem 'better_errors'
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
 end
 
 group :production do
