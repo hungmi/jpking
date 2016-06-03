@@ -7,6 +7,7 @@ class Product < ActiveRecord::Base
   enum state: { alive: 0, dead: 1 }
 
   belongs_to :category
+  has_many :attachments, -> { where(attachments: { imageable_type: "Product" }) }, foreign_key: "imageable_id"#, class_name: "Attachment"
 
   include Fetchable
   include Imageable
@@ -47,8 +48,10 @@ class Product < ActiveRecord::Base
   end
 
   def self.search(params)
+    @products = Product.includes(:attachments).ready.alive.references(:attachments).limit(100)
     params = params.gsub(" ","|")
-    includes(:attachments).ready.alive.references(:attachments).preload(attachments: :imageable).find_by_sql("SELECT * FROM products WHERE jp_name || zh_name || item_code || description ~* '.*#{params}.*'")
+    @or_products = Product.includes(:attachments).ready.alive.references(:attachments).limit(100)
     # binding.pry
+    return (@products + @or_products).uniq
   end
 end
