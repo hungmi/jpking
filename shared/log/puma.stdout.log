@@ -1,0 +1,550 @@
+=== puma startup: 2016-06-04 09:20:10 +0800 ===
+[12792] * Starting control server on unix:///var/folders/qv/9fftg76s44q0cg365tvwpvhc0000gn/T/puma-status-1465003210125-12792
+[12792] - Worker 0 (pid: 12813) booted, phase: 0
+
+
+Started GET "/products?utf8=%E2%9C%93&q%5Bcategory_jp_name_or_category_zh_name_or_jp_name_or_zh_name_or_item_code_or_description_cont%5D=g" for 172.20.10.4 at 2016-06-04 09:20:34 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ProductsController#index as HTML
+  Parameters: {"utf8"=>"✓", "q"=>{"category_jp_name_or_category_zh_name_or_jp_name_or_zh_name_or_item_code_or_description_cont"=>"g"}}
+  [1m[35m (20.3ms)[0m  SELECT COUNT(DISTINCT count_column) FROM (SELECT  DISTINCT "products"."id" AS count_column FROM "products" LEFT OUTER JOIN "categories" ON "categories"."id" = "products"."category_id" WHERE ((((("categories"."jp_name" ILIKE '%g%' OR "categories"."zh_name" ILIKE '%g%') OR "products"."jp_name" ILIKE '%g%') OR "products"."zh_name" ILIKE '%g%') OR "products"."item_code" ILIKE '%g%') OR "products"."description" ILIKE '%g%') LIMIT 99 OFFSET 0) subquery_for_count
+  Rendered partials/_tool.html.erb (3.5ms)
+  [1m[36mProduct Load (166.3ms)[0m  [1mSELECT  DISTINCT "products".* FROM "products" LEFT OUTER JOIN "categories" ON "categories"."id" = "products"."category_id" WHERE ((((("categories"."jp_name" ILIKE '%g%' OR "categories"."zh_name" ILIKE '%g%') OR "products"."jp_name" ILIKE '%g%') OR "products"."zh_name" ILIKE '%g%') OR "products"."item_code" ILIKE '%g%') OR "products"."description" ILIKE '%g%')  ORDER BY "products"."id" ASC LIMIT 99 OFFSET 0[0m
+  [1m[35mAttachment Load (0.6ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 63], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 64], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 65], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 66], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.4ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 98], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 99], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 106], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 166], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 178], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 179], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 193], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 214], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 217], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 254], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 287], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 386], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 387], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 388], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 389], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 466], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 467], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 468], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 469], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 470], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 481], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 482], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 533], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 534], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 560], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 561], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 658], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 666], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 677], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 678], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 696], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 697], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 698], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 699], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 716], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 835], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 836], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 837], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 838], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 900], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 922], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 923], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 924], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 925], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 926], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 927], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 928], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 944], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1015], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1016], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1022], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1023], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1059], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1060], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.4ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1101], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1102], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.4ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1103], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1104], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1134], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1141], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1160], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1177], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1228], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1229], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1230], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1331], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1332], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1373], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1374], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1385], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1411], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1412], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1602], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1603], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1604], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1605], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1683], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1684], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1713], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1714], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1724], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1725], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1747], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1804], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1808], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1809], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1926], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1928], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1999], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2038], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2042], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2048], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2049], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2055], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2056], ["imageable_type", "Product"]]
+  Rendered products/_product.html.erb (260.8ms)
+  Rendered partials/_tool.html.erb (1.2ms)
+  Rendered products/index.html.erb within layouts/application (452.8ms)
+  Rendered partials/_navbar.html.erb (13.2ms)
+Completed 200 OK in 1080ms (Views: 823.2ms | ActiveRecord: 219.1ms)
+
+
+Started GET "/products?utf8=%E2%9C%93&q%5Bcategory_jp_name_or_category_zh_name_or_jp_name_or_zh_name_or_item_code_or_description_cont%5D=g" for 172.20.10.4 at 2016-06-04 09:21:29 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  Parameters: {"utf8"=>"✓", "q"=>{"category_jp_name_or_category_zh_name_or_jp_name_or_zh_name_or_item_code_or_description_cont"=>"g"}}
+  [1m[36m (150.0ms)[0m  [1mSELECT DISTINCT COUNT(DISTINCT "products"."id") FROM "products" LEFT OUTER JOIN "categories" ON "categories"."id" = "products"."category_id" WHERE ((((("categories"."jp_name" ILIKE '%g%' OR "categories"."zh_name" ILIKE '%g%') OR "products"."jp_name" ILIKE '%g%') OR "products"."zh_name" ILIKE '%g%') OR "products"."item_code" ILIKE '%g%') OR "products"."description" ILIKE '%g%')[0m
+  Rendered partials/_tool.html.erb (3.2ms)
+  [1m[35mProduct Load (149.1ms)[0m  SELECT  DISTINCT "products".* FROM "products" LEFT OUTER JOIN "categories" ON "categories"."id" = "products"."category_id" WHERE ((((("categories"."jp_name" ILIKE '%g%' OR "categories"."zh_name" ILIKE '%g%') OR "products"."jp_name" ILIKE '%g%') OR "products"."zh_name" ILIKE '%g%') OR "products"."item_code" ILIKE '%g%') OR "products"."description" ILIKE '%g%')  ORDER BY "products"."id" ASC LIMIT 99 OFFSET 0
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 63], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 64], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 65], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 66], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 98], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 99], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 106], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 166], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 178], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 179], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 193], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (1.6ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 214], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 217], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 254], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 287], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 386], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 387], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 388], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 389], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 466], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 467], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 468], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 469], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 470], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 481], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 482], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 533], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 534], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 560], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 561], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 658], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 666], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 677], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 678], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 696], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 697], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 698], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 699], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 716], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 835], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 836], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 837], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 838], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 900], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 922], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 923], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 924], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 925], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.4ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 926], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 927], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 928], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 944], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1015], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1016], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1022], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1023], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1059], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1060], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1101], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1102], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1103], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1104], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1134], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1141], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1160], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1177], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1228], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1229], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1230], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1331], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1332], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1373], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1374], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1385], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1411], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1412], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1602], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1603], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1604], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1605], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1683], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1684], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1713], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.4ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1714], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1724], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1725], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1747], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1804], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1808], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1809], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1926], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 1928], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 1999], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2038], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2042], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2048], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2049], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2055], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2056], ["imageable_type", "Product"]]
+  Rendered products/_product.html.erb (339.4ms)
+  Rendered partials/_tool.html.erb (2.2ms)
+  Rendered products/index.html.erb within layouts/application (511.6ms)
+  Rendered partials/_navbar.html.erb (6.9ms)
+Completed 200 OK in 789ms (Views: 438.6ms | ActiveRecord: 331.6ms)
+
+
+Started GET "/assets/ad_main.self-f1a685dbb3cc9d3532a5c5bf9b2f10e5b52ed7384cdac0a64767c541837f834d.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/categories.self-6978bd9145812453f42b7bb71d71f3da43b6c9c3b71439468bbe782b6449c8ac.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/carts.self-4abc8c131839a8d416282430dddf4a429a910d6056b4a1d3a0ba8f177224ad6c.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/cart_items.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/navbar.self-ac4dc0c14ce1d29c2e1c77c15d542908ba0955de0c95f7adc78635bd29161dc2.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/links.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/order_items.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/orders.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/partials.self-35e17986a3c1e202f693d33ae8ce975bb4a0e2a4dd0cdc41bdbf9d08b46b1677.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/products.self-91316e794dde10e2669e261c8171bcd23b0b9076194d599db5c16131a5e75bb2.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/register.self-63f57e8b0241cfb9794d6f46377a52b8fb4e34905f611ee1dd2781a6a5f4a748.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/responsive.self-10ebf571cc530fbcfbeaf1de5b13a7989bb9e0f8ab6935017cc2d5620dc71396.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/sessions.self-9b2888a25830657d6d8efc6b8d94cb0489fdca343e6b8b477afc115a098c343e.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/shops.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spinner.self-79f6204e1e80eccbb26cddf23d0b37944d7b39298172f262f0d3cbda2fb366d1.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/application.self-2b592db9d87696b4eec17706444fa5d49791ccc9bb625792b44ee88b4e8c334d.css?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:30 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/fastclick.self-2ef237ba874bf05f39b1fe6a3ad359ed6e5abe70f69553cc28f84dd7c8f0fe54.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/cart_items.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/carts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/categories.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.lazyload.self-cd4d7bf22d03a46e8d5293078376a8029eb57c7f15c6a652376215fd511840bf.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/links.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/order_items.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/products.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/shops.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spinner.self-a2a9e9eb237b3fc8c965dec4e7c8866d286ce72ec15aeb3ce97c9ffa5172c752.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/application.self-a9e43c0f98e502856638ef28024db2555592ea8283d0237298f72d8b9db26590.js?body=1" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/icon-32b07cf5e4b103d5d181ed319b74fd8e172a133946ef1da4e7bc5a5a3d7ee64e.png" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular-fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c.woff2" for 172.20.10.4 at 2016-06-04 09:21:31 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/products?page=2&q%5Bcategory_jp_name_or_category_zh_name_or_jp_name_or_zh_name_or_item_code_or_description_cont%5D=g&utf8=%E2%9C%93" for 172.20.10.4 at 2016-06-04 09:21:34 +0800
+Cannot render console from 172.20.10.4! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  Parameters: {"page"=>"2", "q"=>{"category_jp_name_or_category_zh_name_or_jp_name_or_zh_name_or_item_code_or_description_cont"=>"g"}, "utf8"=>"✓"}
+  [1m[35m (164.7ms)[0m  SELECT DISTINCT COUNT(DISTINCT "products"."id") FROM "products" LEFT OUTER JOIN "categories" ON "categories"."id" = "products"."category_id" WHERE ((((("categories"."jp_name" ILIKE '%g%' OR "categories"."zh_name" ILIKE '%g%') OR "products"."jp_name" ILIKE '%g%') OR "products"."zh_name" ILIKE '%g%') OR "products"."item_code" ILIKE '%g%') OR "products"."description" ILIKE '%g%')
+  Rendered partials/_tool.html.erb (2.8ms)
+  [1m[36mProduct Load (159.4ms)[0m  [1mSELECT  DISTINCT "products".* FROM "products" LEFT OUTER JOIN "categories" ON "categories"."id" = "products"."category_id" WHERE ((((("categories"."jp_name" ILIKE '%g%' OR "categories"."zh_name" ILIKE '%g%') OR "products"."jp_name" ILIKE '%g%') OR "products"."zh_name" ILIKE '%g%') OR "products"."item_code" ILIKE '%g%') OR "products"."description" ILIKE '%g%')  ORDER BY "products"."id" ASC LIMIT 99 OFFSET 99[0m
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2058], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2060], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2062], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2063], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2065], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2066], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2071], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2075], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2080], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2081], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2082], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2090], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2094], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2095], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2101], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2102], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.4ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2121], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2126], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2127], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2131], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2134], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2135], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2180], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2191], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2195], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2196], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2199], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2203], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2210], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2213], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2214], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2215], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2216], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2232], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2235], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2236], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2237], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2238], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2262], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2266], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2267], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2268], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2269], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2280], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2282], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2298], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2303], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2305], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2309], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2316], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2319], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2327], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2361], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2374], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2375], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2376], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2419], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2420], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2423], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2435], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2458], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2477], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2486], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2487], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2494], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2496], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2500], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2533], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2548], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2551], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2554], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2578], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2607], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2608], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2616], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2617], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2624], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2625], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2632], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2633], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2646], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2647], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2648], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2650], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2651], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2656], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2657], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2659], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2660], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2664], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2672], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2674], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2679], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2682], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.2ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2690], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.3ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2691], ["imageable_type", "Product"]]
+  [1m[35mAttachment Load (0.3ms)[0m  SELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1  [["imageable_id", 2692], ["imageable_type", "Product"]]
+  [1m[36mAttachment Load (0.2ms)[0m  [1mSELECT  "attachments".* FROM "attachments" WHERE "attachments"."imageable_id" = $1 AND "attachments"."imageable_type" = $2  ORDER BY "attachments"."id" ASC LIMIT 1[0m  [["imageable_id", 2693], ["imageable_type", "Product"]]
+  Rendered products/_product.html.erb (246.6ms)
+  Rendered partials/_tool.html.erb (2.2ms)
+  Rendered products/index.html.erb within layouts/application (421.3ms)
+  Rendered partials/_navbar.html.erb (4.3ms)
+Completed 200 OK in 689ms (Views: 321.5ms | ActiveRecord: 357.7ms)
+[12792] - Gracefully shutting down workers...
+[12792] === puma shutdown: 2016-06-04 09:22:36 +0800 ===
+[12792] - Goodbye!
+Exiting

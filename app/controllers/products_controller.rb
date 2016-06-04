@@ -13,8 +13,8 @@ class ProductsController < ApplicationController
     #   @products = Product.all.includes(:links, :attachments).where("attachments_count > 0").limit(100)
     # end
     # @q = Product.ransack(params[:q])#.alive
-    @products = @q.result(distinct: true)#.includes(:category)
-    @total_page = (@products.size / 100.0).ceil
+    @products = @q.result(distinct: true).limit(99).offset(99*(current_page - 1))#.includes(:category)
+    @total_page = (@q.result(distinct: true).size / 99.0).ceil
     # binding.pry
   end
 
