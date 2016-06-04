@@ -6,7 +6,7 @@ namespace :dev do
     `PGPASSWORD=mypassword pg_dump -Fc --no-acl --no-owner -h localhost -U hungmi #{db_name} > #{db_file}`
   end
 
-  desc "restore" do
+  desc "restore db"
   task :add, [:href] do |t, args|
     `pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d jpking_dev #{args[:href]}`
   end
