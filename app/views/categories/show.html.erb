@@ -1,6 +1,4 @@
 <div id="product-index-container">
-  <div id="last-page"><%= last_page %></div>
-  <div id="next-page"><%= next_page(@total_page) %></div>
   <% if @children.present? %>
     <% @children.each_slice(4) do |c4| %>
       <div class="row">
@@ -9,9 +7,14 @@
     <% end %>
   <% end %>
   <div class="row" id="products">
-    <%= render 'partials/tool', position: "top" %>
-    <%= render @products, rowCount: params[:rowCount].to_i %>
-    <%= render 'partials/tool', position: "bottom" %>
+    <div class="row">
+      <%= render "partials/pagination" %>
+      <%= render 'partials/tool' %>
+    </div>
+    <%= render @products, rowCount: session[:rowCount].to_i %>
+    <div class="text-center">
+      <%= render "partials/pagination" %>
+    </div>
   </div>
 </div>
 <script type="text/javascript">

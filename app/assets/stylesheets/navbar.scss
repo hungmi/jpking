@@ -14,30 +14,29 @@
       border: 2px solid hotpink;
     }
   }
-  // input {
-  //   color: black;
-  // }
-  h1.navbar-brand {
-    margin: 0px;
-    // font-size: 30px;
-    line-height: 33px;
-    & > a {
-      font-size: 0px; 
-      &:hover, &:focus {
-        text-decoration: none;
-      }
-      & > span {
-        color: white;
-        &.japan-logo-text {
-          color: hotpink;
-        }
-        font-family: 'Orbitron', sans-serif;
-        font-size: 46px;
-      }
-    }
-  }
+  
   .navbar-right {
     padding: 10px 15px;
+    &.visible-xs {
+      padding: 0px;
+      margin: 0px -15px;
+      font-size: 0px;
+      .btn-3 {
+        font-size: 18px;
+        width: 33.333%;
+        height: 50px;
+        line-height: 38px;
+        background-color: white;
+        color: hotpink;
+        border-top: 1px solid hotpink;
+        border-bottom: 1px solid hotpink;
+        border-right: 1px solid hotpink;
+        border-radius: 0px;
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
   }
   .navbar-form {
     border: none;
@@ -53,6 +52,32 @@
   li.active a {
     color: black;
     background-color: pink;
+  }
+}
+
+h1.navbar-brand {
+  margin: 0px;
+  // font-size: 30px;
+  line-height: 33px;
+  & > a {
+    font-size: 0px; 
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+    & > span {
+      color: white;
+      &.japan-logo-text {
+        color: hotpink;
+      }
+      font-family: 'Orbitron', sans-serif;
+      font-size: 46px;
+    }
+  }
+}
+
+.navbar-header.visible-xs {
+  span {
+    color: pink;
   }
 }
 

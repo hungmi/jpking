@@ -13,8 +13,8 @@ class ProductsController < ApplicationController
     #   @products = Product.all.includes(:links, :attachments).where("attachments_count > 0").limit(100)
     # end
     # @q = Product.ransack(params[:q])#.alive
-    @products = @q.result(distinct: true).limit(99).offset(99*(current_page - 1))#.includes(:category)
-    @total_page = (@q.result(distinct: true).size / 99.0).ceil
+    @products = @q.result(distinct: true).page(current_page)#.includes(:category)
+    @total_page = (@q.result(distinct: true).size / Product.per_page).ceil
     # binding.pry
   end
 
@@ -84,9 +84,5 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:shop_id, :jp_name, :zh_name, :original_price, :wholesale_price, :stock, :item_code)
-    end
-
-    def set_row_count
-      params[:rowCount] = params[:rowCount].to_i.between?(1,12) ? params[:rowCount].to_i : nil
     end
 end

@@ -1,11 +1,8 @@
-<div class="col-xs-12 tool <%= position %>">
-  <div class="col-sm-6 col-xs-12 text-left">
-    <%= pagination(3, @total_page) %>
-  </div>
-  <div class="col-sm-6 col-xs-12 text-right" id="row-counts">
+<div class="col-sm-6 col-xs-12 tool">
+  <div class="col-xs-12 text-right" id="row-counts">
     每列顯示數量
     <% for i in [3,4,6] do %>
-      <%= link_to "#{i}個", params.merge(rowCount:i), class: "btn btn-link" %>
+      <%= link_to "#{i}個", row_count_path(rowCount:i), class: "btn btn-link", method: :post %>
     <% end %>
   </div>
 </div>

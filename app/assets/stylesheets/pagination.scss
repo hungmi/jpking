@@ -1,0 +1,37 @@
+@media only screen and (min-width: 481px) {
+  #pagination-wrapper {
+    text-align: left;
+    padding: 20px 0px;
+  }
+  #last-page {
+    position: fixed;
+    z-index: 9999;
+    left: 20px;
+    top: 50%;
+    a { font-size: 16px; }
+  }
+
+  #next-page {
+    position: fixed;
+    z-index: 9999;
+    right: 20px;
+    top: 50%;
+    a { font-size: 16px; }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #pagination-wrapper {
+    text-align: center;
+  }
+
+  #last-page {
+    float: left;
+    a { font-size: 16px; }
+  }
+
+  #next-page {
+    float: right;
+    a { font-size: 16px; }
+  }
+}

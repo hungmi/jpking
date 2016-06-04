@@ -23,12 +23,12 @@
 <!-- 
 <% @hot_products[0..2].each do |p| %>
   <div class="col-xs-4">
-    <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: p.name %>
+    <%= image_tag p.attachments.order(:id).first.image.url, style: "width: 100%; height: 100%;", alt: p.name %>
   </div>
 <% end %>
 <% @hot_products[3..6].each do |p| %>
   <div class="col-xs-3">
-    <%= image_tag "https://unsplash.it/300?random", style: "width: 100%; height: 100%;", alt: p.name %>
+    <%= image_tag p.attachments.order(:id).first.image.url, style: "width: 100%; height: 100%;", alt: p.name %>
   </div>
 <% end %>
 -->

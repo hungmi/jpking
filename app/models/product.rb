@@ -3,8 +3,15 @@ class Product < ActiveRecord::Base
   scope :ready, -> { where("attachments_count > 0 and products.description IS NOT NULL").alive }
   scope :not_ready, -> { where.not("attachments_count > 0 and products.description IS NOT NULL").alive }
   scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
+  scope :page, -> (current_page) { limit(Product.per_page).offset(Product.per_page*(current_page - 1)) }
 
   enum state: { alive: 0, dead: 1 }
+
+  attr_accessor :per
+
+  def self.per_page
+    30
+  end
 
   belongs_to :category
   #has_many :attachments#, -> { where(attachments: { imageable_type: "Product" }) }, foreign_key: "imageable_id"#, class_name: "Attachment"

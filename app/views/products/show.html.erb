@@ -37,6 +37,10 @@
   <%= dead_or_alive_btn(@product) %>
   <%= contact_us %>
 </div>
+<div class="col-sm-12 col-xs-12 text-center">
+  <hr class="or_divider"></hr>
+  <%= link_to "繼續尋寶", category_path(@product.category.jp_name, anchor: @product.item_code), class:"btn btn-default btn-easier" %>
+</div>
 
 <script type="text/javascript">
   $(function() {

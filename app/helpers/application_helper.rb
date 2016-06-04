@@ -24,9 +24,9 @@ module ApplicationHelper
     capture do
       for i in start_page..end_page do
         if i == current_page
-          concat link_to i, params.merge(page: i, anchor: "pagination"), class: "btn btn-link btn-sm btn-disabled", id: "current-page"
+          concat link_to i, params.merge(page: i, anchor: "pagination"), class: "btn btn-link btn-disabled", id: "current-page"
         else
-          concat link_to i, params.merge(page: i, anchor: "pagination"), class: "btn btn-link btn-sm"
+          concat link_to i, params.merge(page: i, anchor: "pagination"), class: "btn btn-link"
         end
       end
     end
@@ -34,22 +34,24 @@ module ApplicationHelper
   def final_page(final_page)
     link_to final_page, params.merge(page: final_page, anchor: "pagination"), class: "btn btn-link btn-sm"
   end
-  def last_page # 上一頁
+  def last_page(option={}) # 上一頁
     last_page = current_page - 1
-    link_to("上一頁", params.merge(page: last_page, anchor: "pagination"), class: "btn btn-default") if last_page > 0
+    link_to("<<", params.merge(page: last_page, anchor: "pagination"), class: "btn btn-default #{option[:class]}", id: "#{option[:id]}") if last_page > 0
   end
   # current_page 移到 application_controller#helper_method
   # def current_page
   #   params[:page].to_i.zero? ? 1 : params[:page].to_i
   # end
-  def next_page(total_page) # 下一頁
+  def next_page(total_page, option={}) # 下一頁
     next_page = current_page + 1
-    link_to("下一頁", params.merge(page: next_page, anchor: "pagination"), class: "btn btn-default") if next_page <= total_page
+    link_to(">>", params.merge(page: next_page, anchor: "pagination"), class: "btn btn-default #{option[:class]}", id: "#{option[:id]}") if next_page <= total_page
   end
-  def pagination(inner_window, final_page)
+  def pagination(options = { inner_window: 2 })
+    inner_window = options[:inner_window]
+    final_page = options[:final_page]
     capture do
       content_tag :div, id: "pagination" do
-        concat "頁數："
+        concat last_page(class: "btn-easier", id: "last-page")
         unless current_page - inner_window < 2
           concat first_page
           concat pages_divider
@@ -59,6 +61,7 @@ module ApplicationHelper
           concat pages_divider
           concat final_page(final_page)
         end
+        concat next_page(@total_page, class: "btn-easier", id: "next-page")
       end
     end
   end

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get '/login' => :new, as: :login
     post '/sign_in' => :create, as: :sign_in
     delete '/logout' => :destroy, as: :logout
+    post '/row_count' => :row_count, as: :row_count
   end
   resources :users
   resources :shops

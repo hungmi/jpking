@@ -1,6 +1,6 @@
 <h1>
   JPP8發財車
-  <%= link_to "繼續採購", category_path(@last_product.category, anchor: @last_product.item_code), class: "btn btn-info pull-right" if @cart.cart_items.present? %>
+  <%= link_to "繼續採購", category_path(@last_product.category.jp_name, anchor: @last_product.item_code), class: "btn btn-info pull-right" if @cart.cart_items.present? %>
 </h1>
 <% if @cart.cart_items.present? %>
 <div class="table-responsive">

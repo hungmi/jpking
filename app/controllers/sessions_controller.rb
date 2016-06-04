@@ -27,4 +27,9 @@ class SessionsController < ApplicationController
     flash[:notice] = "期待您下次光臨"
     redirect_to root_path
   end
+
+  def row_count
+    session[:rowCount] = params[:rowCount].to_i.between?(1,12) ? params[:rowCount].to_i : nil
+    redirect_to :back
+  end
 end
