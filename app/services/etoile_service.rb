@@ -61,7 +61,7 @@ class EtoileService
           @product.wholesale_price = special_price || wholesale_price
           @product.save if @product.changed?
         else
-          @product = category.products.where( item_code: params[:productCode], jp_name: product_name_in_link.text.strip, original_price: original_price, wholesale_price: wholesale_price ).create
+          @product = category.products.where( item_code: params[:productCode], jp_name: product_name_in_link.text.strip, original_price: original_price, wholesale_price: wholesale_price ).first_or_create
         end
         # binding.pry
         @product.links.create( value: @request_url + good_strip(product_name_in_link.attr("href").to_s) )

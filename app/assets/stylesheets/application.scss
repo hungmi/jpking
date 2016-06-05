@@ -23,6 +23,10 @@ html, body, h1, h2, h3, h4, h5 {
   font-weight: 300;
 }
 
+body {
+  padding-bottom: 44px;
+}
+
 a:not(.btn) {
   &:visited {
     color: #337ab7;
@@ -103,7 +107,7 @@ img.img100 {
 hr.or_divider {
   margin: 30px 0px;
   color: #aaa;
-  border-top: 1px solid #aaa;
+  border-top: 1px solid #ddd;
   &::after {
     content: "或";
     top: -0.7em;

@@ -81,15 +81,22 @@ h1.navbar-brand {
   }
 }
 
-#navbar-customize input[type="search"] {
-  @media only screen and (min-width: 992px) {
-    width: 370px;
+#navbar-customize {
+  form#product_search {
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+      padding: 0px;
+    }
   }
-  @media only screen and (max-width: 991px) and (min-width: 768px) {
-    width: 200px;
-  }
-  @media only screen and (max-width: 767px) and (min-width: 481px) {
-    width: auto;
+  input[type="search"] {
+    @media only screen and (min-width: 1024px) {
+      width: 370px;
+    }
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+      width: 140px;
+    }
+    @media only screen and (min-device-width : 481px) and (max-device-width : 767px) {
+      width: 100px;
+    }
   }
 }
 

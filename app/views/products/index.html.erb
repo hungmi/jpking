@@ -1,3 +1,4 @@
+<!-- 改用categories#show -->
 <div id="product-index-container">
   <div id="last-page"><%= last_page %></div>
   <div id="next-page"><%= next_page(@total_page) %></div>
@@ -9,9 +10,14 @@
     <% end %>
   <% end %>
   <div class="row">
+    <%= render "partials/pagination" %>
     <%= render 'partials/tool', position: "top" %>
-    <%= render @products, rowCount: params[:rowCount].to_i %>
-    <%= render 'partials/tool', position: "bottom" %>
+  </div>
+  <div class="row">
+    <%= render @products, rowCount: session[:rowCount].to_i %>
+  </div>
+  <div class="text-center">
+    <%= render "partials/pagination" %>
   </div>
 </div>
 <script type="text/javascript">

@@ -8,6 +8,7 @@ class Category < ActiveRecord::Base
   has_many :products
 
   include Fetchable
+  include Imageable
 
   validates :jp_name, :zh_name, uniqueness: true, allow_blank: true
 

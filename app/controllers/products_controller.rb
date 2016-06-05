@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
-  before_action :set_row_count, only: [:index]
 
   # GET /products
   # GET /products.json
@@ -15,6 +14,7 @@ class ProductsController < ApplicationController
     # @q = Product.ransack(params[:q])#.alive
     @products = @q.result(distinct: true).page(current_page)#.includes(:category)
     @total_page = (@q.result(distinct: true).size / Product.per_page).ceil
+    render template: "categories/show"
     # binding.pry
   end
 
