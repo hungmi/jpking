@@ -4,9 +4,9 @@ module ApplicationHelper
   end
   def contact_us
     capture do
-      link_to "https://m.me/jpp888/", class: "btn btn-link contact_us", target: "_blank" do
+      link_to "https://m.me/jpp888/", class: "btn btn-link btn-easier contact_us", target: "_blank" do
         concat content_tag :i, "", class: "glyphicon glyphicon-question-sign"
-        concat " 聯絡板板"
+        concat " 詢問板板"
       end
     end
   end

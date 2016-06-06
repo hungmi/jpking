@@ -5,27 +5,28 @@ namespace :dev do
     @fog = UploadService.fog
     @dir = @fog.directories.get("jpking-db2")
     @file_index = @dir.files.size
+    @local_dir = "/Users/hungmi/Documents/jpking_aws"
     db_name = Rails.application.config.database_configuration[Rails.env]["database"] 
     case args[:tablename]
     when "full"
       puts "開始備份完整資料庫..."
       @file_name = "jpking_dev_#{@file_index + 1}.dump"
-      `pg_dump -Fc --no-acl --no-owner -h localhost -U hungmi #{db_name} > "/Users/hungmi/Documents/jpking_aws/#{@file_name}"`
+      `pg_dump -Fc --no-acl --no-owner -h localhost -U hungmi #{db_name} > "#{@local_dir}/#{@file_name}"`
       puts "備份完成，開始上傳..."
-      Rake::Task["dev:upload\['full'\]"].invoke
+      Rake::Task["dev:upload"].invoke("full")
     else
       puts "開始備份#{args[:tablename]}"
-      @file_name = "#{args[:tablename]}_#{Time.now.strftime("%m%d%H%M")}.pg"
-      @local_dir = "/Users/hungmi/Documents/jpking_aws"
-      `pg_dump -d jpking_dev --table=#{args[:tablename]} > #{@local_dir}/#{@file_name}`
+      @file_name = "#{args[:tablename]}_#{Time.now.strftime("%m%d%H%M")}.dump"
+      `pg_dump -Fc --data-only -d jpking_dev --table=#{args[:tablename]} > #{@local_dir}/#{@file_name}`
       puts "備份完成，開始上傳..."
-      Rake::Task["dev:upload\['#{args[:tablename]}'\]"].invoke
+      Rake::Task["dev:upload"].invoke(args[:tablename])
     end
     #`mv "#{args[:file_name]}" "/Users/hungmi/Documents/jpking_aws/#{args[:file_name]}"`
   end
 
   desc "upload db"
   task :upload, [:backup_type] => :environment do |t, args|
+    # binding.pry
     file = @dir.files.create ({
       :key    => @file_name,
       :body   => File.open("#{@local_dir}/#{@file_name}"),
@@ -36,7 +37,7 @@ namespace :dev do
       fetchable_id: @file_index,
       fetchable_type: args[:backup_type]
     })
-    puts "上傳成功，link: #{Link.last.value}"
+    puts "上傳成功，link: '#{Link.last.value}'"
   end
 
   desc "restore db"

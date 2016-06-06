@@ -66,3 +66,17 @@ div#car-logo {
 .btn.btn-large {
   font-size: 36px !important;
 }
+
+#cart_items_in_carts {
+  margin-bottom: 20px;
+  & > div {
+    padding: 10px 0px;
+    border-bottom: 1px solid #ccc;
+    &:last-child {
+      border-bottom: 0px;
+    }
+  }
+  // & > .row:nth-child(odd) {
+  //   background-color: #eee;
+  // }
+}

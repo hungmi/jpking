@@ -1,3 +1,17 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table-like-columns {
+  .tr {
+    border-bottom: 1px solid #ddd;
+    //padding: 
+  }
+  .thead h5 {
+    font-weight: bold;
+  }
+  .thead h5, .tbody p{
+    margin: 10px 0px;
+    line-height: 1.42;
+  }
+}
