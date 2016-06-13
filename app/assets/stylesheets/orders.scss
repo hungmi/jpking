@@ -5,7 +5,9 @@
 .table-like-columns {
   .tr {
     border-bottom: 1px solid #ddd;
-    //padding: 
+    &:last-child {
+      border-bottom: none;
+    }
   }
   .thead h5 {
     font-weight: bold;

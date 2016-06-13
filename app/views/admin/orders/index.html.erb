@@ -1,0 +1,22 @@
+<div class="btn-navs no-space">
+  <%= link_to admin_orders_path(scope: "paid"), class: "btn #{'active' if params[:scope] == 'paid'}" do %>
+    未採購 <%= render_notification(@importable_count) %>
+  <% end %>
+  |
+  <%= link_to admin_orders_path(scope: "importing"), class: "btn #{'active' if params[:scope] == 'importing'}" do %>
+    採購中 <%= render_notification(@importing_count) %>
+  <% end %>
+  |
+  <%= link_to admin_orders_path(scope: "imported"), class: "btn #{'active' if params[:scope] == 'imported'}" do %>
+    已採購  <%= render_notification(@imported_count) %>
+  <% end %>
+</div>
+<%#= link_to "加入海渡購物車", admin_add_to_etoile_cart_path, method: :post, class: "btn btn-primary", style: "width: 33.33%;" %>
+<% case params[:scope] %>
+<% when "paid" %>
+  <%= render "admin/partials/importable_order_items", orders: @orders %>
+<% when "importing" %>
+  <%= render "admin/partials/importing_order_items", orders: @orders %>
+<% when "imported" %>
+  <%= render "admin/partials/imported_order_items", orders: @orders %>
+<% end %>

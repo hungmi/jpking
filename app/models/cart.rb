@@ -5,7 +5,7 @@ class Cart < ActiveRecord::Base
   def total_benefit
     benefit = 0
     self.cart_items.map do |item|
-      benefit += item.benefit*item.quantity
+      benefit += item.total_benefit
     end
     benefit
   end
@@ -17,7 +17,7 @@ class Cart < ActiveRecord::Base
   def total
     total = 0
     self.cart_items.map do |item|
-      total += item.price*item.quantity
+      total += item.total
     end
     total
   end
@@ -26,7 +26,7 @@ class Cart < ActiveRecord::Base
     order_items_attributes = []
     self.cart_items.map do |i|
       attrs = {}
-      [:quantity, :price, :name, :product_id].map do |attr|
+      [:quantity, :product_id].map do |attr|
         attrs[attr] = i.send(attr.to_s)
       end
       order_items_attributes << attrs

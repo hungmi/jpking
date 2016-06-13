@@ -24,6 +24,19 @@ zh-TW:
       ready_to_deliver: 已出貨
       delivered: 已送達
       cancel: 他媽的已取消
+  order_item_state:
+    admin:
+      placed: 下單未付款
+      paid: 已付款未訂購
+      importing: 訂購中
+      imported: 已訂購
+      stocked: 已入庫
+      packaged: 已分貨
+      ready_to_deliver: 已出貨
+      delivered: 已送達
+      cancel: 他媽的已取消
+      unavailable: 售完缺貨中
+      wait: 等待進貨
 
   activerecord:
     attributes:

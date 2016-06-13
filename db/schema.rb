@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601204525) do
+ActiveRecord::Schema.define(version: 20160612172657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,6 @@ ActiveRecord::Schema.define(version: 20160601204525) do
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
     t.integer  "product_id"
-    t.string   "item_code"
-    t.string   "name"
-    t.integer  "price"
     t.integer  "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -83,10 +80,11 @@ ActiveRecord::Schema.define(version: 20160601204525) do
     t.integer  "product_id"
     t.string   "name"
     t.integer  "quantity"
-    t.integer  "price"
+    t.integer  "ordered_price"
     t.integer  "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "item_code"
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
@@ -113,14 +111,16 @@ ActiveRecord::Schema.define(version: 20160601204525) do
     t.integer  "wholesale_price"
     t.integer  "stock"
     t.string   "item_code"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "attachments_count", default: 0
     t.text     "material"
     t.text     "description"
     t.integer  "state",             default: 0
     t.string   "product_size"
     t.string   "origin"
+    t.integer  "wholesale_amount",  default: 1
+    t.boolean  "price_in_name",     default: false
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -138,8 +138,9 @@ ActiveRecord::Schema.define(version: 20160601204525) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "password_confirmation"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "role",                  default: 0
   end
 
   add_foreign_key "cart_items", "carts"

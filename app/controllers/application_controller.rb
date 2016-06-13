@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :user_signed_in?, :current_user, :current_page
-  before_action :generate_cart, :set_ransack
+  before_action :generate_cart, :set_ransack, :store_last_page!
+
+  def store_last_page!
+    session[:my_previous_url] = request.env["HTTP_REFERER"]
+  end
 
   def set_ransack
     @q = Product.ransack(params[:q])
@@ -16,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     redirect_to login_path unless user_signed_in?
+  end
+
+  def authenticate_admin!
+    redirect_to login_path unless (user_signed_in? && current_user.admin?)
   end
 
   def current_user

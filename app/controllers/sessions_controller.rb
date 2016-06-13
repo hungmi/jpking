@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    session[:my_previous_url] = request.env["HTTP_REFERER"]
+    # session[:my_previous_url] = request.env["HTTP_REFERER"]
   end
 
   def create
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     else
       session[:user] = @user.id
       flash[:notice] = "歡迎回來"
-      redirect_to session[:my_previous_url]
+      redirect_to session[:my_previous_url] || root_path
     end
   end
 

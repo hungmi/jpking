@@ -41,40 +41,42 @@ class EtoileService
     # loop 此目錄中各分頁的連結，一千樣就有 10 頁
     @agent = Mechanize.new
     sign_in(@agent)
+    puts "已登入"
     category.links.map do |link|
-      @page = @agent.get(link.value)  
+      puts "正在抓取 #{category.name} 底下產品，目前進度 #{category.products.size} / #{category.total}"
+      @page = @agent.get(link.value)
       # binding.pry
       @page.search(".item_box").map do |item|
         # 取得商品資料
-        product_name_in_link = item.css(".item_name > a") # 產品名稱，包含連結到產品
+        product_name_in_link = item.css(".item_name > a") # <a href='產品連結'>產品名稱</a>
         params = extract_params product_name_in_link.attr("href").to_s
         original_price = item.search(".item_price1 p.price_num_small").first.text.gsub(",","")[/\d+/]
         wholesale_price = item.search(".item_price2 p.price_num_small").first.text.gsub(",","")[/\d+/]
+        wholesale_amount = get_wholesale_amount(product_name_in_link.text)
         special_price = item.search(".item_price3_small").first.text.gsub(",","")[/\d+/]
-        # item.css(".item_thm img").each do |img|
-        # image_url_base = item.css(".item_thm > a > img").attr("src").to_s.gsub("productnl","product").gsub("05_","01_")#.gsub("01.jpg","img_num.jpg")
         ############
-        # 儲存商品及其連結
+        # 儲存商品及其連結，根據 item_code 找商品，如果有找到的話就會對應更新價格
         if category.products.where( item_code: params[:productCode] ).present?
           @product = category.products.where( item_code: params[:productCode] ).first
           @product.original_price = original_price
           @product.wholesale_price = special_price || wholesale_price
           @product.save if @product.changed?
         else
-          @product = category.products.where( item_code: params[:productCode], jp_name: product_name_in_link.text.strip, original_price: original_price, wholesale_price: wholesale_price ).first_or_create
+          @product = category.products.where( item_code: params[:productCode], jp_name: product_name_in_link.text.strip, original_price: original_price, wholesale_price: wholesale_price, wholesale_amount: wholesale_amount ).first_or_create
         end
         # binding.pry
+        @product.strip_price_from_name!
         @product.links.create( value: @request_url + good_strip(product_name_in_link.attr("href").to_s) )
-        sleep rand(10)
+        # sleep rand(10)
         fetch_product(@product)
         ############
       end
-      sleep rand(30)
+      sleep rand(5)
     end
   end
 
   def fetch_product(product)
-    # 此方法是用來抓產品詳細資訊跟尺寸、顏色；大圖不一定要從這邊抓，因為連結可以推斷出來
+    # 此方法是用來抓產品詳細資訊跟尺寸、顏色；大圖不一定要從這邊抓，因為大圖連結可以推斷出來
     # add state to product first, 可購買、已下架
     # 跑到各個目錄的 product list 比對列出的產品連結，這樣 request 最少
     # 也要寫 renew_categories
@@ -82,29 +84,34 @@ class EtoileService
     # 不必登入也可以拿到清楚的圖
     # @agent = Mechanize.new
     # sign_in(@agent)
-    target_link = product.links.last
-    @product_page = Nokogiri::HTML open(target_link.value)
-    # binding.pry
-    if @product_page.search("p.err_big").present?
-      target_link.dead! && target_link.fetchable.dead!
-    else
-      { 'サイズ' => :product_size, '素材・原材料名・成分' => :material, 'コメント' => :description, '原産国' => :origin }.map do |k,v|
-        find_detail_in_table(k, v, product)
-      end
-
-      images = @product_page.css("img[id*=image_]")
-      images.each do |img|
-        # binding.pry
-        @attachment = product.attachments.new
-        image_url = @request_url + img.attr("src").to_s.gsub("productnl","product").gsub("03_","01_")
-        @attachment.source_url = image_url
-        @attachment.description = img.attr("alt").to_s
-        if @attachment.valid?
-          @attachment.remote_image_url = image_url
-          @attachment.save
+    target_link = product.links.alive.last
+    
+    unless target_link.up_to_date?
+      puts "抓取 #{target_link.value} 中"
+      @product_page = Nokogiri::HTML open(target_link.value)
+      # binding.pry
+      if @product_page.search("p.err_big").present?
+        target_link.dead! && target_link.fetchable.dead!
+      else
+        { 'サイズ' => :product_size, '素材・原材料名・成分' => :material, 'コメント' => :description, '原産国' => :origin }.map do |k,v|
+          find_detail_in_table(k, v, product)
         end
-        sleep rand(5)
+
+        images = @product_page.css("img[id*=image_]")
+        images.each do |img|
+          # binding.pry
+          @attachment = product.attachments.new
+          image_url = @request_url + img.attr("src").to_s.gsub("productnl","product").gsub("03_","01_")
+          @attachment.source_url = image_url
+          @attachment.description = img.attr("alt").to_s
+          if @attachment.valid?
+            @attachment.remote_image_url = image_url
+            @attachment.save
+          end
+        end
+        target_link.touch(:fetch_time)
       end
+      sleep rand(2)
     end
   end
 
@@ -193,5 +200,14 @@ class EtoileService
       sign_in_form.username = "799300"
       sign_in_form.password = "bj680709"
       sign_in_form.submit
+    end
+
+    def get_wholesale_amount(name)
+      if name.index("（") && name.index("）") && name.index("x")
+        x_pos = name.index("x")
+        return name[x_pos+1..-1][/\d+/].to_i
+      else
+        1
+      end
     end
 end

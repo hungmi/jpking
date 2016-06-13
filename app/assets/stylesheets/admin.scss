@@ -1,0 +1,22 @@
+.btn-navs {
+  .btn {
+    width: 33.3333%;
+    font-size: 26px;
+    border-bottom: 1px solid #999;
+    border-radius: 0px;
+    color: #999;
+    &.active {
+      border: 1px solid #999;
+      border-bottom: 0px;
+      color: black;
+      box-shadow: none;
+    }
+  }
+  span.notification {
+    border-radius: 99999px;
+    background-color: red;
+    padding: 0px 9px;
+    color: white;
+    font-size: 24px;
+  }
+}

@@ -1,4 +1,7 @@
 module ProductsHelper
+  def product_path(product)
+    human_product_path(item_code: product.item_code, product_name: product.name)
+  end
   def breadcrumb(product)
     categories = link_to(product.category.jp_name, category_path(product.category.jp_name, anchor: product.item_code), class:"btn btn-link")
     child = product.category
@@ -26,6 +29,14 @@ module ProductsHelper
           concat "商品缺貨中"
         end
       end
+    end
+  end
+
+  def dead_or_alive(product)
+    if product.alive?
+      "有庫存"
+    else
+      "售完補貨中"
     end
   end
 end

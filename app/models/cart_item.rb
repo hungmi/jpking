@@ -13,23 +13,15 @@ class CartItem < ActiveRecord::Base
   end
 
   def fork
-    self.name = self.product.name
-    self.price = self.product.our_price
-    self.quantity = 1
-    self.item_code = self.product.item_code
+    self.quantity = self.product.wholesale_amount
   end
 
-  def wholesale_amount
-    if self.name.index("（") && self.name.index("）") && self.name.index("x")
-      x_pos = self.name.index("x")
-      return self.name[x_pos+1..-1][/\d+/].to_i
-    else
-      1
-    end
+  def total_benefit
+    self.product.single_benefit * self.quantity
   end
 
-  def benefit
-    self.product.their_price*self.wholesale_amount - self.price
+  def price
+    self.product.our_price
   end
 
   def total

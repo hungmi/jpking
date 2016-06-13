@@ -21,34 +21,40 @@
     <div class="col-xs-12 thead">
       <h5>訂單內容</h5>
     </div>
-    <div class="clearfix" id="cart_items_in_carts">
-      <%= form_for @order, url: order_path(@order.token) do |f| %>
+    <%= form_for @order, url: order_path(@order.token) do |f| %>
+      <div class="clearfix" id="items_in_list">
         <%= f.fields_for :order_items do |ff| %>
-        <div class="col-xs-12">
+        <div class="col-xs-12 item">
           <div class="col-xs-3 col-sm-3">
-            <%= link_to ff.object.product do %>
-              <%= image_tag ff.object.product.attachments.first.image.url, class: "img100" %>
+            <% if ff.object.product.attachments_count > 0 %>
+              <%= link_to ff.object.product do %>
+                <%= image_tag ff.object.product.attachments.first.image.url, class: "img100" %>
+              <% end %>
             <% end %>
           </div>
           <div class="col-xs-9 col-sm-4">
-            <%= link_to ff.object.name, ff.object.product %><br>
+            <%= link_to ff.object.product.name, ff.object.product %><br>
             <%= ff.object.price %> x
-            <%= ff.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999 } %><br>
-            <div class="no-space">
-              <%= f.submit "更新", class: "btn btn-primary", style: "width: 33.33%;" %>
-              <%= link_to "下次再買", root_path, class: "btn btn-link", style: "width: 33.33%;" %>
-              <% if @order.cancelable? %>
-                <%= link_to order_item_path(ff.object), method: :delete, data: { confirm: "從訂單移除#{ff.object.name}?" }, class: "btn btn-link", style: "width: 33.33%" do %>
-                  <i class="glyphicon glyphicon-remove"></i>
-                  刪除
+            <% if @order.cancelable? %>
+              <%= ff.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999, pattern: "[0-9]*" } %><br>
+              <div class="no-space">
+                <%= f.submit "更新", class: "btn btn-primary", style: "width: 33.33%;" %>
+                <%= link_to "下次再買", root_path, class: "btn btn-link", style: "width: 33.33%;" %>
+                <% if @order.cancelable? %>
+                  <%= link_to order_item_path(ff.object), method: :delete, data: { confirm: "從訂單移除#{ff.object.name}?" }, class: "btn btn-link", style: "width: 33.33%" do %>
+                    <i class="glyphicon glyphicon-remove"></i>
+                    刪除
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
+              </div>
+            <% else %>
+              <%= ff.object.quantity %>
+            <% end %>
           </div>
         </div>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
   <div class="col-xs-12">
     <div class="col-xs-3"></div>
@@ -59,8 +65,7 @@
     <div class="col-xs-9 text-right"><%= @order.i18n_state_for_user %></div>
   </div>
   <div class="col-xs-12 text-center" style="margin-top: 30px;">
-    <%= link_to "確定進貨", root_path(@order.token), class: "btn btn-warning btn-easier", style: "width: 100%;" %>
-    <%= link_to "暫時壓單", cancel_order_path(@order.token), class: "btn btn-link" %>
+    <%= render_order_state_btns(@order) %>
     <%= contact_us %>
   </div>
 </div>

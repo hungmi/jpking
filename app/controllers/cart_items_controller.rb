@@ -30,14 +30,23 @@ class CartItemsController < ApplicationController
     respond_to do |format|
       if @cart_item.unique?
         if @cart_item.save
-          format.html { redirect_to cart_path, notice: '成功加入購物車' }
+          format.html { 
+            flash[:success] = "成功加入發財車！"
+            redirect_to cart_path
+          }
           format.json { render :show, status: :created, location: @cart_item }
         else
-          format.html { redirect_to :back, notice: '加入購物車失敗' }
+          format.html {
+            flash[:danger] = '加入購物車失敗'
+            redirect_to :back
+          }
           format.json { render json: @cart_item.errors, status: :unprocessable_entity }
         end
       else
-        format.html { redirect_to cart_path, notice: '已加入購物車' }
+        format.html {
+          flash[:warning] = '已加入購物車'
+          redirect_to cart_path
+        }
       end
     end
   end
@@ -47,7 +56,10 @@ class CartItemsController < ApplicationController
   def update
     respond_to do |format|
       if @cart_item.update(cart_item_params)
-        format.html { redirect_to cart_path, notice: 'Cart item was successfully updated.' }
+        format.html {
+          flash[:success] = "更新成功！"
+          redirect_to cart_path
+        }
         format.json { render :show, status: :ok, location: @cart_item }
       else
         format.html { render :edit }
@@ -61,7 +73,10 @@ class CartItemsController < ApplicationController
   def destroy
     @cart_item.destroy
     respond_to do |format|
-      format.html { redirect_to cart_path, notice: 'Cart item was successfully destroyed.' }
+      format.html {
+        flash[:success] = "#{@cart_item.product.name} 已從訂單中移除！"
+        redirect_to cart_path
+      }
       format.json { head :no_content }
     end
   end

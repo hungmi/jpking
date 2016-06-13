@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
 
-  enum state: { placed: 0, paid: 1, jp_ordered: 2, stocked: 3, packaged: 4, ready_to_deliver: 5, delivered: 6, cancel: 7 }
+  enum state: { placed: 0, paid: 1, delivered: 2, cancel: 3 }
   enum delivery: { black_cat: 0, face: 1, cvs_711: 2, cvs_family: 3 }
 
   before_create :generate_order_num
@@ -16,10 +16,15 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :order_items, reject_if: :all_blank, allow_destroy: true
 
+  def pay!
+    self.paid!
+    self.order_items.map { |oi| oi.paid! }
+  end
+
   def total
     total = 0
     self.order_items.map do |item|
-      total += item.price*item.quantity
+      total += item.total
     end
     total
   end

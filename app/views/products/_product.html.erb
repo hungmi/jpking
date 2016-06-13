@@ -1,5 +1,5 @@
 <div class='<%= rowCount > 0 ? "col-xs-#{12/rowCount}" : "col-sm-4 col-xs-6" %> product-card text-center' id="<%= product.item_code %>">
-  <%= link_to human_product_path(item_code: product.item_code, product_name: product.name) do %>
+  <%= link_to product do %>
     <div style="position: relative;" class="product-show-images-container embed-container ratio-1-1">
       <% if product.attachments_count > 0 %>
         <%= image_tag product.attachments.order(:id).first.image.url, style: "width: 100%; height: 100%;", alt: product.name, lazy: true %>

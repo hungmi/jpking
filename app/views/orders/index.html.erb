@@ -1,31 +1,25 @@
-<h1>訂單紀錄</h1>
+<h1>訂購紀錄</h1>
 <%= form_for :merge_orders, url: merge_orders_path do |f| %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><%= check_box_tag :merge_all %> 合併</th>
-        <th>訂單編號</th>
-        <th>訂購時間</th>
-        <th>總金額</th>
-        <th>狀態</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
+  <%= check_box_tag :merge_all %> 合併
+  <% @orders.each do |order| %>
+    <div class="clearfix" style="padding: 15px 0px; border-bottom: 1px solid #ccc;">
+      <div class="col-xs-1" style="padding-left: 0px;">
         <%= f.fields_for order.token do |ff| %>
-        <tr>
-          <td><%= ff.check_box :_merge %></td>
-          <td class="better-num"><%= link_to order.num, order_path(order.token) %> <%= link_to "檢視訂單內容", order_path(order.token) %></td>
-          <td><%= order.order_time %></td>
-          <td class="better-num"><%= order.total %></td>
-          <td><%= order.i18n_state_for_user %></td>
-          <td><%= render_order_state_btns(order) %> <%= contact_us %></td>
-        </tr>
+          <%= ff.check_box :_merge %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
+      </div>
+      <div class="col-xs-11">
+        <h2 class="better-num h2" style="margin-top: 0px;">
+          <span class="hint">NT$ </span><%= link_to order.total, order_path(order.token) %>
+          <%= order.i18n_state_for_user %>
+          <%= link_to "檢視", order_path(order.token), class: "pull-right btn btn-link" %>
+        </h2>
+        <h3 class="better-num"><span class="hint">編號：</span><%= link_to order.num, order_path(order.token) %></h3>
+        <h5 class="better-num"><span class="hint">訂購時間：</span><%= order.order_time %></h5>
+        <div><%= render_order_state_btns(order) %> <%= contact_us %></div>
+      </div>
+    </div>
+  <% end %>
   <%= f.submit "合併" %>
 <% end %>
 

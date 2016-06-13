@@ -7,29 +7,49 @@ class Product < ActiveRecord::Base
 
   enum state: { alive: 0, dead: 1 }
 
-  attr_accessor :per
-
   def self.per_page
     30
   end
 
   belongs_to :category
-  #has_many :attachments#, -> { where(attachments: { imageable_type: "Product" }) }, foreign_key: "imageable_id"#, class_name: "Attachment"
+  has_many :order_items
 
   include Fetchable
   include Imageable
-  # include PgSearch
-
-  # pg_search_scope :search, :against => [:jp_name, :zh_name, :description, :material, :item_code]
 
   validates :item_code, uniqueness: true, allow_blank: true
 
   def their_price
-    original_price ? (original_price*1.08*1.05*0.3).round : "無"
+    original_price ? (original_price*1.08*0.3).round : "無"
   end
 
   def our_price
-    wholesale_price ? (wholesale_price*1.08*1.05*0.3).round : "無"
+    wholesale_price ? (wholesale_price/wholesale_amount*1.08*1.05*0.3).round : "無"
+  end
+
+  def single_benefit
+    self.wholesale_amount*self.their_price - self.our_price
+  end
+
+  def get_wholesale_amount
+    if self.name.index("（") && self.name.index("）") && self.name.index("x")
+      x_pos = self.name.index("x")
+      return self.name[x_pos+1..-1][/\d+/].to_i
+    else
+      1
+    end
+  end
+
+  def strip_price_from_name!
+    if self.jp_name[/（?￥\d*\s*x\s*\d*）?/]
+      self.jp_name = self.jp_name.gsub(/（?￥\d*\s*x\s*\d*）?/,"").strip
+    elsif self.jp_name[/￥\d*/]
+      self.jp_name = self.jp_name.gsub(/￥\d*/,"").strip
+    end
+    if self.changed?
+      self.price_in_name = true
+      self.save
+    end
   end
 
   def name
@@ -59,5 +79,18 @@ class Product < ActiveRecord::Base
     params = params.gsub(" ","|")
     @or_products = Product.ready.alive.find_by_sql("SELECT * FROM products WHERE jp_name || zh_name || item_code || description ~* '.*#{params}.*'")
     return (@products + @or_products).uniq
+  end
+
+  def check_availability!
+    target_link = self.links.last
+    page = Nokogiri::HTML open(target_link.value)
+    if page.search("p.err_big").present?
+      target_link.dead! && target_link.fetchable.dead!
+      target_link.fetchable.order_items.where(state: [OrderItem.states[:paid], OrderItem.states[:importing]]).update_all(state: OrderItem.states[:unavailable])
+      return false
+    else
+      target_link.touch && target_link.fetchable.touch
+      return true
+    end
   end
 end

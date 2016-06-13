@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
+  root "pages#home"
+  resources :categories, except: [:index]
+  controller 'pages' do
+    get '/guide' => :guide, as: :guide
+    get '/cart' => :cart, as: :cart
+    get '/register' => :register, as: :register
+  end
+  resources :products, except: [:show]
   resources :order_items
   resources :orders do
     member do
+      get "pay"
       get "cancel"
       get "reorder"
     end
@@ -9,18 +18,9 @@ Rails.application.routes.draw do
       post "merge"
     end
   end
-  root "pages#home"
-  resources :categories, except: [:index]
   resources :links
-  resources :products
-  get "/:item_code/:product_name" => "products#show", as: :human_product
   resources :cart_items
   # resources :carts
-  controller 'pages' do
-    get '/guide' => :guide, as: :guide
-    get '/cart' => :cart, as: :cart
-    get '/register' => :register, as: :register
-  end
   controller 'sessions' do
     get '/login' => :new, as: :login
     post '/sign_in' => :create, as: :sign_in
@@ -29,6 +29,17 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :shops
+  namespace :admin do
+    controller 'orders' do
+      get "orders" => :index
+      post "importing"
+      post "imported"
+      post "unavailable"
+    end
+    post "add_to_etoile_cart"
+  end
+
+  get "/:item_code/:product_name" => "products#show", as: :human_product
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

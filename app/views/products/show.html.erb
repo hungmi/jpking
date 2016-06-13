@@ -34,6 +34,8 @@
     <br>
     <span>批發價 NT$</span>
     <span class="our-price"><%= @product.our_price %></span>
+    <br>
+    <span style="line-height: 48px;">批發單位：<%= @product.wholesale_amount %> 個</span>
     </h4>
     <%= dead_or_alive_btn(@product) %>
     <%= contact_us %>
