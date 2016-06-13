@@ -39,7 +39,7 @@ module Jpking
       config.allow_unknown_urls
 
       # Timeout if requests take longer than 5 seconds
-      # config.timeout = 30
+      config.timeout = 30
 
       # Don't raise errors when SSL certificates can't be validated
       config.ignore_ssl_errors
