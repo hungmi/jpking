@@ -6,14 +6,14 @@ namespace :dev do
     @dir = @fog.directories.get("jpking-db2")
     @file_index = @dir.files.size
     @local_dir = "/Users/hungmi/Documents/jpking_aws"
-    db_name = Rails.application.config.database_configuration[Rails.env]["database"] 
+    db_name = Rails.application.config.database_configuration[Rails.env]["database"]
     case args[:tablename]
-    when "full"
+    when nil
       puts "開始備份完整資料庫..."
       @file_name = "jpking_dev_#{@file_index + 1}.dump"
       `pg_dump -Fc --no-acl --no-owner -h localhost -U hungmi #{db_name} > "#{@local_dir}/#{@file_name}"`
       puts "備份完成，開始上傳..."
-      Rake::Task["dev:upload"].invoke("full")
+      Rake::Task["dev:upload"].invoke()
     else
       puts "開始備份#{args[:tablename]}"
       @file_name = "#{args[:tablename]}_#{Time.now.strftime("%m%d%H%M")}.dump"

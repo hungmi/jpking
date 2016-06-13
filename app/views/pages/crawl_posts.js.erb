@@ -1,0 +1,2 @@
+$("<%= j(render partial: 'partials/crawled_results', locals: { results: @results }) %>").appendTo("#crawl-result")
+$("body").animate({ scrollTop: $("body").height() }, 1000 )

@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   root "pages#home"
   resources :categories, except: [:index]
   controller 'pages' do
-    get '/guide' => :guide, as: :guide
-    get '/cart' => :cart, as: :cart
-    get '/register' => :register, as: :register
+    get 'guide'
+    get 'cart'
+    get 'register'
+    get 'fb_bot'
+    post 'crawl_posts'
   end
   resources :products, except: [:show]
   resources :order_items

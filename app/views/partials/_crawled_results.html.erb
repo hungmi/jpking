@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <thead>
+    <th>訂購人</th>
+    <th>訂購數量</th>
+  </thead>
+  <tbody>
+    <% results.each do |url, result| %>
+      <h4><%= url %></h4>
+      <% result.each do |u, n| %>
+      <tr>
+        <td><%= u %></td>
+        <td><%= n %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

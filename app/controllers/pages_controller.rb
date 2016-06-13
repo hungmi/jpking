@@ -18,4 +18,20 @@ class PagesController < ApplicationController
   def register
     
   end
+
+  def fb_bot
+  end
+
+  def crawl_posts
+    @bbb = FbBot.new
+    @results = {}
+    if params[:post][:url].present?
+      @results[params[:post][:url]] = @bbb.get_order_from_post(params[:post][:url])
+    end
+    # binding.pry
+    respond_to do |format|
+      format.js
+      format.json { render json: @results, status: :ok }
+    end
+  end
 end
