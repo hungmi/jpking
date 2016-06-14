@@ -2,7 +2,7 @@ class Admin::OrdersController < AdminController
   before_action :set_view_mode, only: [:index]
   
   def index
-    params[:scope] = (params[:scope].present? && OrderItem.respond_to?(params[:scope])) ? params[:scope] : "all"
+    params[:scope] = (params[:scope].present? && OrderItem.respond_to?(params[:scope])) ? params[:scope] : "paid"
     # session[:importable_order_item_view_mode] ||= "orders"
     # session[:importing_order_item_view_mode] ||= "shops"
     # session[:imported_order_item_view_mode] ||= "shops"
