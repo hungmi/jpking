@@ -8,14 +8,12 @@ class EtoileOrderBot
   Capybara.app_host = "http://etonet.etoile.co.jp/"
 
   def initialize#(username, password)
-    Headless.ly do
-      visit('/ec/app/auth/login')
-      fill_in('username', with: "799300")
-      fill_in('password', with: "bj680709")
-      page.execute_script("$('form#loginform').submit()")
-      visit('/ec/app/cart/list?priceRangeType=02&viewMode=newarrival&iconViewMode=1&pageNo=1&dataCount=100&listImageSize=05&allClear=false&offset=-1&filterByOrderHistory=false&filterByMetadata=false&onlyDiscounted=false&onlyEtoileOriginal=false&onlyMadeInJapan=false&customerLimited=false&isProductAndCategoryNameSearch=false&rankingRangeType=0002&customerCode=799300&offsetSearch=false')
-      print page.body
-    end
+    visit('/ec/app/auth/login')
+    fill_in('username', with: "799300")
+    fill_in('password', with: "bj680709")
+    page.execute_script("$('form#loginform').submit()")
+    visit('/ec/app/cart/list?priceRangeType=02&viewMode=newarrival&iconViewMode=1&pageNo=1&dataCount=100&listImageSize=05&allClear=false&offset=-1&filterByOrderHistory=false&filterByMetadata=false&onlyDiscounted=false&onlyEtoileOriginal=false&onlyMadeInJapan=false&customerLimited=false&isProductAndCategoryNameSearch=false&rankingRangeType=0002&customerCode=799300&offsetSearch=false')
+    print page.body
   end
   
   def lets_order!
