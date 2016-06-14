@@ -46,8 +46,9 @@ gem "lazyload-rails"
 gem 'fastclick-rails'
 # gem 'browser'
 gem 'ransack'
+gem 'poltergeist'
 gem "capybara-webkit"
-# gem "headless"
+gem "headless"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
