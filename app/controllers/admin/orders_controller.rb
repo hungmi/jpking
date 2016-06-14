@@ -1,8 +1,14 @@
 class Admin::OrdersController < AdminController
+  before_action :set_view_mode, only: [:index]
   
   def index
     params[:scope] = (params[:scope].present? && OrderItem.respond_to?(params[:scope])) ? params[:scope] : "all"
+    # session[:importable_order_item_view_mode] ||= "orders"
+    # session[:importing_order_item_view_mode] ||= "shops"
+    # session[:imported_order_item_view_mode] ||= "shops"
     @orders = Order.includes(:order_items, order_items: [:product, product: [:links] ]).where(order_items: { state: OrderItem.states[params[:scope]] })
+    @etoile_order_items = OrderItem.includes(:product, product: [:shop]).where(products: { shop_id: 1 }).importing
+    @products = Product.includes(:order_items).where(order_items: { state: OrderItem.states[params[:scope]] }).group_by(&:shop_id)
     @importable_count = OrderItem.paid.size
     @importing_count = OrderItem.importing.size
     @imported_count = OrderItem.imported.size
@@ -63,6 +69,14 @@ class Admin::OrdersController < AdminController
       flash[:warning] = "此訂單品項不存在。"
       redirect_to :back
     end
+  end
+
+  private
+
+  def set_view_mode
+    session[:paid_items_view_mode] ||= params[:paid_items_view_mode] || "orders"
+    session[:importing_items_view_mode] ||= params[:importing_items_view_mode] || "shops"
+    session[:imported_items_view_mode] ||= params[:imported_items_view_mode] || "shops"
   end
 
 end

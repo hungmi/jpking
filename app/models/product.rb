@@ -11,6 +11,7 @@ class Product < ActiveRecord::Base
     30
   end
 
+  belongs_to :shop
   belongs_to :category
   has_many :order_items
 

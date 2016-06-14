@@ -2,5 +2,15 @@
 <h4>貼上網址，例如：https://www.facebook.com/groups/BWCATGO/permalink/1716518145274091/</h4>
 <%= form_for :post, url: crawl_posts_path, remote: true do |f| %>
   <%= f.text_field :url, style: "width:100%;" %>
-  <%= f.submit '開始查詢' %>
+  <%= f.submit '開始查詢', id: "crawl-button" %>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#crawl-button").on("ajax:send", function(xhr) {
+      $("#crawl-button").hide()
+    }).on("ajax:success", function(e, data, status, xhr) {
+      $("#crawl-button").show()
+    });
+  });
+</script>

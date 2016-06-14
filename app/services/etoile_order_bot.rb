@@ -17,18 +17,23 @@ class EtoileOrderBot
   end
   
   def lets_order!
-    OrderItem.paid.map do |oi|
-      fill_in('ruiban', with: oi.product.item_code[0..2])
-      fill_in('hinban', with: oi.product.item_code[3..5])
-      page.execute_script("searchProduct(getProductCode(), getProductVariationCode())")
-      if page.has_selector?('#addCartButton')
-        within("#directInputForm") { fill_in("purchaseQuantity", with: oi.quantity.to_s) }
-        page.execute_script("$('#directInputForm').submit()")
+    if OrderItem.importing.present?
+      OrderItem.importing.map do |oi|
+        fill_in('ruiban', with: oi.product.item_code[0..2])
+        fill_in('hinban', with: oi.product.item_code[3..5])
+        page.execute_script("searchProduct(getProductCode(), getProductVariationCode())")
+        if page.has_selector?('#addCartButton')
+          within("#directInputForm") { fill_in("purchaseQuantity", with: oi.quantity.to_s) }
+          page.execute_script("$('#directInputForm').submit()")
+        end
+        oi.imported!
+        puts "#{oi.name} 已訂購完成"
+        return true
+        # sleep rand(1)
       end
-      oi.imported!
-      puts "#{oi.name} 已訂購完成"
-      # sleep rand(1)
+    else
+      return false
     end
-    save_and_open_screenshot
+    # save_and_open_screenshot
   end
 end

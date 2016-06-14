@@ -13,4 +13,10 @@ module OrdersHelper
       end
     end
   end
+
+  ["paid", "importing", "imported"].each do |this_state|
+    define_method "is_#{this_state}?" do
+      params[:scope] == this_state
+    end
+  end
 end

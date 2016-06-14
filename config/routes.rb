@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'register'
     get 'fb_bot'
     post 'crawl_posts'
+    get 'scanner'
   end
   resources :products, except: [:show]
   resources :order_items

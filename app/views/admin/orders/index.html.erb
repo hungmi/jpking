@@ -1,22 +1,25 @@
 <div class="btn-navs no-space">
-  <%= link_to admin_orders_path(scope: "paid"), class: "btn #{'active' if params[:scope] == 'paid'}" do %>
+  <%= link_to admin_orders_path(scope: "paid"), class: "btn #{'active' if is_paid?}" do %>
     未採購 <%= render_notification(@importable_count) %>
   <% end %>
   |
-  <%= link_to admin_orders_path(scope: "importing"), class: "btn #{'active' if params[:scope] == 'importing'}" do %>
+  <%= link_to admin_orders_path(scope: "importing"), class: "btn #{'active' if is_importing?}" do %>
     採購中 <%= render_notification(@importing_count) %>
   <% end %>
   |
-  <%= link_to admin_orders_path(scope: "imported"), class: "btn #{'active' if params[:scope] == 'imported'}" do %>
+  <%= link_to admin_orders_path(scope: "imported"), class: "btn #{'active' if is_imported?}" do %>
     已採購  <%= render_notification(@imported_count) %>
   <% end %>
 </div>
-<%#= link_to "加入海渡購物車", admin_add_to_etoile_cart_path, method: :post, class: "btn btn-primary", style: "width: 33.33%;" %>
-<% case params[:scope] %>
-<% when "paid" %>
-  <%= render "admin/partials/importable_order_items", orders: @orders %>
-<% when "importing" %>
-  <%= render "admin/partials/importing_order_items", orders: @orders %>
-<% when "imported" %>
-  <%= render "admin/partials/imported_order_items", orders: @orders %>
-<% end %>
+<div style="margin: 10px 0px;">
+  <% if is_importing? %>
+    <%= link_to "將海渡商品加入海渡購物車", admin_add_to_etoile_cart_path, method: :post, class: "btn btn-info", data: { disable_with: '正在加入...' }, disabled: (true unless @etoile_order_items.present?) %>
+  <% end %>
+  <% if params["#{params[:scope]}_items_view_mode".to_sym] == "orders" %>
+    <%= link_to "按店家檢視", params.merge("#{params[:scope]}_items_view_mode".to_sym => "shops"), class: "btn btn-default" %>
+    <%= render "admin/partials/order_items_by_orders", orders: @orders %>
+  <% else %>
+    <%= link_to "按訂單檢視", params.merge("#{params[:scope]}_items_view_mode".to_sym => "orders"), class: "btn btn-default" %>
+    <%= render "admin/partials/order_items_by_shops", orders: @orders %>
+  <% end %>
+</div>

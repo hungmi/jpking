@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612172657) do
+ActiveRecord::Schema.define(version: 20160614044800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,9 +121,11 @@ ActiveRecord::Schema.define(version: 20160612172657) do
     t.string   "origin"
     t.integer  "wholesale_amount",  default: 1
     t.boolean  "price_in_name",     default: false
+    t.integer  "shop_id"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["shop_id"], name: "index_products_on_shop_id", using: :btree
 
   create_table "shops", force: :cascade do |t|
     t.string   "zh_name"
@@ -151,4 +153,5 @@ ActiveRecord::Schema.define(version: 20160612172657) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "shops"
 end
