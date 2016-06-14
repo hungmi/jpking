@@ -7,11 +7,17 @@ module Admin::OrdersHelper
 
   def render_order_item_next_state_btn(item)
     if item.imported?
-      link_to "入庫", admin_imported_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
+      link_to "入庫", root_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
     elsif item.importing?
       link_to "完成採購", admin_imported_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
     elsif item.paid?
       link_to "採購", admin_importing_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
+    end
+  end
+
+  ["paid", "importing", "imported"].each do |this_state|
+    define_method "is_#{this_state}?" do
+      params[:scope] == this_state
     end
   end
 end
