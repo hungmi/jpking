@@ -1,0 +1,3 @@
+<% @results.each do |picture, orders| %>
+$("<%= j(render 'admin/partials/fb_orders', orders: orders, picture: picture) %>").appendTo("#orders")
+<% end %>

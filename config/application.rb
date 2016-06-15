@@ -27,7 +27,7 @@ module Jpking
 
     Capybara::Webkit.configure do |config|
       # Enable debug mode. Prints a log of everything the driver is doing.
-      config.debug = true
+      # config.debug = true
 
       # By default, requests to outside domains (anything besides localhost) will
       # result in a warning. Several methods allow you to change this behavior.
@@ -39,7 +39,7 @@ module Jpking
       config.allow_unknown_urls
 
       # Timeout if requests take longer than 5 seconds
-      config.timeout = 30
+      # config.timeout = 30
 
       # Don't raise errors when SSL certificates can't be validated
       config.ignore_ssl_errors

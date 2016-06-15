@@ -10,5 +10,17 @@ class AdminController < ApplicationController
     end
     redirect_to admin_orders_path
   end
+
+  def fb_bot
+    
+  end
+
+  def get_post
+    @bbb = FbBot.new
+    @results = @bbb.get_post(params[:post][:url])
+    respond_to do |format|
+      format.js
+    end
+  end
   
 end

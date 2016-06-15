@@ -1,0 +1,29 @@
+<div id="orders"></div>
+<%= form_for :post, url: admin_get_post_path, remote: true do |f| %>
+  <%= f.text_field :url %>
+  <%= f.submit "取得貼文資訊" %>
+<% end %>
+
+<style type="text/css">
+  form {
+    display: flex;
+  }
+  input[name="post[url]"] {
+    width: 80%;
+    border: 2px solid black;
+    line-height: 40px;
+    font-size: 24px;
+  }
+  input[name="commit"] {
+    line-height: 46px;
+    border: 2px solid black;
+    border-left: none;
+    background-color: black;
+    font-weight: 400;
+    color: white;
+  }
+  input[name="commit"]:hover {
+    background-color: white;
+    color: black;
+  }
+</style>
