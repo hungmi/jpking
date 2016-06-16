@@ -21,20 +21,33 @@ class FbBot
     # save_and_open_screenshot
   end
 
-  def get_order_from_post(url)
+  def get_single_post_orders(url)
     visit("/#{url.gsub(Capybara.app_host,'')}")
-    if page.has_selector?('a.UFICommentActorName')
-      @html = Nokogiri::HTML.parse(page.html)
-      @names = {}
-      @html.search(".UFICommentContent").map do |comment|
-        @names[comment.search(".UFICommentActorName").text] = comment.search(".UFICommentBody span").text
+    @html = Nokogiri::HTML.parse(page.html)
+    i = 0
+    @results = {}
+    @orders = {}
+    # 頁面：該則貼文的專屬連結
+    # 例如：https://www.facebook.com/groups/880774278680822/permalink/1032736396817942/
+    # 整則貼文的文字
+    @product = find(".userContent").text
+    @picture = @html.search(".mtm img").attr('src').text
+    # 各回覆的專屬連結
+    @html.search(".UFIComment.UFIRow[aria-label='留言'] .UFICommentContent").each do |a|
+      customer = a.search(".UFICommentActorName").text
+      unless customer == "江佳蓉" # 若回覆有編輯過，會出現一個連結的title是 '顯示編輯紀錄'，要忽略掉
+        puts "正在抓取 comment##{i} ..."
+        # save_screenshot
+        @orders[customer] = a.search(".UFICommentBody").inner_html
+        @results[0] = { picture: @picture, title: @product, orders: @orders }
+        i = i + 1
       end
-      @names
     end
-    #save_and_open_screenshot
+    # binding.pry
+    return @results
   end
 
-  def get_post(url)
+  def get_orders_in_post_comments(url)
     visit("/#{url.gsub(Capybara.app_host,'')}")
     @html = Nokogiri::HTML.parse(page.html)
     @results = {}
@@ -43,25 +56,35 @@ class FbBot
     # 整則貼文的文字
     # puts find(".userContent").text
     # 各回覆的專屬連結
-    @html.search(".UFICommentContentBlock .uiLinkSubtle").each_with_index do |a,i|
-      relative_url = a.attr('href')
-      visit(relative_url)
-      save_screenshot
-      @html = Nokogiri::HTML.parse(page.html)
-      @comment = @html.search(".UFIComment.UFIRow:nth-child(#{i+1})[aria-label='留言'] .UFICommentContent")
-      @author = @comment.search(".UFICommentActorName").text
-      @commnet_body = @comment.search(".UFICommentBody")
-      @picture = @comment.search(".mvs a").attr("href")
-      @replys = @html.search(".UFIReplyList:nth-child(#{i+1}) .UFIComment.UFIRow[aria-label='回應'] .UFICommentContent")
-      @orders = {}
-      @replys.each do |r|
-        customer = r.search(".UFICommentActorName").text
-        unless customer.include? @author
-          @orders[r.search(".UFICommentActorName").text] = r.search(".UFICommentBody").text
+    i = 0
+    @html.search(".UFICommentContentBlock .uiLinkSubtle").each do |a|
+      unless a.attr('title').present?
+        relative_url = a.attr('href')
+        visit(relative_url)
+        puts "正在抓取 comment##{i} ..."
+        # save_screenshot
+        html = Nokogiri::HTML.parse(page.html)
+        @comment = html.search(".UFIComment.UFIRow[aria-label='留言'] .UFICommentContent")[i]
+        
+        @author = @comment.search(".UFICommentActorName").text
+        @comment_body = @comment.search(".UFICommentBody").inner_html
+        if @comment.search(".mvs a img").present?
+          @picture = @comment.search(".mvs a img").attr("src").text
         end
+        @orders = {}
+        if html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='回應'] .UFICommentContent").present?
+          @replys = html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='回應'] .UFICommentContent")
+          @replys.each do |r|
+            customer = r.search(".UFICommentActorName").text
+            unless customer.include? @author
+              @orders[customer] = r.search(".UFICommentBody").text
+            end
+          end
+        end
+        # binding.pry
+        @results[i] = { picture: @picture, title: @comment_body, orders: @orders }
+        i = i + 1
       end
-      # binding.pry
-      @results[@picture] = @orders
     end
 
     return @results

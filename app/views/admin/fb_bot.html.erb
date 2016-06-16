@@ -1,15 +1,21 @@
-<div id="orders"></div>
-<%= form_for :post, url: admin_get_post_path, remote: true do |f| %>
+<div class="row" style="position: relative;">
+<%= form_for :post, url: admin_post_to_orders_path, remote: true, html: { id: "post_url_form" } do |f| %>
+  <%= f.select :type, [['單一產品',1],['單日連線多產品',2]] %>
   <%= f.text_field :url %>
   <%= f.submit "取得貼文資訊" %>
 <% end %>
+</div>
+<div id="orders" class="row"></div>
 
 <style type="text/css">
-  form {
+  form#post_url_form {
     display: flex;
+    position: fixed;
+    width: 940px;
+    top: 60px;
   }
   input[name="post[url]"] {
-    width: 80%;
+    width: 100%;
     border: 2px solid black;
     line-height: 40px;
     font-size: 24px;
@@ -26,4 +32,16 @@
     background-color: white;
     color: black;
   }
+  #orders {
+    margin-top: 48px;
+  }
 </style>
+
+<script type="text/javascript">
+  $(document).on("ajaxSend", function(){
+    $('input[name="commit"]').hide()
+  })
+  $(document).on("ajaxComplete", function(){
+    $('input[name="commit"]').show()
+  })
+</script>

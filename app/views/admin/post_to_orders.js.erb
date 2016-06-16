@@ -1,0 +1,3 @@
+<% @results.each do |index, content| %>
+$("<%= j(render 'admin/partials/fb_orders', content: content) %>").appendTo("#orders")
+<% end %>

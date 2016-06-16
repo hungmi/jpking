@@ -16603,3 +16603,4 @@ WARNING: The next major version of capybara-webkit will require at least version
 === puma startup: 2016-06-15 23:28:18 +0800 ===
 WARNING: The next major version of capybara-webkit will require at least version 5.0 of Qt. You're using version 4.8.7.
 === puma startup: 2016-06-15 23:31:11 +0800 ===
+=== puma startup: 2016-06-16 02:48:11 +0800 ===

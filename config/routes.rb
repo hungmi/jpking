@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       post "unavailable"
     end
     get "fb_bot"
-    post "get_post"
+    post "post_to_orders"
     post "add_to_etoile_cart"
   end
 

@@ -11,13 +11,15 @@ class AdminController < ApplicationController
     redirect_to admin_orders_path
   end
 
-  def fb_bot
-    
-  end
+  def fb_bot ; end
 
-  def get_post
+  def post_to_orders
     @bbb = FbBot.new
-    @results = @bbb.get_post(params[:post][:url])
+    if params[:post][:type] == "1"
+      @results = @bbb.get_single_post_orders(params[:post][:url])
+    else
+      @results = @bbb.get_orders_in_post_comments(params[:post][:url])
+    end
     respond_to do |format|
       format.js
     end
