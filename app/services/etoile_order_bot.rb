@@ -3,6 +3,7 @@ class EtoileOrderBot
   require 'capybara/dsl'
   require 'capybara-webkit'
   include Capybara::DSL
+  Headless.new.start
   Capybara.run_server = false
   Capybara.current_driver = :webkit
   Capybara.app_host = "http://etonet.etoile.co.jp/"
