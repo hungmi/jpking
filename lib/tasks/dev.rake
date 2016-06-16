@@ -58,6 +58,8 @@ namespace :dev do
     case type
     when "full"
       `pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jpking -d #{rails_db_name} #{@server_dir}/#{file_name}`
+      # wget https://jpking-db2.s3-ap-northeast-1.amazonaws.com/jpking_dev_23.dump
+      # pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jpking -d jpking_production jpking_dev_23.dump
     when "table"
       `psql #{rails_db_name} < #{@server_dir}/#{file_name}`
     end
