@@ -1,10 +1,10 @@
 class EtoileOrderBot
   require 'capybara'
   require 'capybara/dsl'
-  require 'capybara-webkit'
+  require 'capybara/poltergeist'
   include Capybara::DSL
   Capybara.run_server = false
-  Capybara.current_driver = :webkit
+  Capybara.current_driver = :poltergeist
   Capybara.app_host = "http://etonet.etoile.co.jp/"
 
   def initialize#(username, password)
