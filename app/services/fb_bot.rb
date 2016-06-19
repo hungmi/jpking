@@ -12,6 +12,7 @@ class FbBot
     puts "登入中"
     # @html = `phantomjs /Users/hungmi/Workspace/jpking/app/assets/javascripts/hello.js&`
     visit('/')
+    page.save_screenshot
     if page.has_selector?('input[name="email"]')
       fill_in("email", with: "gn01189424@gmail.com")
       fill_in("pass", with: "peter012")
@@ -20,7 +21,7 @@ class FbBot
     else
       puts "已登入"
     end
-    save_and_open_screenshot
+    page.save_screenshot
   end
 
   def get_single_post_orders(url)
