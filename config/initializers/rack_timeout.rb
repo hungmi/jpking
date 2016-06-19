@@ -1,1 +1,1 @@
-Rack::Timeout.timeout = 29 if Rails.env.production?
+Rack::Timeout.timeout = 99 if Rails.env.production?
