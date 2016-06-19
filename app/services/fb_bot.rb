@@ -5,7 +5,7 @@ class FbBot
   include Capybara::DSL
   Capybara.run_server = false
   Capybara.current_driver = :poltergeist
-  Capybara.app_host = "https://www.facebook.com/"
+  Capybara.app_host = "https://zh-tw.facebook.com/"
   # Headless.new.start
 
   def initialize#(user,pass)
@@ -16,7 +16,7 @@ class FbBot
     if page.has_selector?('input[name="email"]')
       fill_in("email", with: "gn01189424@gmail.com")
       fill_in("pass", with: "peter012")
-      find("input#u_0_m").click
+      find("input#u_0_m").trigger('click')
       # save_screenshot
     else
       puts "已登入"
