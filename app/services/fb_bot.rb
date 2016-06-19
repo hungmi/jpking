@@ -74,7 +74,7 @@ class FbBot
         puts "正在抓取 comment##{i} ..."
         # save_screenshot
         html = Nokogiri::HTML.parse(page.html)
-        @comment = html.search(".UFIComment.UFIRow[aria-label='留言'] .UFICommentContent")[i]
+        @comment = html.search(".UFIComment.UFIRow[aria-label='留言'] .UFICommentContent")[i] || html.search(".UFIComment.UFIRow[aria-label='Comment'] .UFICommentContent")[i]
         
         @author = @comment.search(".UFICommentActorName").text
         @author_id = @comment.search(".UFICommentActorName").attr("data-hovercard").text[/[^id=]\d+/]
@@ -82,8 +82,14 @@ class FbBot
         @orders = {}
         if @comment.search(".mvs a img").present? # 有圖才抓！！
           @picture = @comment.search(".mvs a img").attr("src").text
-          if html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='回應'] .UFICommentContent").present?
-            @replys = html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='回應'] .UFICommentContent")
+          @replys = if html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='回應'] .UFICommentContent").present?
+            html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='回應'] .UFICommentContent")
+          elsif html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='Comment reply'] .UFICommentContent").present?
+            html.search(".UFIReplyList .UFIComment.UFIRow[aria-label='Comment reply'] .UFICommentContent")
+          else
+            []
+          end
+          if @replys.present?
             @replys.each do |r|
               customer = r.search(".UFICommentActorName").text
               customer_id = r.search(".UFICommentActorName").attr("data-hovercard").text[/[^id=]\d+/]
