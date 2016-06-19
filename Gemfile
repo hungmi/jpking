@@ -46,7 +46,7 @@ gem "lazyload-rails"
 gem 'fastclick-rails'
 # gem 'browser'
 gem 'ransack'
-gem "capybara-webkit"
+# gem "capybara-webkit"
 gem 'poltergeist'
 gem "watir", "~>4.0"
 
