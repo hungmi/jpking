@@ -11,7 +11,7 @@ class FbBot
   def initialize#(user,pass)
     puts "登入中"
     # @html = `phantomjs /Users/hungmi/Workspace/jpking/app/assets/javascripts/hello.js&`
-    visit('https://zh-tw.facebook.com')
+    visit('/')
     page.save_screenshot
     if page.has_selector?('input[name="email"]')
       fill_in("email", with: "gn01189424@gmail.com")
@@ -29,6 +29,7 @@ class FbBot
   end
 
   def get_single_post_orders(url)
+    puts "開始抓取 #{url}"
     visit(url)
     @html = Nokogiri::HTML.parse(page.html)
     i = 0
@@ -58,6 +59,7 @@ class FbBot
 
   def get_orders_in_post_comments(url)
     # binding.pry
+    puts "開始抓取 #{url}"
     visit(url)
     @html = Nokogiri::HTML.parse(page.html)
     @results = {}
