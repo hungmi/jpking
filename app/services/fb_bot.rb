@@ -11,16 +11,18 @@ class FbBot
   def initialize#(user,pass)
     puts "登入中"
     # @html = `phantomjs /Users/hungmi/Workspace/jpking/app/assets/javascripts/hello.js&`
-    visit('/')
+    visit('https://www.facebook.com/login.php?login_attempt=1&lwv=110')
     page.save_screenshot
     if page.has_selector?('input[name="email"]')
       fill_in("email", with: "gn01189424@gmail.com")
       fill_in("pass", with: "peter012")
-      if page.has_selector?("input#u_0_m")
-        find("input#u_0_m").trigger('click')
-      elsif page.has_selector?("input#u_0_o")
-        find("input#u_0_o").trigger('click')
-      end
+      page.save_screenshot
+      find("button#loginbutton").click()
+      # if page.has_selector?("input#u_0_m")
+      #   find("input#u_0_m").trigger('click')
+      # elsif page.has_selector?("input#u_0_o")
+      #   find("input#u_0_o").trigger('click')
+      # end
       # save_screenshot
     else
       puts "已登入"
