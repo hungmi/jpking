@@ -16,7 +16,11 @@ class FbBot
     if page.has_selector?('input[name="email"]')
       fill_in("email", with: "gn01189424@gmail.com")
       fill_in("pass", with: "peter012")
-      find("input#u_0_m").trigger('click')
+      if page.has_selector?("input#u_0_m")
+        find("input#u_0_m").trigger('click')
+      elsif page.has_selector?("input#u_0_o")
+        find("input#u_0_o").trigger('click')
+      end
       # save_screenshot
     else
       puts "已登入"
