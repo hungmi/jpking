@@ -5,13 +5,13 @@ class FbBot
   include Capybara::DSL
   Capybara.run_server = false
   Capybara.current_driver = :poltergeist
-  Capybara.app_host = "https://zh-tw.facebook.com/"
+  Capybara.app_host = "https://www.facebook.com/"
   # Headless.new.start
 
   def initialize#(user,pass)
     puts "登入中"
     # @html = `phantomjs /Users/hungmi/Workspace/jpking/app/assets/javascripts/hello.js&`
-    visit('/')
+    visit('https://zh-tw.facebook.com')
     page.save_screenshot
     if page.has_selector?('input[name="email"]')
       fill_in("email", with: "gn01189424@gmail.com")
@@ -25,7 +25,7 @@ class FbBot
   end
 
   def get_single_post_orders(url)
-    visit("/#{url.gsub(Capybara.app_host,'')}")
+    visit(url)
     @html = Nokogiri::HTML.parse(page.html)
     i = 0
     @results = {}
@@ -53,7 +53,8 @@ class FbBot
   end
 
   def get_orders_in_post_comments(url)
-    visit("/#{url.gsub(Capybara.app_host,'')}")
+    # binding.pry
+    visit(url)
     @html = Nokogiri::HTML.parse(page.html)
     @results = {}
     # 頁面：該則貼文的專屬連結
