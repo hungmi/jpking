@@ -16604,3 +16604,13 @@ WARNING: The next major version of capybara-webkit will require at least version
 WARNING: The next major version of capybara-webkit will require at least version 5.0 of Qt. You're using version 4.8.7.
 === puma startup: 2016-06-15 23:31:11 +0800 ===
 === puma startup: 2016-06-16 02:48:11 +0800 ===
+=== puma startup: 2016-06-18 04:09:09 +0800 ===
+=== puma startup: 2016-06-18 06:13:14 +0800 ===
+=== puma startup: 2016-06-19 00:13:59 +0800 ===
+2016-06-19 00:14:40.235 webkit_server[32121:1251079] Cannot find executable for CFBundle 0x7faff3608c90 </Library/Internet Plug-Ins/Disabled Plug-Ins> (not loaded)
+=== puma startup: 2016-06-19 01:06:15 +0800 ===
+=== puma startup: 2016-06-19 01:06:15 +0800 ===
+=== puma startup: 2016-06-19 01:06:15 +0800 ===
+=== puma startup: 2016-06-19 20:56:02 +0800 ===
+=== puma startup: 2016-06-19 21:01:35 +0800 ===
+Can't open '/Users/hungmi/Workspace/jpking/app/assets/javascript/hello.js'

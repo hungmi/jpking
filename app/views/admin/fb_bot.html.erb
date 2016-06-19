@@ -5,14 +5,27 @@
   <%= f.submit "取得貼文資訊" %>
 <% end %>
 </div>
-<div id="orders" class="row"></div>
-
+<div id="customer_orders" class="clearfix">
+  <h1 class="hidden">按顧客分類</h1>
+</div>
+<hr class="hidden" style="border-color: #333;">
+<div id="orders" class="clearfix">
+  <h1 class="hidden">按產品分類</h1>
+</div>
+<%= link_to "清除版面", "#", onclick: "function(){ $('#customer_orders, #orders').html(''); }" %>
 <style type="text/css">
+  #orders .row:nth-child(odd) {
+    background-color: #eee;
+  }
+  #customer_orders {
+    margin-top: 50px;
+  }
   form#post_url_form {
     display: flex;
     position: fixed;
     width: 940px;
     top: 60px;
+    z-index: 9999;
   }
   input[name="post[url]"] {
     width: 100%;
@@ -36,12 +49,3 @@
     margin-top: 48px;
   }
 </style>
-
-<script type="text/javascript">
-  $(document).on("ajaxSend", function(){
-    $('input[name="commit"]').hide()
-  })
-  $(document).on("ajaxComplete", function(){
-    $('input[name="commit"]').show()
-  })
-</script>

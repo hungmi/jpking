@@ -75,17 +75,22 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def on_amazon(args = {})
-    name = args[:name] || self.jp_name
-    rate = args[:rate].to_f > 0 ? args[:rate].to_f : 1
-    if name.present?
-      url = "https://www.amazon.co.jp/s/ref=nb_sb_noss?field-keywords=#{name}"
-      @page = Nokogiri::HTML open(url)
-      imgs = @amazon.search(".s-result-item img").map do |img_html|
-        img_html.attr("src")
-      end
-    end
-  end
+  # def on_amazon(args = {})
+  #   name = args[:name] || self.jp_name
+  #   rate = args[:rate].to_f > 0 ? args[:rate].to_f : 1
+  #   results = {}
+  #   if name.present?
+  #     url = "https://www.amazon.co.jp/s/ref=nb_sb_noss?field-keywords=#{name}"
+  #     @page = Nokogiri::HTML open(url)
+  #     imgs = @amazon.search(".s-result-item img").map do |img_html|
+  #       img_html.attr("src")
+  #     end
+  #     names = @amazon.search(".s-access-detail-page h2").map do |name_link_html|
+  #       name_link_html
+  #     end
+  #   end
+  #   results[name] = { imgs: imgs, }
+  # end
 
   def self.search(params)
     @products = Product.find_by_sql("SELECT * FROM products WHERE jp_name || zh_name || item_code || description ~* '.*#{params}.*'")

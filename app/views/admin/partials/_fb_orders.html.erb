@@ -1,16 +1,18 @@
-<div class="clearfix">
-<%= raw content[:title] %>
-<%= image_tag content[:picture], style: "max-width: 100%; height: 200px;" %>
+<div class="col-xs-3">
+  <%= raw pic_title_orders[:title] %>
+  <div class="clearfix">
+    <%= image_tag pic_title_orders[:picture], style: "max-width: 100%; width: 100px;" %>
+  </div>
   <table class="table table-striped">
     <thead>
       <th>姓名</th>
       <th>數量</th>
     </thead>
     <tbody>
-      <% content[:orders].each do |customer, text| %>
+      <% pic_title_orders[:orders].each do |customer_id, name_and_content| %>
         <tr>
-          <td><%= customer %></td>
-          <td><%= raw text %></td>
+          <td class="customer" data-customer-id="<%= customer_id %>"><%= link_to name_and_content[:name], "https://facebook.com/#{customer_id}", target: "_blank" %></td>
+          <td class="order"><%= raw name_and_content[:content] %></td>
         </tr>
       <% end %>
     </tbody>
