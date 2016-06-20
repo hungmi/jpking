@@ -48,13 +48,13 @@ namespace :dev do
     `pg_restore --verbose --clean --no-acl --no-owner -h localhost -U hungmi -d #{rails_db_name} #{args[:db_name]}`
   end
 
-  desc "restore table on production"
+  desc "restore db on production"
   task :restore_on_production, [:db_link] => :environment do |t, args|
     #db_link = Link.where(fetchable_type: "db").order(:id).last.value
     rails_db_name = Rails.application.config.database_configuration[Rails.env]["database"] 
     file_name = args[:db_link][/[^\/]*$/]
     @server_dir = "/home/deploy/jpking/db_backups"
-    `wget -O #{@server_dir} #{db_link}`
+    `wget -O #{@server_dir} #{args[:db_link]}`
     `pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jpking -d #{rails_db_name} #{@server_dir}/#{file_name}`
     # wget https://jpking-db2.s3-ap-northeast-1.amazonaws.com/jpking_dev_23.dump
     # pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jpking -d jpking_production jpking_dev_23.dump
