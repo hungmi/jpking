@@ -5,9 +5,9 @@ class EtoileOrderBot
   include Capybara::DSL
   Capybara.run_server = false
   Capybara.current_driver = :poltergeist
-  Capybara.app_host = "http://etonet.etoile.co.jp/"
 
   def initialize#(username, password)
+    Capybara.app_host = "http://etonet.etoile.co.jp/"
     visit('/ec/app/auth/login')
     fill_in('username', with: "799300")
     fill_in('password', with: "bj680709")

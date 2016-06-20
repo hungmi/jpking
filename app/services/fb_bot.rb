@@ -5,10 +5,9 @@ class FbBot
   include Capybara::DSL
   Capybara.run_server = false
   Capybara.current_driver = :poltergeist
-  Capybara.app_host = "https://www.facebook.com/"
-  # Headless.new.start
 
   def initialize#(user,pass)
+    Capybara.app_host = "https://www.facebook.com/"
     puts "登入中"
     # @html = `phantomjs /Users/hungmi/Workspace/jpking/app/assets/javascripts/hello.js&`
     visit('https://www.facebook.com/login.php?login_attempt=1&lwv=110')
