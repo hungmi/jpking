@@ -29,4 +29,5 @@ $(document).on('ajaxSend', ->
       $('#customer_orders').append "<div class='clearfix' />"
     return
   $('h1.hidden, hr.hidden').removeClass 'hidden'
+  alert("終於跑完惹～^_^")
   return
