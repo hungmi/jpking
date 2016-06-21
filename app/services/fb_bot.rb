@@ -15,8 +15,10 @@ class FbBot
     if page.has_selector?('input[name="email"]')
       fill_in("email", with: "gn01189424@gmail.com")
       fill_in("pass", with: "peter012")
-      page.save_screenshot
-      find("button#loginbutton").click()
+      # page.save_screenshot
+      if page.has_selector?('#loginbutton')
+        find("#loginbutton").click()
+      end
       # if page.has_selector?("input#u_0_m")
       #   find("input#u_0_m").trigger('click')
       # elsif page.has_selector?("input#u_0_o")
