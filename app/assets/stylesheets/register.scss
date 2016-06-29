@@ -1,3 +1,7 @@
+table.register-table {
+  display: block;
+}
+
 .normal {
   background-color: rgba(51, 151, 183, 0.44) !important;
   color: black !important;
@@ -16,6 +20,10 @@ tr.title {
     padding-top: 30px !important;
     padding-bottom: 16px !important;
   }
+}
+
+td.side-title {
+  min-width: 120px;
 }
 
 .account-btn {

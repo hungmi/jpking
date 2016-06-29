@@ -1,4 +1,4 @@
-<table class="table" style="margin: auto; width: 600px; height: 500px; text-align: center; vertical-align: middle;">
+<table class="table register-table" style="margin: auto; width: 600px; height: 500px; text-align: center; vertical-align: middle; display: block;">
   <tbody>
     <tr class="title">
       <td></td>
@@ -6,38 +6,44 @@
       <td class="premium">尊榮會員</td>
     </tr>
     <tr>
-      <td>適用對象</td>
+      <td class="side-title">適用對象</td>
       <td>喜愛日貨的團購主</td>
       <td>長期經營的專業賣家</td>
     </tr>
     <tr>
-      <td>刷卡服務</td>
+      <td class="side-title">刷卡服務</td>
       <td>2% 手續費</td>
       <td>1.8% 手續費</td>
     </tr>
     <tr>
-      <td>含稅空運</td>
+      <td class="side-title">含稅空運</td>
       <td>390 / 公斤</td>
       <td>370 / 公斤</td>
     </tr>
     <tr>
-      <td>國內免運門檻</td>
-      <td>5,000</td>
-      <td>3,000</td>
+      <td class="side-title">國內運送</td>
+      <td>採用黑貓計價<br>當次採購達 5,000 即免運</td>
+      <td>採用黑貓計價<br>當次採購達 3,000 即免運</td>
     </tr>
     <tr>
-      <td>代購大師</td>
+      <td class="side-title">代購大師</td>
       <td>無</td>
       <td>Coming soooooooooooon</td>
     </tr>
     <tr>
-      <td></td>
+      <td class="side-title"></td>
       <td style="padding: 0px;">
-        <%= link_to "980 / 無限期", root_path, class:"btn btn-default account-btn normal", style: "width: 100%;" %>
+        <%= link_to root_path, class:"btn btn-default account-btn normal", style: "width: 100%;" do %>
+          NT$ 980<br>
+          終生可使用<br>
+          現在加入
+        <% end %>
         <span>採購累計達 20 萬，全額返還</span>
       </td>
       <td style="padding: 0px;">
-        <%= link_to "3980 / 無限期", root_path, class:"btn btn-default account-btn premium", style: "width: 100%;" %>
+        NT$ 3980
+        終生可使用
+        <%= link_to "現在加入", root_path, class:"btn btn-default account-btn premium", style: "width: 100%;" %>
         <span>採購累計達 50 萬，全額返還</span>
       </td>
     </tr>
