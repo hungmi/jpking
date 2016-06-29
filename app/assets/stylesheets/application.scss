@@ -1,22 +1,21 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import "mixin";
+@import "spinner";
+@import "responsive";
 
+@import "pagination";
+@import "carts";
+@import "categories";
+@import "orders";
+@import "products";
+@import "sessions";
+@import "register";
+@import "admin";
+
+@import "ad_main";
+@import "navbar";
+@import "partials";
 @import "bootstrap-sprockets";
 @import "bootstrap";
-// @import "spinner";
 
 html, body, h1, h2, h3, h4, h5 {
   font-family: 'HanHei TC','PingFang TC', 'Helvetica Neue', 'Helvetica', 'STHeitiTC-Light', 'Arial', sans-serif;
@@ -105,18 +104,7 @@ img.img100 {
 .btn-easier { padding: 12px 20px; }
 
 hr.or_divider {
-  margin: 30px 0px;
-  color: #aaa;
-  border-top: 1px solid #ddd;
-  &::after {
-    content: "或";
-    top: -0.7em;
-    display: inline-block;
-    position: relative;
-    background-color: white;
-    padding: 0px 10px;
-    font-size: 16px;
-  }
+  @include divider("或")
 }
 
 .hint {

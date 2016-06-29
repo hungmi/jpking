@@ -72,8 +72,8 @@ div#car-logo {
   & .item {
     padding: 10px 0px;
     border-bottom: 1px solid #ccc;
-    &:last-child {
-      border-bottom: none;
-    }
+  }
+  div.item:last-of-type {
+    border-bottom: none;
   }
 }

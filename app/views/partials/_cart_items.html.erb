@@ -19,7 +19,7 @@
       <%= dead_or_alive(item.product) %>
       <br>
       <div class="no-space">
-      <%= f.submit "更新", class: "btn btn-primary", style: "width: 33.33%;" %>
+      <%= f.submit "更新數量", class: "btn btn-primary", style: "width: 33.33%;" %>
       <%= link_to "下次再買", root_path, class: "btn btn-link", style: "padding: 6px 0px; margin: 0px 7%;" %>
       <%= link_to "刪除", cart_item_path(item), class: "btn btn-link", style: "padding: 6px 0px; margin: 0px 7%;", method: :delete, data: { confirm: "從購物車移除#{item.product.name}？" } %>
       </div>

@@ -1,32 +1,89 @@
-table.register-table {
-  display: block;
+table#register-table {
+  // display: block;
+  height: 500px;
+  vertical-align: middle;
+  margin-bottom: 75px;
+  tr:not(.title):not(.action) {
+    background-color: floralwhite;
+  }
+  td {
+    line-height: 45px;
+    font-size: 16px;
+    &.side-title {
+      min-width: 120px;
+      width: 15%;
+      font-weight: 500;
+    }
+    &.content {
+      min-width: 42.5% !important;
+      width: 42.5% !important;
+    }
+  }
+  .text-sm {
+    line-height: 20px;
+    font-size: 14px;
+  }
+  a.btn {
+    border-radius: 0px;
+    color: white;
+    width: 100%;
+    &.btn-premium {
+      background-color: #FF8FA2;
+      border: 2px solid #FF8FA2;
+      &:hover {
+        background-color: white;
+        color: #FF8FA2;
+      }
+    }
+    &.btn-normal {
+      background-color: rgba(51, 151, 183, 0.86);
+      border: 2px solid rgba(51, 151, 183, 0.86);
+      &:hover {
+        background-color: white;
+        color: rgba(51, 151, 183, 0.86);
+      }
+    }
+  }
 }
 
 .normal {
   background-color: rgba(51, 151, 183, 0.44) !important;
   color: black !important;
-  font-size: 30px;
+  font-size: 30px !important;
 }
 
 .premium {
   background-color: rgba(255, 182, 193, 0.76) !important;
   color: black !important;
-  font-size: 30px;
+  font-size: 30px !important;
 }
 
 tr.title {
   td {
     border-top: 0px !important;
-    padding-top: 30px !important;
+    padding-top: 20px !important;
     padding-bottom: 16px !important;
   }
-}
-
-td.side-title {
-  min-width: 120px;
 }
 
 .account-btn {
   border-radius: 0px !important;
   font-size: 20px !important;
+}
+
+div#q-and-a {
+  width: 70%;
+  margin: 75px auto 50px;
+  .question {
+    margin-top: 100px;
+  }
+  p.answer {
+    text-align: left;
+    line-height: 30px;
+    font-size: 16px;
+  }
+}
+
+hr.q-and-a-divider {
+  @include divider("Q & A")
 }

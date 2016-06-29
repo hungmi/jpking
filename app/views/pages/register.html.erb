@@ -1,51 +1,64 @@
-<table class="table register-table" style="margin: auto; width: 600px; height: 500px; text-align: center; vertical-align: middle; display: block;">
+<table class="table text-center" id="register-table">
   <tbody>
     <tr class="title">
       <td></td>
-      <td class="normal">豪華會員</td>
-      <td class="premium">尊榮會員</td>
+      <td class="normal"><p class="text-sm">喜愛日貨</p>團購主<br>NT$ 980<br><p class="text-sm">採購累計達 20 萬，全額返還會員費</p></td>
+      <td class="premium"><p class="text-sm">長期經營</p>專業賣家<br>NT$ 3980<br><p class="text-sm">採購累計達 50 萬，全額返還會員費</p></td>
     </tr>
     <tr>
-      <td class="side-title">適用對象</td>
-      <td>喜愛日貨的團購主</td>
-      <td>長期經營的專業賣家</td>
+      <td class="side-title">會員期限</td>
+      <td class="content">無限期，只需繳交一次</td>
+      <td class="content">無限期，只需繳交一次</td>
     </tr>
     <tr>
-      <td class="side-title">刷卡服務</td>
-      <td>2% 手續費</td>
-      <td>1.8% 手續費</td>
+      <td class="side-title">刷卡手續費</td>
+      <td class="content">2%</td>
+      <td class="content">1.8%</td>
     </tr>
     <tr>
-      <td class="side-title">含稅空運</td>
-      <td>390 / 公斤</td>
-      <td>370 / 公斤</td>
+      <td class="side-title">國際運費</td>
+      <td class="content">390 / 公斤</td>
+      <td class="content">370 / 公斤</td>
     </tr>
     <tr>
-      <td class="side-title">國內運送</td>
-      <td>採用黑貓計價<br>當次採購達 5,000 即免運</td>
-      <td>採用黑貓計價<br>當次採購達 3,000 即免運</td>
+      <td class="side-title">黑貓宅配</td>
+      <td class="content">達 5,000 即免運</td>
+      <td class="content">達 3,000 即免運</td>
     </tr>
     <tr>
-      <td class="side-title">代購大師</td>
-      <td>無</td>
-      <td>Coming soooooooooooon</td>
+      <td class="side-title">網拍管家</td>
+      <td class="content">無</td>
+      <td class="content">Coming soooooooooooon</td>
     </tr>
-    <tr>
+    <tr class="action">
       <td class="side-title"></td>
-      <td style="padding: 0px;">
-        <%= link_to root_path, class:"btn btn-default account-btn normal", style: "width: 100%;" do %>
-          NT$ 980<br>
-          終生可使用<br>
+      <td class="content" style="padding: 0px;">
+        <%= link_to root_path, class: "btn btn-normal btn-lg" do %>
           現在加入
         <% end %>
-        <span>採購累計達 20 萬，全額返還</span>
       </td>
-      <td style="padding: 0px;">
-        NT$ 3980
-        終生可使用
-        <%= link_to "現在加入", root_path, class:"btn btn-default account-btn premium", style: "width: 100%;" %>
-        <span>採購累計達 50 萬，全額返還</span>
+      <td class="content" style="padding: 0px;">
+        <%= link_to root_path, class: "btn btn-premium btn-lg" do %>
+          現在加入
+        <% end %>
       </td>
     </tr>
   </tbody>
 </table>
+<hr class="q-and-a-divider">
+<div id="q-and-a">
+  <h3 class="question">Q. 為什麼要付費才能加入會員？</h3>
+  <p class="answer">收費制度是為了保障您享受的服務品質，只需繳交一次，就可無限期使用會員。</p>
+  <h3 class="question">Q. 於加入會員之後不滿意，是否可以申請退費？</h3>
+  <p class="answer">於加入會員當日開始，<b> 30 天內 </b>可申請<b> 全額退費 </b>。<br>並於退費之後，無法再次申請加入。</p>
+  <h3 class="question">Q. 訂購之後，需要幾天才能拿到商品呢？</h3>
+  <p class="answer">通常 10 ~ 14 天可拿到商品。<br>您可以在 <%= link_to "訂購紀錄", orders_path %> 查詢目前訂單的處理進度。</p>
+  <h3 class="question">Q. 除了刷卡之外，還有其他付費方式嗎？</h3>
+  <p class="answer">除了刷卡之外，您也可使用 <b>ATM 匯款、轉帳</b> 支付會員費及貨款。</p>
+  <h3 class="question">Q. 國內宅配運費怎麼算？</h3>
+  <p class="answer">一律採用 <%= link_to "黑貓運費計價", "http://www.t-cat.com.tw/Inquire/timesheet3.aspx#explanation" %>。<br>團購主當次採購金額<b>達NT$ 5000 可享單一地址免運</b>；專業賣家當次採購金額<b>達NT$ 3000 可享單一地址免運</b>。</p>
+  <h3 class="question">Q. 除了購買的金額之外，是否還有額外的費用呢？</h3>
+  <p class="answer">本站的商品皆為含稅價，亦無任何服務費、關稅等等。<br>您可以這樣計算成本：<br>貨款 + 國際運費 + 國內宅配 = 成本。</p>
+  <h3 class="question">Q. 網拍管家是什麼？</h3>
+  <p class="answer">JPP8 團隊擁有經營 Y拍、露天、蝦皮、FB、LINE 等等各式各樣平台的經驗，最瞭解您的辛苦，因此在未來會不斷推出可協助您的小工具，讓您可以輕鬆自在的經營。</p>
+</div>
