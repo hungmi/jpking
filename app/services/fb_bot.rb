@@ -8,7 +8,8 @@ class FbBot
 
   def initialize#(user,pass)
     Capybara.app_host = "https://www.facebook.com/"
-    puts "登入中"
+    page.driver.headers = { "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" }
+    puts "登入中 #{page.driver.headers}"
     # @html = `phantomjs /Users/hungmi/Workspace/jpking/app/assets/javascripts/hello.js&`
     visit('https://www.facebook.com/login.php?login_attempt=1&lwv=110')
     page.save_screenshot
