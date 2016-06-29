@@ -8,6 +8,7 @@ class EtoileOrderBot
 
   def initialize#(username, password)
     Capybara.app_host = "http://etonet.etoile.co.jp/"
+    page.driver.headers = { "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" }
     visit('/ec/app/auth/login')
     fill_in('username', with: "799300")
     fill_in('password', with: "bj680709")
