@@ -1,30 +1,41 @@
 <div class="clearfix" id="items_in_list">
-<% @cart_items.map do |item| %>
+<% @cart_items.map do |product_id, items| %>
+  <% product = Product.find(product_id) %>
   <div class="col-xs-12 item">
-    <%= form_for item, url: cart_item_path(item.id) do |f| %>
     <div class="col-xs-3 col-sm-3">
-      <%= link_to item.product do %>
-        <% if item.product.attachments_count > 0 %>
-          <%= image_tag item.product.attachments.first.image.url, class: "img100" %>
+      <%= link_to product do %>
+        <% if product.attachments_count > 0 %>
+          <%= image_tag product.attachments.first.image.url, class: "img100" %>
         <% else %>
           <%= image_tag "https://unsplash.it/400?image=668", class: "img100" %>
         <% end %>
       <% end %>
     </div>
     <div class="col-xs-9 col-sm-6">
-      <%= link_to item.product.item_code, item.product %>
-      <%= link_to item.product.name, item.product %><br>
-      <%= item.product.our_price %> x
-      <%= f.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999, pattern: "[0-9]*" } %>
-      <%= dead_or_alive(item.product) %>
-      <br>
-      <div class="no-space">
-      <%= f.submit "更新數量", class: "btn btn-primary", style: "width: 33.33%;" %>
-      <%= link_to "下次再買", root_path, class: "btn btn-link", style: "padding: 6px 0px; margin: 0px 7%;" %>
-      <%= link_to "刪除", cart_item_path(item), class: "btn btn-link", style: "padding: 6px 0px; margin: 0px 7%;", method: :delete, data: { confirm: "從購物車移除#{item.product.name}？" } %>
-      </div>
+      <%#= link_to item.product.item_code, item.product %>
+      <%= link_to product.name, product %>
+      <b class="pull-right"><%= "NT$ #{product.our_price}" %></b>
+      <br><br>
+      <% items.each do |item| %>
+        <%= form_for item, url: cart_item_path(item.id), remote: true do |f| %>
+          <div class="row">
+            <div class="col-xs-12">
+              <%= item.variation.present? ? "#{item.variation.jp_name} x " : ""  %>
+              <%= f.number_field :quantity, { style: "width: 60px; margin: 0px;", max: 999, pattern: "[0-9]*" } %>
+              <%= dead_or_alive(product) %>
+            </div>
+            <div class="col-xs-12" style="margin-top:10px;">
+              <%= f.button "確定更新", class: "btn btn-primary", style: "display: none; width: 33.33%;", data: { disable_with: "請稍等..." } %>
+              <div class="pull-right">
+              <%= link_to "下次再買", root_path, style:"" %> |
+              <%= link_to "刪除", cart_item_path(item), style:"", method: :delete, data: { confirm: "從購物車移除\n#{item.product.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" } %>
+              </div>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+      <% end %>
     </div>
-    <% end %>
   </div>
 <% end %>
 </div>

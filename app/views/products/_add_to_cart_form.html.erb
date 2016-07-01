@@ -1,0 +1,12 @@
+<%= form_for :cart_item, url: cart_items_path do |f| %>
+  <%= f.text_field :product_id, value: product.id, class: "hidden" %>
+  <% if product.variations.size > 0 %>
+    <%= f.select :variation_id, product.variations.pluck(:jp_name, :id) %><br>
+  <% end %>
+  <%= f.label :quantity, "數量" %>
+  <%= f.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999, pattern: "[0-9]*", required: true, value: product.wholesale_amount } %><br>
+  <%= f.button class: "btn add_to_cart" do %>
+    <%= content_tag :i, "", class:"glyphicon glyphicon-shopping-cart" %>
+    <%= content_tag :span, "加入發財車", class:"add-to-cart-text" %>
+  <% end %>
+<% end %>

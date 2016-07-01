@@ -10,21 +10,21 @@ class SessionsController < ApplicationController
     # true => 密碼正確
     case @user.try(:authenticate, params[:user][:password])
     when nil
-      flash[:notice] = "查無使用者"
+      flash[:warning] = "查無使用者"
       redirect_to login_path
     when false
-      flash[:notice] = "密碼錯誤"
+      flash[:danger] = "密碼錯誤"
       redirect_to login_path
     else
       session[:user] = @user.id
-      flash[:notice] = "歡迎回來"
+      flash[:success] = "歡迎回來"
       redirect_to session[:my_previous_url] || root_path
     end
   end
 
   def destroy
     session[:user] = nil
-    flash[:notice] = "期待您下次光臨"
+    flash[:success] = "期待您下次光臨"
     redirect_to root_path
   end
 

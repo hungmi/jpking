@@ -1,5 +1,4 @@
-a.add_to_cart.btn { color: white; }
-
+.add_to_cart.btn { color: white !important; }
 @media only screen and (max-width: 480px) {
   .btn.add_to_cart {
     background-color: #FF8FA2;
@@ -18,7 +17,13 @@ a.add_to_cart.btn { color: white; }
     }
   }
   #product-index-container {
-    span.add-to-cart-text { display: none; } 
+    span.add-to-cart-text {
+      display: none;
+    }
+    .btn.choose_variation {
+      color: white;
+      background-color: lightskyblue;
+    }
   }
 }
 
@@ -33,15 +38,19 @@ a.add_to_cart.btn { color: white; }
     }
   }
   #product-index-container {
-    .btn.add_to_cart {
+    .btn.add_to_cart, .btn.choose_variation {
       font-size: 14px;
       padding: 4px 6px;
+    }
+    .btn.choose_variation {
+      color: white;
+      background-color: lightskyblue;
     }
   }
 }
 
 .tool {
   #row-counts {
-    padding: 20px 20px 20px 0px;
+    padding: 20px 0px 20px 0px;
   }
 }

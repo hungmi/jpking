@@ -2,16 +2,18 @@ class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:cart]
 
   def home
-    @categories = Category.parent_categories
-    @hot_products = Product.all.limit(7)
+    # @categories = Category.parent_categories
+    # @hot_products = Product.all.limit(7)
+    @products = Product.where.not(ranking:nil).order(ranking: :asc).page(current_page)
+    @total_page = (Product.where.not(ranking:nil).size / Product.per_page).ceil
   end
 
   def guide
   end
 
   def cart
-    @cart = Cart.includes(:cart_items, cart_items: [:product, {product: [:category]}]).where(user_id: current_user.id).first
-    @cart_items = @cart.cart_items.order(:id)
+    @cart = Cart.includes(:cart_items, cart_items: [:variation, :product, {product: [:category]}]).where(user_id: current_user.id).first
+    @cart_items = @cart.cart_items.order(:id).group_by(&:product_id)
     @last_product = @cart.cart_items.last.try(:product)
   end
 

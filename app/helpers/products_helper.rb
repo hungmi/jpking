@@ -13,16 +13,30 @@ module ProductsHelper
     categories
   end
   def add_to_cart_btn(product)
-    capture do
-      link_to cart_items_path(cart_item: { product_id: product.id, quantity: 1 }), class: "btn add_to_cart", method: :post do
-        concat content_tag :i, "", class:"glyphicon glyphicon-shopping-cart"
-        concat content_tag :span, "加入發財車", class:"add-to-cart-text"# unless session[:rowCount] && (controller_name == "categories" && action_name == "show")
+    if product.variations.size > 0
+      choose_variation_btn(product)
+    else
+      capture do
+        link_to cart_items_path(cart_item: { product_id: product.id, quantity: 1 }), class: "btn add_to_cart", method: :post do
+          concat content_tag :i, "", class:"glyphicon glyphicon-shopping-cart"
+          concat content_tag :span, "加入發財車", class:"add-to-cart-text"# unless session[:rowCount] && (controller_name == "categories" && action_name == "show")
+        end
       end
     end
   end
+
+  def choose_variation_btn(product)
+    capture do
+      link_to product, class: "btn choose_variation" do
+        concat content_tag :i, "", class:"glyphicon glyphicon-shopping-cart"
+        concat content_tag :span, "選擇款式", class:"add-to-cart-text"
+      end
+    end
+  end
+
   def dead_or_alive_btn(product)
     if product.alive?
-      add_to_cart_btn(product)
+      render "products/add_to_cart_form", product: product
     else
       capture do
         link_to "#", class: "btn btn-disabled", disabled: "disabled" do

@@ -8,10 +8,10 @@
     <%= render "partials/money_car" %>
   </div>
   <div class="pull-right text-right">
-    <h3>成本：<strong><%= @cart.total %></strong> 元</h3>
-    <h3>預估營業額：<strong><%= @cart.total_revenue %></strong> 元</h3>
+    <h3 id="total">成本：<strong><%= @cart.total %></strong> 元</h3>
+    <h3 id="total_revenue">預估營業額：<strong><%= @cart.total_revenue %></strong> 元</h3>
     <hr style="border: 1px solid gray;">
-    <h3>預估利潤：<strong><%= @cart.total_benefit %></strong> 元</h3>
+    <h3 id="total_benefit">預估利潤：<strong><%= @cart.total_benefit %></strong> 元</h3>
     <%= link_to "預覽訂單", orders_path, method: :post, class: "btn btn-default btn-large btn-gold" %>
   </div>
 <% else %>
@@ -25,8 +25,17 @@
   </div>
 <% end %>
 
+
 <script type="text/javascript">
-  $('input[name="cart_item[quantity]"]').bind('keypress change',function(){
-    $(this).siblings('input[type="submit"]').removeClass("hidden")
+  $("form.edit_cart_item input").on("input change", function(){
+    $(this).parents("form").find('button').show()
+  })
+  $("form.edit_cart_item").on("ajax:success", function(e, data, status, xhr){
+    console.log(data)
+    $(this).find('button').hide()
+    Object.keys(data).forEach(function(name, index){
+      console.log(name + ": " + data[name])
+      $("#" + name).find("strong").html(data[name])
+    })
   })
 </script>

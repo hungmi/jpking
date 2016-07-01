@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614044800) do
+ActiveRecord::Schema.define(version: 20160630145546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,13 @@ ActiveRecord::Schema.define(version: 20160614044800) do
     t.integer  "cart_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "variation_id"
   end
 
   add_index "cart_items", ["cart_id"], name: "index_cart_items_on_cart_id", using: :btree
+  add_index "cart_items", ["variation_id"], name: "index_cart_items_on_variation_id", using: :btree
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user_id"
@@ -85,10 +87,12 @@ ActiveRecord::Schema.define(version: 20160614044800) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "item_code"
+    t.integer  "variation_id"
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
+  add_index "order_items", ["variation_id"], name: "index_order_items_on_variation_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.string   "token"
@@ -122,6 +126,8 @@ ActiveRecord::Schema.define(version: 20160614044800) do
     t.integer  "wholesale_amount",  default: 1
     t.boolean  "price_in_name",     default: false
     t.integer  "shop_id"
+    t.integer  "ranking"
+    t.integer  "variations_count",  default: 0
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -145,13 +151,28 @@ ActiveRecord::Schema.define(version: 20160614044800) do
     t.integer  "role",                  default: 0
   end
 
+  create_table "variations", force: :cascade do |t|
+    t.string   "item_code"
+    t.integer  "product_id"
+    t.string   "zh_name"
+    t.string   "jp_name"
+    t.string   "gtin_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "variations", ["product_id"], name: "index_variations_on_product_id", using: :btree
+
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
+  add_foreign_key "cart_items", "variations"
   add_foreign_key "carts", "users"
   add_foreign_key "categories", "shops"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "order_items", "variations"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "shops"
+  add_foreign_key "variations", "products"
 end

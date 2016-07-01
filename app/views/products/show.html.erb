@@ -9,10 +9,14 @@
           <%= image_tag a.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px; display: none;", class:"product-main-image", id:"image-#{a.id}" %>
         <% end %>      
       </div>
-      <% @images.each do |a| %>
-        <div class="col-xs-2 product-thumbs" data-image=<%= "image-#{a.id}" %>>
-          <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
-          <%= a.description %>
+      <% @images.each_slice(6) do |a6| %>
+        <div class="row">
+        <% a6.each do |a| %>
+          <div class="col-xs-2 product-thumbs" data-image=<%= "image-#{a.id}" %>>
+            <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
+            <%= a.description %>
+          </div>
+        <% end %>
         </div>
       <% end %>
     <% end %>

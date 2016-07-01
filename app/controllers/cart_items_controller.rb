@@ -56,11 +56,12 @@ class CartItemsController < ApplicationController
   def update
     respond_to do |format|
       if @cart_item.update(cart_item_params)
-        format.html {
-          flash[:success] = "更新成功！"
-          redirect_to cart_path
-        }
-        format.json { render :show, status: :ok, location: @cart_item }
+        @cart = @cart_item.cart
+        # format.html {
+        #   flash[:success] = "更新成功！"
+        #   redirect_to cart_path
+        # }
+        format.json { render json: { total: @cart.total, total_revenue: @cart.total_revenue, total_benefit: @cart.total_benefit }, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @cart_item.errors, status: :unprocessable_entity }
@@ -89,6 +90,6 @@ class CartItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_item_params
-      params.require(:cart_item).permit(:name, :price, :quantity, :product_id, :item_code)
+      params.require(:cart_item).permit(:name, :price, :quantity, :product_id, :variation_id, :item_code)
     end
 end

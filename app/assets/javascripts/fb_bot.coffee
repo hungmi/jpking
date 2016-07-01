@@ -1,4 +1,4 @@
-$(document).on('ajaxSend', ->
+$("form#post_url_form").on('ajaxSend', ->
   $('input[name="commit"]').hide()
   return
 ).on('ajaxComplete', ->

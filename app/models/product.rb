@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  default_scope { order(:id) }
+  # default_scope { order(:id) }
   scope :ready, -> { where("attachments_count > 0 and products.description IS NOT NULL").alive }
   scope :not_ready, -> { where.not("attachments_count > 0 and products.description IS NOT NULL").alive }
   scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
@@ -14,6 +14,7 @@ class Product < ActiveRecord::Base
   belongs_to :shop
   belongs_to :category
   has_many :order_items
+  has_many :variations
 
   include Fetchable
   include Imageable
@@ -43,9 +44,9 @@ class Product < ActiveRecord::Base
 
   def strip_price_from_name!
     if self.jp_name[/（?￥\d*\s*x\s*\d*）?/]
-      self.jp_name = self.jp_name.gsub(/（?￥\d*\s*x\s*\d*）?/,"").strip
+      self.jp_name = self.jp_name.gsub(/（?￥\d*\s*x\s*\d*）?/,"").squish.strip
     elsif self.jp_name[/￥\d*/]
-      self.jp_name = self.jp_name.gsub(/￥\d*/,"").strip
+      self.jp_name = self.jp_name.gsub(/￥\d*/,"").squish.strip
     end
     if self.changed?
       self.price_in_name = true

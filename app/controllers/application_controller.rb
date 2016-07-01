@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :generate_cart, :set_ransack, :store_last_page!
 
   def store_last_page!
-    session[:my_previous_url] = request.env["HTTP_REFERER"]
+    session[:my_previous_url] = request.env["HTTP_REFERER"] if request.get?
+    Rails.logger.debug session[:my_previous_url]
   end
 
   def set_ransack
