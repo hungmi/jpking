@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       post "imported"
       post "unavailable"
     end
+    get "panel"
     get "fb_bot"
     post "post_to_orders"
     post "add_to_etoile_cart"

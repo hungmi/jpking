@@ -1,0 +1,24 @@
+<%= audio_tag 'generic_hover.mp3', id: "genericHover" %>
+
+<h1 class="title"><span>Mission List</span></h1>
+
+<div class="col-xs-12 tech">
+  <div class="title">#1 與 Facebook 貼文的戰鬥</div>
+  <div class="content">
+  規體動效就有獎能同期！上以笑上程心有半。條高高紅不體有別同年先北大任，保夫天別之、角城面了軍產。驗少實稱受小；道地上麼一。認由油倒消水作英，己根跟心遠這行論安不希除就年不！在著知雖格利山運間另在明巴朋他長管....<br><br>
+  表發工德方道性題節發。其改必策外不海例子天地一禮下了內方……空國行治品育。禮走給大能經交在大中談老中是汽，打它會著受究衣天重子公病然麼具小火來意修都分市體寫是式這時……高起阿意社、世業想的事。色家的小出我如麼後你面。包書總片務不覺有有處分感十已活的進所實笑！
+  </div>
+  <div class="text-center">
+    <%= link_to admin_fb_bot_path, class: "btn btn-tech" do %>
+      接受任務    
+    <% end %>
+  </div>
+</div>
+
+<% content_for :custom_js do %>
+<script type="text/javascript">
+  $(".btn-tech").on('mouseover', function(){
+    $("#genericHover")[0].play();
+  })
+</script>
+<% end %>

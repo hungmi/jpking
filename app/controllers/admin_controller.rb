@@ -1,6 +1,10 @@
 class AdminController < ApplicationController
   before_action :authenticate_admin!
 
+  def panel
+    render layout: 'admin'
+  end
+
   def add_to_etoile_cart
     @ee = EtoileOrderBot.new
     if @ee.lets_order!

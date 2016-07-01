@@ -3,12 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :user_signed_in?, :current_user, :current_page
-  before_action :generate_cart, :set_ransack, :store_last_page!
-
-  def store_last_page!
-    session[:my_previous_url] = request.env["HTTP_REFERER"] if request.get?
-    Rails.logger.debug session[:my_previous_url]
-  end
+  before_action :generate_cart, :set_ransack
 
   def set_ransack
     @q = Product.ransack(params[:q])
@@ -20,11 +15,20 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    redirect_to login_path unless user_signed_in?
+    unless user_signed_in?
+      store_last_page!
+      redirect_to login_path
+    end
   end
 
   def authenticate_admin!
-    redirect_to login_path unless (user_signed_in? && current_user.admin?)
+    unless authenticate_user!
+      if current_user.admin?
+        return true
+      else
+        redirect_to root_path
+      end
+    end
   end
 
   def current_user
@@ -37,5 +41,10 @@ class ApplicationController < ActionController::Base
 
   def current_page
     params[:page].to_i.zero? ? 1 : params[:page].to_i
+  end
+
+  def store_last_page!
+    session[:my_previous_url] = request.original_fullpath
+    # Rails.logger.debug "上一頁是：#{session[:my_previous_url]}"
   end
 end
