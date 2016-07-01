@@ -45,3 +45,17 @@ zh-TW:
         description: 特色
         product_size: 尺寸
         origin: 原產地
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: 此 Email 已經被使用
+            phone:
+              taken: 此手機號碼已註冊過
+            name:
+              taken: 此帳號無法使用
+            password:
+              blank: 請填寫此欄位
+            password_confirmation:
+              confirmation: 密碼兩次輸入不符合

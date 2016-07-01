@@ -1,17 +1,37 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for @user do |f| %>
+  <%= f.input :name, label: "帳號" %>
+  <%= f.input :phone, label: "手機號碼，宅配時需聯絡" %>
+  <%= f.input :email, label: "Email，收取訂單證明" %>
+  <%= f.input :password, label: "密碼" %>
+  <%= f.input :password_confirmation, label: "密碼確認" %>
+  <%= f.submit "註冊", class:"btn btn-pink", style: "width: 100%" %>
 <% end %>
+<script type="text/javascript">
+  $form = $("form#new_user")
+  $("input[type='submit']").on("click", function(e){
+    e.preventDefault()
+    $.ajax({
+      url: "/users/validate",
+      method: "POST",
+      dataType: "json",
+      data: $form.serialize()
+    }).always(function(data, textStatus, jqXHR){
+      if (data.status == 200) {
+        // alert( "success" );
+        // window.data = data
+        $form.submit()
+      }
+    }).fail(function(jqxhr, status, errorThrown){
+      if (jqxhr.status == 422) {
+        window.data = jqxhr
+        $form.find("span.help-block").remove()
+        $form.find("div.form-group").removeClass("has-error")
+        Object.keys(data.responseJSON).forEach(function(name, index){
+          console.log(name + ": " + data.responseJSON[name])
+          $("#user_" + name).parents("div.form-group").addClass("has-error")
+          $("#user_" + name).parent().append("<span class='help-block'>" + data.responseJSON[name] + "</span>")
+        })
+      }
+    })
+  })
+</script>

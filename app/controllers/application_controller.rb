@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :user_signed_in?, :current_user, :current_page
+  helper_method :user_signed_in?, :current_user, :current_page, :sign_in_as
   before_action :generate_cart, :set_ransack
 
   def set_ransack
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_signed_in?
-    session[:user].present?
+    session[:user].present? && User.find_by_id(session[:user]).present?
   end
 
   def current_page
@@ -46,5 +46,9 @@ class ApplicationController < ActionController::Base
   def store_last_page!
     session[:my_previous_url] = request.original_fullpath
     # Rails.logger.debug "上一頁是：#{session[:my_previous_url]}"
+  end
+
+  def sign_in_as(user)
+    session[:user] = user.id
   end
 end

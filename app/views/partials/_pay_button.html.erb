@@ -1,0 +1,26 @@
+<%= form_tag Pay2go.service_url, method: :post do %>
+<%#= form_tag "https://capi.pay2go.com/MPG/mpg_gateway", method: :post do %>
+
+  <%= hidden_field_tag "MerchantID",      Pay2go.merchant_id %>
+  <%= hidden_field_tag "HashKey",         Pay2go.hash_key %>
+  <%= hidden_field_tag "HashIV",          Pay2go.hash_iv %>
+  <%= hidden_field_tag "LoginType",       "0" %>
+  <%= hidden_field_tag "RespondType",     "JSON" %>
+  <%= hidden_field_tag "Version",         "1.2" %>
+  <%= hidden_field_tag "LangType",        I18n.locale.to_s %>
+  <%= hidden_field_tag "Email",           order.billing_mail %>
+  <%= hidden_field_tag "EmailModify",     0 %>
+  <%= hidden_field_tag "TradeLimit",      900 %>
+
+  <%= hidden_field_tag "ItemDesc",        t('.item_desc') %>
+  <%= hidden_field_tag "OrderComment",    t('.order_comment') %>
+  <%= hidden_field_tag "MerchantOrderNo", "#{order.id}s#{Time.now.strftime("%Y%m%d%H%M%S")}" %>
+  <%= hidden_field_tag "TimeStamp",       order.created_at.to_i %>
+  <%= hidden_field_tag "Amt",             order.total %>
+
+  <%= hidden_field_tag "CREDIT",          "1" %>
+  <%= hidden_field_tag "ReturnURL",       pay2go_cc_notify_rent_url(order.token) %>
+  <%= hidden_field_tag "CheckValue",      Pay2goService.new(order).check_value %>
+
+  <%= submit_tag t('.pay_btn_txt'), class: "btn btn-danger btn-lg btn-default" %>
+<% end %>

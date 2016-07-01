@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   end
 
   def register
-    
+    @user = User.new
   end
 
   def fb_bot

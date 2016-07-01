@@ -15,7 +15,13 @@
   <span class="price-divider-desktop hidden-sm hidden-xs">/</span>
   <br class="price-divider-mobile visible-sm visible-xs">
   <span>批</span>
-  <span class="our-price"><%= product.our_price %></span>
+  <span class="our-price">
+    <% if user_signed_in? %>
+      <%= product.our_price %>
+    <% else %>
+      ???
+    <% end %>
+  </span>
   <h5 class="product-name"><%= link_to product.name, product %></h5>
   <%#= product.zh_name %>
   <%#= product.stock %>

@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   controller 'pages' do
     get 'guide'
     get 'cart'
-    get 'register'
     get 'fb_bot'
     post 'crawl_posts'
     get 'scanner'
@@ -30,7 +29,12 @@ Rails.application.routes.draw do
     delete '/logout' => :destroy, as: :logout
     post '/row_count' => :row_count, as: :row_count
   end
-  resources :users
+  resources :users do
+    collection do
+      post 'validate' => :validate
+    end
+  end
+  get 'register' => "users#new", as: :register
   resources :shops
   namespace :admin do
     controller 'orders' do
