@@ -33,7 +33,7 @@
             <% end %>
           </div>
           <div class="col-xs-9 col-sm-4">
-            <%= link_to ff.object.product.name, ff.object.product %><br>
+            <%= link_to "#{ff.object.product.name}#{(' (' + ff.object.variation.jp_name + ')') if ff.object.variation.present?}", ff.object.product %><br>
             <%= ff.object.price %> x
             <% if @order.cancelable? %>
               <%= ff.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999, pattern: "[0-9]*" } %><br>

@@ -164,11 +164,11 @@ class OrdersController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.includes(:order_items, order_items: [:order, :product, product: [:attachments] ] ).references(:order_items).find_by_token(params[:id])
+      @order = Order.includes(:order_items, order_items: [:order, :variation, :product, product: [:attachments] ] ).find_by_token(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:num, :token, :user_id, :state, :delivery, :total, order_items_attributes: [ :product_id, :price, :quantity, :name, :id ])
+      params.require(:order).permit(:num, :token, :user_id, :state, :delivery, :total, order_items_attributes: [ :product_id, :variation_id, :price, :quantity, :name, :id ])
     end
 end

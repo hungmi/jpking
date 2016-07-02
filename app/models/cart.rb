@@ -26,7 +26,7 @@ class Cart < ActiveRecord::Base
     order_items_attributes = []
     self.cart_items.map do |i|
       attrs = {}
-      [:quantity, :product_id].map do |attr|
+      [:quantity, :product_id, :variation_id].map do |attr|
         attrs[attr] = i.send(attr.to_s)
       end
       order_items_attributes << attrs
