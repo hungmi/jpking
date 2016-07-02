@@ -11,10 +11,10 @@ class OrderItem < ActiveRecord::Base
   end
 
   def price
-    if self.order.cancelable?
-      self.product.our_price
-    else
+    if self.order.paid?
       self.ordered_price
+    else
+      self.product.our_price
     end
   end
 
