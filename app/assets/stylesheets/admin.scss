@@ -1,6 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$main-color : #ffcb00;
+
 h1, h2, h3, h4, h5 {
   color: #54bd00;
 }
@@ -21,7 +23,7 @@ body, html {
   background-color: #0b0c0d;
 }
 
-div.tech {
+.tech-wrapper {
   border: 1px solid #ffcb00;
   // height: 300px;
   padding: 0px;
@@ -47,6 +49,7 @@ div.tech {
   // box-shadow: inset 0 0 6px rgba(255, 255, 255, 1);
   // -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 1);
   // height: 100px;
+  background-color: #0b0c0d;
   padding: 8px 6px;
   width: 100px;
   text-align: center;
@@ -82,5 +85,38 @@ div.tech {
     padding: 0px 9px;
     color: white;
     font-size: 24px;
+  }
+}
+
+.input-tech {
+  border: 1px solid #ffcb00; 
+  padding: 8px 6px;
+  text-align: center;
+  background-color: #0b0c0d;
+  color: $main-color;
+}
+
+label {
+  color: $main-color;
+}
+
+.history {
+  height: 200px;
+  width: 100%;
+  max-width: 500px;
+  border-left: 2px solid #ffbc00;
+  border-bottom: 2px solid #ffbc00;
+  margin: 20px 0px;
+  position: relative;
+  .bar-wrapper {
+    padding: 0px 2px;
+    bottom: 0px;
+    position: absolute;
+    width: 5%;
+  }
+  .bar {
+    border: 1px solid #ffbc00;
+    border-bottom: 0px;
+    background-color: rgba(255, 203, 0, 0.4);
   }
 }

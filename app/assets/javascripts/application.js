@@ -20,7 +20,7 @@ $(document).on('page:change', function() {
   $("img").lazyload();
   $(".anchor").on('click', function(){
     $('html, body').animate({
-      scrollTop: $( $.attr(this, 'href') ).offset().top - 15
+      scrollTop: $( $.attr(this, 'href') ).offset().top - 70
     }, 500)
   });
 });

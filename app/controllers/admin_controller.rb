@@ -5,6 +5,16 @@ class AdminController < ApplicationController
     render layout: 'admin'
   end
 
+  def settings
+    @setting = Setting.first
+  end
+
+  def update_settings
+    @setting = Setting.first
+    @setting.update(settings_params)
+    redirect_to admin_settings_path
+  end
+
   def add_to_etoile_cart
     @ee = EtoileOrderBot.new
     if @ee.lets_order!
@@ -27,6 +37,12 @@ class AdminController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  private
+
+  def settings_params
+    params.require(:setting).permit(:currency, :tax_factor, :benefit_factor)
   end
   
 end

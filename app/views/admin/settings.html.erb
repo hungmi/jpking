@@ -1,0 +1,28 @@
+<%= form_for @setting, url: admin_update_settings_path do |f| %>
+
+  <%= f.label :currency, '原料匯率' %>
+  <%= f.text_field :currency, class: "input-tech" %>
+  <div class="history">
+    <% for i in 0..11 %>
+      <div class="bar-wrapper" style="left: <%= 5*i %>%;">
+        <div class="bar" style="height: <%= rand(30..170).to_s %>px;"></div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <%= f.label :tax_factor, '保護費' %>
+  <%= f.text_field :tax_factor, class: "input-tech" %>
+  <div class="history">
+  </div>
+
+  <div class="clearfix"></div>
+
+  <%= f.label :benefit_factor, '服務費' %>
+  <%= f.text_field :benefit_factor, class: "input-tech" %>
+  <div class="history">
+  </div>
+
+  <%= f.submit "儲存", class: "btn btn-tech" %>
+<% end %>

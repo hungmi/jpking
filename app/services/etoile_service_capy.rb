@@ -23,6 +23,7 @@ class EtoileServiceCapy
     # @category.update_column(:total, total_results)
     # @category = @category.reload
     # page_num = (total_results / 100.0).ceil
+    Product.where.not(ranking: nil).update_all(ranking: nil)
     @ranking = 1
     for i in 1..10 do # 只抓前一千樣
       ranking_page_url = base_url.gsub("pageNo=1", "pageNo=#{i}")

@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     end
     get "panel"
     get "fb_bot"
+    get "settings"
+    patch "update_settings" => :update_settings
     post "post_to_orders"
     post "add_to_etoile_cart"
   end

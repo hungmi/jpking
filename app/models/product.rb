@@ -22,11 +22,11 @@ class Product < ActiveRecord::Base
   validates :item_code, uniqueness: true, allow_blank: true
 
   def their_price
-    original_price ? (original_price*1.08*0.3).round : "無"
+    original_price ? (original_price * $tax_factor * $currency ).round : "無"
   end
 
   def our_price
-    wholesale_price ? (wholesale_price/wholesale_amount*1.08*1.05*0.3).round : "無"
+    wholesale_price ? (wholesale_price / wholesale_amount * $benefit_factor * $tax_factor * $currency).round : "無"
   end
 
   def single_benefit

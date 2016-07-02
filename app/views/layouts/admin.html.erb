@@ -9,6 +9,7 @@
   <%= yield :extra_css %>
   <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= audio_tag 'generic_hover.mp3', id: "genericHover" %>
   <%#= favicon_link_tag "favicon.ico" %>
 </head>
 <body>
@@ -22,5 +23,11 @@
     </div>
   </div>
   <%= yield :custom_js %>
+
+  <script type="text/javascript">
+    $(".btn-tech").on('mouseover', function(){
+      $("#genericHover")[0].play();
+    })
+  </script>
 </body>
 </html>
