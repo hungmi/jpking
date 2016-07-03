@@ -26,3 +26,6 @@ set :puma_workers, 0
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_preload_app, false
+
+# Whenever is cron job scheduler
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
