@@ -21,44 +21,54 @@
     <div class="col-xs-12 thead">
       <h5>訂單內容</h5>
     </div>
-    <%= form_for @order, url: order_path(@order.token) do |f| %>
       <div class="clearfix" id="items_in_list">
-        <%= f.fields_for :order_items do |ff| %>
-        <div class="col-xs-12 item">
-          <div class="col-xs-3 col-sm-3">
-            <% if ff.object.product.attachments_count > 0 %>
-              <%= link_to ff.object.product do %>
-                <%= image_tag ff.object.product.attachments.first.image.url, class: "img100" %>
+        <% @order_item_groups.each do |product_id, order_items| %>
+          <% product = Product.find(product_id) %>
+          <div class="col-xs-12 item">
+            <div class="col-xs-3 col-sm-3">
+              <% if product.attachments_count > 0 %>
+                <%= link_to product do %>
+                  <%= image_tag product.attachments.first.image.url, class: "img100" %>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
-          <div class="col-xs-9 col-sm-4">
-            <%= link_to "#{ff.object.product.name}#{(' (' + ff.object.variation.jp_name + ')') if ff.object.variation.present?}", ff.object.product %><br>
-            <%= ff.object.price %> x
-            <% if @order.cancelable? %>
-              <%= ff.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999, pattern: "[0-9]*" } %><br>
-              <div class="no-space">
-                <%= f.submit "更新", class: "btn btn-primary", style: "width: 33.33%;" %>
-                <%= link_to "下次再買", root_path, class: "btn btn-link", style: "width: 33.33%;" %>
-                <% if @order.cancelable? %>
-                  <%= link_to order_item_path(ff.object), method: :delete, data: { confirm: "從訂單移除#{ff.object.name}?" }, class: "btn btn-link", style: "width: 33.33%" do %>
-                    <i class="glyphicon glyphicon-remove"></i>
-                    刪除
+            </div>
+            <div class="col-xs-9 col-sm-6">
+              <%= link_to product.name, product %>
+              <% order_items.each_with_index do |item, index| %>
+                <div class="clearfix">
+                <%= form_for item, url: order_item_path(item.id), remote: true do |f| %>
+                  <b class="pull-right">NT$ <%= item.price %></b>
+                  <%= item.variation.present? ? "#{item.variation.jp_name} x" : "" %>
+                  <% if @order.cancelable? %>
+                    <%= f.number_field :quantity, { style: "width: 60px;", max: 999, pattern: "[0-9]*" } %>
+                    <%= dead_or_alive(product) %>
+                    <br>
+                    <div class="col-xs-12" style="margin-top:10px;">
+                      <%= f.button "確定更新", class: "btn btn-primary", style: "display: none; width: 33.33%;", data: { disable_with: "請稍等..." } %>
+                      <div class="pull-right">
+                        <%= link_to "下次再買", root_path %>
+                        <% if @order.cancelable? %>
+                           |
+                          <%= link_to "刪除", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" } %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% else %>
+                    <%= item.quantity %>
+                    <%= dead_or_alive(product) %>
                   <% end %>
                 <% end %>
-              </div>
-            <% else %>
-              <%= ff.object.quantity %>
-            <% end %>
+                </div>
+                <hr>
+              <% end %>
+            </div>
           </div>
-        </div>
         <% end %>
       </div>
-    <% end %>
   </div>
   <div class="col-xs-12">
     <div class="col-xs-3"></div>
-    <div class="col-xs-9 text-right text-danger" style="font-size: 24px;"><strong><%= "NT #{@order.total} 元" %></strong></div>
+    <div id="total" class="col-xs-9 text-right text-danger" style="font-size: 24px;">NT <strong><%= @order.total %></strong> 元</div>
   </div>
   <div class="col-xs-12">
     <div class="col-xs-3"></div>
@@ -70,7 +80,21 @@
   </div>
 </div>
 <script type="text/javascript">
-  $("input[id*='_quantity']").bind('keypress change', function(){
-    $(this).siblings("input[type='submit']").removeClass("hidden")
+  $("form.edit_order_item input").on("input change", function(){
+    $(this).parents("form").find('button').show()
+  })
+  $("form.edit_order_item").on("ajax:success", function(e, data, status, xhr){
+    console.log(data)
+    $(this).find('button').hide()
+    Object.keys(data).forEach(function(name, index){
+      console.log(name + ": " + data[name])
+      $("#" + name).find("strong").html(data[name])
+    })
   })
 </script>
+
+<style type="text/css">
+  hr:last-child {
+    display: none;
+  }
+</style>

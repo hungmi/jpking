@@ -42,8 +42,9 @@ class OrderItemsController < ApplicationController
   def update
     respond_to do |format|
       if @order_item.update(order_item_params)
-        format.html { redirect_to order_path(@order_item.order.token), notice: '修改完成' }
-        format.json { render :show, status: :ok, location: @order_item }
+        @order = @order_item.order
+        # format.html { redirect_to order_path(@order_item.order.token), notice: '修改完成' }
+        format.json { render json: { total: @order.total }, status: :ok }
       else
         format.html { redirect_to order_path(@order_item.order.token), notice: '此項目無法修改。' }
         format.json { render json: @order_item.errors, status: :unprocessable_entity }
@@ -73,7 +74,7 @@ class OrderItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order_item
-      @order_item = OrderItem.find(params[:id])
+      @order_item = OrderItem.includes(:order, :variation, :product).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

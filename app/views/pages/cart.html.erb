@@ -12,7 +12,7 @@
     <h3 id="total_revenue">預估營業額：<strong><%= @cart.total_revenue %></strong> 元</h3>
     <hr style="border: 1px solid gray;">
     <h3 id="total_benefit">預估利潤：<strong><%= @cart.total_benefit %></strong> 元</h3>
-    <%= link_to "預覽訂單", orders_path, method: :post, class: "btn btn-default btn-large btn-gold" %>
+    <%= link_to "暫存訂單", orders_path, method: :post, class: "btn btn-default btn-large btn-gold" %>
   </div>
 <% else %>
   目前還沒加入任何商品歐～
@@ -39,3 +39,9 @@
     })
   })
 </script>
+
+<style type="text/css">
+  hr:last-child {
+    display: none;
+  }
+</style>

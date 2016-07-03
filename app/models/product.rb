@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   enum state: { alive: 0, dead: 1 }
 
   def self.per_page
-    30
+    36
   end
 
   belongs_to :shop

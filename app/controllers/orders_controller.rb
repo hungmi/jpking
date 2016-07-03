@@ -6,12 +6,13 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.includes(:order_items, order_items: [:order]).where(user_id: current_user.id).all
+    @orders = Order.includes(:order_items, order_items: [:order, :product]).where(user_id: current_user.id).all
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @order_item_groups = @order.order_items.order(:id).group_by(&:product_id)
   end
 
   # GET /orders/new
@@ -164,7 +165,7 @@ class OrdersController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.includes(:order_items, order_items: [:order, :variation, :product, product: [:attachments] ] ).find_by_token(params[:id])
+      @order = Order.includes(:order_items, order_items: [:order, :variation, :product ] ).find_by_token(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
