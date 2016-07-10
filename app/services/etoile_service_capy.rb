@@ -125,6 +125,7 @@ class EtoileServiceCapy
           end
           # binding.pry
         end
+        binding.pry
         images = @product_page.css("img[id*=image_]")
         images.each do |img|
           # binding.pry
