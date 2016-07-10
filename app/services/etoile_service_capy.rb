@@ -86,7 +86,7 @@ class EtoileServiceCapy
     
     unless target_link.up_to_date?
       puts "抓取 #{product.name} 中"
-      @product_page = Nokogiri::HTML open(target_link.value)
+      @product_page = Nokogiri::HTML open(target_link.value, 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36')
       # binding.pry
       if @product_page.search("p.err_big").present?
         target_link.dead! && target_link.fetchable.dead!
@@ -137,7 +137,7 @@ class EtoileServiceCapy
             @attachment.save
           end
         end
-        target_link.touch(:fetch_time)
+        target_link.touch(:fetch_time) unless product.attachments_count == 0
       end
       sleep rand(5)
     end
