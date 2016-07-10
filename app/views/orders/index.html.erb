@@ -1,35 +1,52 @@
 <h1>訂購紀錄</h1>
-<%= form_for :merge_orders, url: merge_orders_path do |f| %>
-  <%= check_box_tag :merge_all %> 合併
-  <% @orders.each do |order| %>
-    <div class="clearfix" style="padding: 15px 0px; border-bottom: 1px solid #ccc;">
-      <div class="col-xs-1" style="padding-left: 0px;">
-        <%= f.fields_for order.token do |ff| %>
-          <%= ff.check_box :_merge %>
-        <% end %>
-      </div>
-      <div class="col-xs-11">
-        <h2 class="better-num h2" style="margin-top: 0px;">
-          <span class="hint">NT$ </span><%= link_to order.total, order_path(order.token) %>
-          <%= order.i18n_state_for_user %>
-          <%= link_to "檢視", order_path(order.token), class: "pull-right btn btn-link" %>
-        </h2>
-        <h3 class="better-num"><span class="hint">編號：</span><%= link_to order.num, order_path(order.token) %></h3>
-        <h5 class="better-num"><span class="hint">訂購時間：</span><%= order.order_time %></h5>
-        <div><%= render_order_state_btns(order) %> <%= contact_us %></div>
-      </div>
+
+<% @orders.each do |order| %>
+  <div class="clearfix" style="padding: 15px 0px; border-bottom: 1px solid #ccc;">
+    <div class="col-xs-1">
+      <% if order.placed? %>
+        <%= check_box_tag :_merge, 1, false, data: { token: order.token } %>
+      <% end %>
     </div>
-  <% end %>
+    <div class="col-xs-11">
+      <h2 class="better-num h2" style="margin-top: 0px;">
+        <span class="hint">NT$ </span><%= link_to order.total, order_path(order.token) %>
+        <%= order.i18n_state_for_user %>
+        <%= link_to "檢視", order_path(order.token), class: "pull-right btn btn-link" %>
+      </h2>
+      <h3 class="better-num"><span class="hint">編號：</span><%= link_to order.num, order_path(order.token) %></h3>
+      <h5 class="better-num"><span class="hint">訂購時間：</span><%= order.order_time %></h5>
+      <div><%= render_order_state_btns(order) %> <%= contact_us %></div>
+    </div>
+  </div>
+<% end %>
+
+<div class="col-xs-12" style="margin-top: 10px;">
+<%= form_for :merge_orders, url: merge_orders_path do |f| %>
+  <label style="cursor: pointer; font-weight: 300;">
+    <%= check_box_tag :merge_all %>
+    全選  
+  </label>
+  <br><br>
+  <%= text_field_tag :order_tokens, nil, class: "hidden" %>
   <%= f.submit "合併" %>
 <% end %>
+</div>
 
 <script type="text/javascript">
   $("#merge_all").click(function(){
-    $("input[type='checkbox'][name*='merge_orders']").prop("checked", $(this).prop("checked"))
+    $("input[type='checkbox'][name*='_merge']").prop("checked", $(this).prop("checked"))
+    $("input[type='checkbox'][name*='_merge']").trigger("change")
   })
-  $("input[type='checkbox'][name*='merge_orders']").click(function(){
+  $("input[type='checkbox'][name*='_merge']").on("change", function(){
+    // console.log($(this).data("token"))
+    if (this.checked) {
+      $("input#order_tokens").val($(this).data("token") + "," + $("input#order_tokens").val())
+    } else {
+      var new_val = $("input#order_tokens").val().replace($(this).data("token"), "")
+      $("input#order_tokens").val(new_val)
+    }
     var merge_all = true
-    $("input[type='checkbox'][name*='merge_orders']").each(function(){
+    $("input[type='checkbox'][name*='_merge']").each(function(){
       merge_all = merge_all * $(this).prop("checked")
     })
     $("#merge_all").prop("checked", merge_all)

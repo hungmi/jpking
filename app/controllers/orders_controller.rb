@@ -1,12 +1,43 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :cancel, :reorder, :is_cancelable]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :cancel, :reorder, :is_cancelable, :pay2go_cc_notify]
   before_action :is_cancelable, only: [:pay, :cancel]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:pay2go_cc_notify]
+  protect_from_forgery except: :pay2go_cc_notify
+
+  def pay2go_cc_notify
+    respond = JSON.parse(params["JSONData"])
+    if respond["Status"] == "SUCCESS"
+      @order.make_payment!(JSON.parse(respond["Result"]))
+      if @order.paid?
+        @order.order_items.map do |oi|
+          oi.update_column(:ordered_price, oi.product.our_price)
+        end
+        flash[:success] = "付款成功！您將會收到一封包含付款資訊的郵件，請至少保留三個月。"
+      end
+      #   # UserMailer.pay_rent_success_mail(@rent).deliver_later
+      #   flash[:success] = "Thanks!"#I18n.t('flash.messages.rent_payment_success')
+      #   redirect_to result_rent_path(@rent)
+      # else
+      #   #render text: I18n.t('flash.messages.rent_payment_fail')
+      # end
+      redirect_to order_path(@order.token)
+    else
+      case respond["Status"]
+      when "TRA20004"
+        flash[:danger] = "很抱歉，交易失敗，請稍候再試一次，或聯絡我們。"
+      when "TRA10016"
+        flash[:danger] = "很抱歉，卡片授權失敗，請確認您使用的是 VISA, MASTER, 或 JCB 卡。"
+      else
+        flash[:danger] = "很抱歉，交易失敗，請稍候再試一次，或聯絡我們。"
+      end
+      redirect_to order_path(@order.token , status: respond["Status"])
+    end
+  end
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.includes(:order_items, order_items: [:order, :product]).where(user_id: current_user.id).all
+    @orders = Order.includes(:order_items, :user, order_items: [:order, :product]).where(user_id: current_user.id).all
   end
 
   # GET /orders/1
@@ -80,16 +111,16 @@ class OrdersController < ApplicationController
     end
   end
 
-  def pay
-    @order.order_items.map do |oi|
-      oi.update_column(:ordered_price, oi.product.our_price)
-    end
-    @order.pay!
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: '付款成功。' }
-      format.json { head :no_content }
-    end
-  end
+  # def pay
+  #   @order.order_items.map do |oi|
+  #     oi.update_column(:ordered_price, oi.product.our_price)
+  #   end
+  #   @order.pay!
+  #   respond_to do |format|
+  #     format.html { redirect_to orders_url, notice: '付款成功。' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   def cancel
     @order.cancel!
@@ -109,24 +140,27 @@ class OrdersController < ApplicationController
 
   def merge # 多張未付款的訂單合為一張新的
     # 先確認所有訂單都是未付款的
-    params[:merge_orders].map do |token, value|
-      if value[:_merge] == "1" && (order = Order.find_by_token(token))
-        unless order.placed?
-          flash[:danger] = "訂單 ##{order.num} 已付款，無法合併。"
-          redirect_to orders_path and return
-        end
+    # binding.pry
+    order_tokens = params[:order_tokens].split(",")
+    @orders = Order.where(token: order_tokens)
+    if @orders.size <= 1
+      flash[:warning] = "選擇的訂單過少，無法合併。"
+      redirect_to orders_path and return
+    end
+    @orders.each do |order|
+      unless order.placed?
+        flash[:danger] = "訂單 ##{order.num} 已付款，無法合併。"
+        redirect_to orders_path and return
       end
     end
 
     total = 0
     @new_order = current_user.orders.create# if order_items_attributes.present?
 
-    params[:merge_orders].map do |token, value|
-      if value[:_merge] == "1" && (order = Order.find_by_token(token))
-        total += order.total
-        order.order_items.update_all(order_id: @new_order.id)
-        order.reload.destroy
-      end
+    @orders.each do |order|
+      total += order.total
+      order.order_items.update_all(order_id: @new_order.id)
+      order.reload.destroy
     end
 
     # 若欲合併的訂單中有重複的品項，會合在一起計算數量

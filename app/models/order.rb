@@ -7,6 +7,7 @@ class Order < ActiveRecord::Base
   before_create :generate_order_num
 
   include Tokenable
+  include Payable
 
   attr_accessor :_merge
 

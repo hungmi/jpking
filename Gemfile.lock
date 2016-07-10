@@ -197,6 +197,7 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    pay2go (0.1.0)
     pg (0.18.4)
     pkg-config (1.1.7)
     poltergeist (1.9.0)
@@ -335,6 +336,7 @@ DEPENDENCIES
   mini_magick
   omniauth (= 1.2.2)
   omniauth-facebook (= 3.0.0)
+  pay2go
   pg
   poltergeist
   pry-byebug

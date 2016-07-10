@@ -61,4 +61,8 @@ Rails.application.configure do
     # Bullet.stacktrace_excludes = [ 'their_gem', 'their_middleware' ]
     # Bullet.slack = { webhook_url: 'http://some.slack.url', foo: 'bar' }
   end
+
+  config.after_initialize do
+    Pay2go.integration_mode = :development
+  end
 end

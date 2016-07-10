@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   resources :order_items
   resources :orders do
     member do
-      get "pay"
+      # get "pay"
       get "cancel"
       get "reorder"
+      post "pay2go_cc_notify"
     end
     collection do
       post "merge"
