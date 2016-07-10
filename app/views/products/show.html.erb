@@ -37,7 +37,13 @@
     <span class="their-price">原價 NT$ <%= @product.their_price %></span>
     <br>
     <span>批發價 NT$</span>
-    <span class="our-price"><%= @product.our_price %></span>
+    <span class="our-price">
+      <% if user_signed_in? %>
+        <%= @product.our_price %>
+      <% else %>
+        ???
+      <% end %>
+    </span>
     <br>
     <span style="line-height: 48px;">批發單位：<%= @product.wholesale_amount %> 個</span>
     </h4>
