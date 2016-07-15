@@ -59,6 +59,7 @@ class EtoileServiceCapy
       @product.original_price   = original_price
       @product.wholesale_price  = special_price || wholesale_price
       @product.wholesale_amount = wholesale_amount
+      @product.shop_id          = 1
       @product.save if @product.changed?
       ############################################################
       # binding.pry
