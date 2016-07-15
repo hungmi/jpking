@@ -1,0 +1,103 @@
+html, body, h1, h2, h3, h4, h5 {
+  font-family: "微軟正黑體",'Open Sans',PingFangTC-Regular,sans-serif,Arial,Helvetica,sans-serif !important;
+  font-weight: 300;
+}
+
+body {
+  padding-bottom: 44px;
+}
+
+a:not(.btn) {
+  &:visited {
+    color: #337ab7;
+  }
+  &:hover {
+    color: green;
+    background-color: transparent;
+  }
+}
+
+.text-on-image-card {
+  margin-bottom: 30px;
+  .text {
+    position: absolute;
+    top: 50%;
+    color: white;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 28px;
+  }
+}
+
+[class*="col-"] {
+  padding: 0px 4px;
+}
+
+.row {
+  margin: 0px -4px;
+}
+
+.icon-large {
+  font-size: 30px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+      width: 970px;
+  }
+}
+
+.block-title {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+img.img100 {
+  width: 100%;
+  height: 100%;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.btn {
+  &.btn-pink {
+    background-color: pink;
+    border: 2px solid white;
+    color: white;
+    &:hover {
+      background-color: #FF8FA2;
+    }
+  }
+  &.help {
+    background-color: floralwhite;
+    color: lightslategray;
+    border: 2px solid lightslategray;
+    &:hover {
+      background-color: white;
+    }
+  }
+}
+
+.better-num {
+  letter-spacing: 0.5px;
+}
+
+.no-space {
+  font-size: 0px;
+}
+
+.btn-easier { padding: 12px 20px; }
+
+hr.or_divider {
+  @include divider("或")
+}
+
+.hint {
+  font-size: 14px;
+}
+
+.circle {
+  border: 1px solid #337ab7;
+  border-radius: 99999px;
+  padding: 0px 3px;
+}

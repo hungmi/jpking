@@ -31,6 +31,9 @@
     <div>
       <ul class="nav navbar-nav navbar-right hidden-xs">
         <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= link_to "控制臺", admin_panel_path, class: "btn btn-pink" %>
+          <% end %>
           <%= link_to "訂購紀錄", orders_path, class: "btn btn-pink" %>
           <%= link_to "發財車", cart_path, class: "btn btn-pink" %>
           <%= link_to "登出", logout_path, class: "btn btn-pink", method: :delete %>

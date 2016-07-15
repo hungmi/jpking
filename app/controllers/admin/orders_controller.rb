@@ -1,5 +1,6 @@
 class Admin::OrdersController < AdminController
   before_action :set_view_mode, only: [:index]
+  layout 'admin'
   
   def index
     params[:scope] = (params[:scope].present? && OrderItem.respond_to?(params[:scope])) ? params[:scope] : "paid"
