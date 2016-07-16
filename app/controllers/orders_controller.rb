@@ -9,9 +9,6 @@ class OrdersController < ApplicationController
     if respond["Status"] == "SUCCESS"
       @order.make_payment!(JSON.parse(respond["Result"]))
       if @order.paid?
-        @order.order_items.map do |oi|
-          oi.update_column(:ordered_price, oi.product.our_price)
-        end
         flash[:success] = "付款成功！您將會收到一封包含付款資訊的郵件，請至少保留三個月。"
       end
       #   # UserMailer.pay_rent_success_mail(@rent).deliver_later

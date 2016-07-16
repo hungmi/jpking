@@ -19,6 +19,10 @@ module Payable
       pi.card_6no = result["Card6No"]
       pi.card_4no = result["Card4No"]
     end
+    self.order_items.map do |oi|
+      oi.update_column(:ordered_price, oi.product.our_price)
+      oi.paid!
+    end
   end
 
 end
