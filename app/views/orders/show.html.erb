@@ -38,10 +38,10 @@
                 <div class="clearfix">
                 <%= form_for item, url: order_item_path(item.id), remote: true do |f| %>
                   <b class="pull-right">NT$ <%= item.price %></b>
-                  <%= item.variation.present? ? "#{item.variation.jp_name} x" : "" %>
+                  <%= item.variation.present? ? "#{item.variation.jp_name} x" : "數量：" %>
                   <% if @order.cancelable? %>
                     <%= f.number_field :quantity, { style: "width: 60px;", max: 999, pattern: "[0-9]*" } %>
-                    <%= dead_or_alive(product) %>
+                    <%#= dead_or_alive(product) %>
                     <br>
                     <div class="col-xs-12" style="margin-top:10px;">
                       <%= f.button "確定更新", class: "btn btn-primary", style: "display: none; width: 33.33%;", data: { disable_with: "請稍等..." } %>
@@ -55,10 +55,11 @@
                     </div>
                   <% else %>
                     <%= item.quantity %>
-                    <%= dead_or_alive(product) %>
+                    <%#= dead_or_alive(product) %>
                   <% end %>
                 <% end %>
                 </div>
+                <span class="pull-right"><%= I18n.t("order_item_state.#{item.state}") unless item.placed? || item.paid? %></span>
                 <hr>
               <% end %>
             </div>
@@ -68,7 +69,7 @@
   </div>
   <div class="col-xs-12">
     <div class="col-xs-3"></div>
-    <div id="total" class="col-xs-9 text-right text-danger" style="font-size: 24px;">NT <strong><%= @order.total %></strong> 元</div>
+    <div id="total" class="col-xs-9 text-right text-danger" style="font-size: 24px;">總計 NT$ <strong><%= @order.total %></strong> 元</div>
   </div>
   <div class="col-xs-12">
     <div class="col-xs-3"></div>
@@ -77,6 +78,7 @@
   <div class="col-xs-12 text-center" style="margin-top: 30px;">
     <%= render_order_state_btns(@order) %>
     <%= contact_us %>
+    <%= link_to "刪除訂單", order_path(@order.token), method: :delete, data: { confirm: "此動作無法復原，確定要刪除訂單嗎？" }, class: "pull-right btn btn-link" %>
   </div>
 </div>
 <script type="text/javascript">

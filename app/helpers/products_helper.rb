@@ -13,13 +13,22 @@ module ProductsHelper
     categories
   end
   def add_to_cart_btn(product)
-    if product.variations.size > 0
-      choose_variation_btn(product)
+    if product.alive?
+      if product.variations.size > 0
+        choose_variation_btn(product)
+      else
+        capture do
+          link_to cart_items_path(cart_item: { product_id: product.id, quantity: 1 }), class: "btn add_to_cart", method: :post do
+            concat content_tag :i, "", class:"glyphicon glyphicon-shopping-cart"
+            concat content_tag :span, "加入發財車", class:"add-to-cart-text"# unless session[:rowCount] && (controller_name == "categories" && action_name == "show")
+          end
+        end
+      end
     else
       capture do
-        link_to cart_items_path(cart_item: { product_id: product.id, quantity: 1 }), class: "btn add_to_cart", method: :post do
-          concat content_tag :i, "", class:"glyphicon glyphicon-shopping-cart"
-          concat content_tag :span, "加入發財車", class:"add-to-cart-text"# unless session[:rowCount] && (controller_name == "categories" && action_name == "show")
+        link_to "#", class: "btn btn-disabled short", disabled: "disabled" do
+          concat content_tag :i, "", class:"glyphicon glyphicon-remove"
+          concat content_tag :span, "商品缺貨中", class:"add-to-cart-text"
         end
       end
     end

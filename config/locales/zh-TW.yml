@@ -8,7 +8,7 @@ zh-TW:
   order_state:
     user:
       placed: 尚未付款
-      paid: 進貨中
+      paid: 已付款
       jp_ordered: 進貨中
       stocked: 商品抵台
       packaged: 請確認物流
@@ -25,6 +25,17 @@ zh-TW:
       delivered: 已送達
       cancel: 他媽的已取消
   order_item_state:
+    placed: 下單未付款
+    paid: 已付款
+    importing: 訂購中
+    imported: 已訂購
+    stocked: 商品已抵台
+    packaged: 即將配送
+    ready_to_deliver: 配送中
+    delivered: 已送達
+    cancel: 已取消
+    unavailable: 售完缺貨中
+    wait: 等待進貨
     admin:
       placed: 下單未付款
       paid: 已付款未訂購

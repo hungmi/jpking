@@ -19,15 +19,15 @@ class Admin::OrdersController < AdminController
   def importing
     @order_item = OrderItem.find(params[:order_item_id])
     if @order_item.present?
-      @order_item.product.check_availability!
-      @order_item = @order_item.reload
+      # @order_item.product.check_availability!
+      # @order_item = @order_item.reload
       if @order_item.paid?
         @order_item.importing!
         flash[:success] = "加入訂購行列。"
         redirect_to :back
-      elsif @order_item.unavailable?
-        flash[:warning] = "此品項缺貨中。"
-        redirect_to :back
+      # elsif @order_item.unavailable?
+      #   flash[:warning] = "此品項缺貨中。"
+      #   redirect_to :back
       end
     else
       flash[:warning] = "此訂單品項不存在。"
@@ -38,15 +38,15 @@ class Admin::OrdersController < AdminController
   def imported
     @order_item = OrderItem.find(params[:order_item_id])
     if @order_item.present?
-      @order_item.product.check_availability!
-      @order_item = @order_item.reload
+      # @order_item.product.check_availability!
+      # @order_item = @order_item.reload
       if @order_item.importing?
         @order_item.imported!
         flash[:success] = "完成訂購。"
         redirect_to :back
-      elsif @order_item.unavailable?
-        flash[:warning] = "此品項缺貨中。"
-        redirect_to :back
+      # elsif @order_item.unavailable?
+      #   flash[:warning] = "此品項缺貨中。"
+      #   redirect_to :back
       end
     else
       flash[:warning] = "此訂單品項不存在。"
@@ -57,8 +57,10 @@ class Admin::OrdersController < AdminController
   def unavailable
     @order_item = OrderItem.find(params[:order_item_id]) 
     if @order_item.present?
-      @order_item.product.check_availability!
+      @order_item.product.short! unless @order_item.product.short?
+      # @order_item.product.check_availability!
       @order_item = @order_item.reload
+      # @order_item.unavailable!
       if @order_item.unavailable?
         flash[:success] = "完成缺貨通知。"
         redirect_to :back

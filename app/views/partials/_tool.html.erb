@@ -1,8 +1,8 @@
 <div class="col-sm-6 col-xs-12 tool">
   <div class="col-xs-12 text-right" id="row-counts">
-    每列顯示數量
-    <% for i in [3,4,6] do %>
-      <%= link_to "#{i}個", row_count_path(rowCount:i), class: "btn btn-link", method: :post %>
+    瀏覽模式
+    <% { 3 => "大圖", 4 => "中圖", 5 => "小圖" }.each do |i, word| %>
+      <%= link_to word, row_count_path(rowCount:i), class: "btn btn-link", method: :post %>
     <% end %>
   </div>
 </div>

@@ -1,12 +1,13 @@
 <div id="login-form">
   <h1>おかえり</h1>
-  <%= link_to root_path, class: "btn btn-facebook" do %>
+  <%= link_to root_path, class: "btn btn-facebook hidden" do %>
     Facebook 登入
   <% end %>
-  <hr>
+  <!-- <hr> -->
   <%= simple_form_for :user, url: sign_in_path do |f| %>
-    <%= f.input :username %>
-    <%= f.input :password %>
+    <%= f.input :username, label: "使用者名稱（非電子郵件）" %>
+    <%= f.input :password, label: "密碼" %>
     <%= f.submit "登入", class:"btn btn-pink", style: "width: 100%" %>
   <% end %>
+  <%= link_to "註冊會員", register_path, class: "btn btn-link", style: "width: 100%;" %>
 </div>

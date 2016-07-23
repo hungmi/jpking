@@ -34,7 +34,8 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.includes(:order_items, :user, order_items: [:order, :product]).where(user_id: current_user.id).all
+    # @orders = Order.includes(:order_items, :user, order_items: [:order, :product]).where(user_id: current_user.id).all
+    @orders = Order.includes(:order_items, order_items: [:order]).where(user_id: current_user.id).all
   end
 
   # GET /orders/1

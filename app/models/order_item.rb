@@ -19,7 +19,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def total
-    return self.price*self.quantity
+    return (self.price || 1)*(self.quantity || 1)
   end
 
   def i18n_state_for_admin

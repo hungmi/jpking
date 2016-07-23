@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_ransack
-    @q = Product.ransack(params[:q])
+    @q = Product.alive.ransack(params[:q])
     # binding.pry
   end
 

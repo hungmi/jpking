@@ -1,11 +1,12 @@
 class Product < ActiveRecord::Base
   # default_scope { order(:id) }
-  scope :ready, -> { where("attachments_count > 0 and products.description IS NOT NULL").alive }
-  scope :not_ready, -> { where.not("attachments_count > 0 and products.description IS NOT NULL").alive }
+  scope :ready, -> { where("attachments_count > 0 and description IS NOT NULL").alive }
+  scope :not_ready, -> { where.not("attachments_count > 0 and description IS NOT NULL").alive }
   scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
+  scope :ranking, -> { where("ranking IS NOT NULL").alive }
   scope :page, -> (current_page) { limit(Product.per_page).offset(Product.per_page*(current_page - 1)) }
 
-  enum state: { alive: 0, dead: 1 }
+  enum state: { alive: 0, dead: 1, short: 2 }
 
   def self.per_page
     36
@@ -13,13 +14,20 @@ class Product < ActiveRecord::Base
 
   belongs_to :shop
   belongs_to :category
-  has_many :order_items
-  has_many :variations
+  has_many :order_items, dependent: :destroy
+  has_many :variations, dependent: :destroy
 
   include Fetchable
   include Imageable
 
   validates :item_code, uniqueness: true, allow_blank: true
+
+  def short!
+    super
+    self.order_items.find_each do |oi|
+      oi.unavailable!
+    end
+  end
 
   def their_price
     original_price ? (original_price * $tax_factor * $currency ).round : "無"
