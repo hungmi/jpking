@@ -48,7 +48,7 @@ module ProductsHelper
       render "products/add_to_cart_form", product: product
     else
       capture do
-        link_to "#", class: "btn btn-disabled", disabled: "disabled" do
+        link_to "#", class: "btn btn-disabled short", disabled: "disabled" do
           concat "商品缺貨中"
         end
       end

@@ -1,4 +1,9 @@
 .add_to_cart.btn { color: white !important; }
+.btn.short {
+  background-color: gray;
+  color: white;
+  font-size: 20px;
+}
 @media only screen and (max-width: 480px) {
   .btn.add_to_cart {
     background-color: #FF8FA2;
@@ -17,6 +22,9 @@
     }
   }
   #product-index-container {
+    .btn.short {
+      font-size: 14px;
+    }
     span.add-to-cart-text {
       display: none;
     }
