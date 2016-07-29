@@ -38,7 +38,7 @@ class Product < ActiveRecord::Base
   end
 
   def single_benefit
-    self.wholesale_amount*self.their_price - self.our_price
+    self.their_price - self.our_price
   end
 
   def get_wholesale_amount
