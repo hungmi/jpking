@@ -19,7 +19,7 @@
           <%= link_to "海", item.product.links.last.value, class: "circle", target: "_blank" %>
           <br>
           <%= item.product.our_price %> x
-          <%= f.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999, pattern: "[0-9]*" } %>
+          <%= f.number_field :quantity, { style: "width: 60px; margin: 10px 0px;", max: 999, pattern: "[0-9]*", step: item.product.wholesale_amount } %>
           <%= dead_or_alive(item.product) %>
           <br>
           <div class="no-space">

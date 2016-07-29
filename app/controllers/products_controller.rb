@@ -13,7 +13,6 @@ class ProductsController < ApplicationController
     # end
     # @q = Product.ransack(params[:q])#.alive
     @products = @q.result(distinct: true).page(current_page)#.includes(:category)
-    @total_page = (@q.result(distinct: true).size / Product.per_page).ceil
     render template: "categories/show"
     # binding.pry
   end

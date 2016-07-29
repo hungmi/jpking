@@ -1,7 +1,7 @@
 <!-- 改用categories#show -->
 <div id="product-index-container">
-  <div id="last-page"><%= last_page %></div>
-  <div id="next-page"><%= next_page(@total_page) %></div>
+  <div id="last-page"><%= link_to_previous_page %></div>
+  <div id="next-page"><%= link_to_next_page %></div>
   <% if @children.present? %>
     <% @children.each_slice(4) do |c4| %>
       <div class="row">

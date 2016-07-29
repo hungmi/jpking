@@ -4,8 +4,7 @@ class PagesController < ApplicationController
   def home
     # @categories = Category.parent_categories
     # @hot_products = Product.all.limit(7)
-    @products = Product.where.not(ranking:nil).order(ranking: :asc).page(current_page)
-    @total_page = (Product.where.not(ranking:nil).size / Product.per_page).ceil
+    @products = Product.where.not(ranking:nil).order(ranking: :asc).page params[:page]
   end
 
   def guide

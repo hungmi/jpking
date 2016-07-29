@@ -21,7 +21,7 @@
           <div class="row">
             <div class="col-xs-12">
               <%= item.variation.present? ? "#{item.variation.jp_name} x " : ""  %>
-              <%= f.number_field :quantity, { style: "width: 60px; margin: 0px;", max: 999, pattern: "[0-9]*" } %>
+              <%= f.number_field :quantity, { style: "width: 60px; margin: 0px;", max: 999, pattern: "[0-9]*", step: product.wholesale_amount } %>
               <%= dead_or_alive(product) %>
             </div>
             <div class="col-xs-12" style="margin-top:10px;">

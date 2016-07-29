@@ -4,13 +4,10 @@ class Product < ActiveRecord::Base
   scope :not_ready, -> { where.not("attachments_count > 0 and description IS NOT NULL").alive }
   scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
   scope :ranking, -> { where("ranking IS NOT NULL").alive }
-  scope :page, -> (current_page) { limit(Product.per_page).offset(Product.per_page*(current_page - 1)) }
 
   enum state: { alive: 0, dead: 1, short: 2 }
 
-  def self.per_page
-    36
-  end
+  paginates_per 36
 
   belongs_to :shop
   belongs_to :category

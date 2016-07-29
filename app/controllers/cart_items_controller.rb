@@ -61,7 +61,7 @@ class CartItemsController < ApplicationController
         #   flash[:success] = "更新成功！"
         #   redirect_to cart_path
         # }
-        format.json { render json: { total: @cart.total, total_revenue: @cart.total_revenue, total_benefit: @cart.total_benefit }, status: :ok }
+        format.json { render json: { total: @cart.total, total_revenue: @cart.total_revenue, total_benefit: @cart.total_benefit, money_on_car: @cart.total_benefit }, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @cart_item.errors, status: :unprocessable_entity }

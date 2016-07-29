@@ -52,7 +52,7 @@
                 <b class="pull-right">NT$ <%= item.price %></b>
                 <%= item.variation.present? ? "#{item.variation.jp_name} x" : "數量：" %>
                 <% if @order.cancelable? %>
-                  <%= f.number_field :quantity, { style: "width: 60px;", max: 999, pattern: "[0-9]*" } %>
+                  <%= f.number_field :quantity, { style: "width: 60px;", max: 999, pattern: "[0-9]*", step: product.wholesale_amount } %>
                   <%#= dead_or_alive(product) %>
                   <br>
                   <div class="col-xs-12" style="margin-top:10px;">
