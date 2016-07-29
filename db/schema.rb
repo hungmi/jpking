@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160716090915) do
+ActiveRecord::Schema.define(version: 20160729141650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,10 @@ ActiveRecord::Schema.define(version: 20160716090915) do
     t.string   "card_4no"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "atm_bank_code"
+    t.string   "atm_code_no"
+    t.string   "atm_expire_date"
+    t.string   "atm_expire_time"
   end
 
   add_index "payment_infos", ["payable_type", "payable_id"], name: "index_payment_infos_on_payable_type_and_payable_id", using: :btree

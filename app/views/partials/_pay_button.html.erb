@@ -18,8 +18,10 @@
   <%= hidden_field_tag "Amt",             order.total %>
 
   <%= hidden_field_tag "CREDIT",          "1" %>
+  <%= hidden_field_tag "VACC",            "1" %>
+  <%= hidden_field_tag "CustomerURL",     pay2go_cc_notify_order_url(order.token) %>
   <%= hidden_field_tag "ReturnURL",       pay2go_cc_notify_order_url(order.token) %>
   <%= hidden_field_tag "CheckValue",      Pay2goService.new(order).check_value %>
 
-  <%= submit_tag "支付貨款", class: "btn btn-warning btn-easier", style: "width: 100%;" %>
+  <%= submit_tag "前往支付頁面", class: "btn btn-warning btn-easier", style: "width: 100%;" %>
 <% end %>

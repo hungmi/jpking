@@ -41,10 +41,10 @@
           <%= link_to "加入會員", register_path, class: "btn btn-pink" %>
           <%= link_to "登入", login_path, class: "btn btn-pink" %>
         <% end %>
-        <%= link_to "批發須知", guide_path, class: "btn btn-default help" %>
+        <%#= link_to "批發須知", guide_path, class: "btn btn-default help" %>
       </ul>
       <ul class="nav navbar-nav navbar-right visible-xs">
-        <%= link_to "批發須知", guide_path, class: "btn btn-3" %>
+        <%#= link_to "批發須知", guide_path, class: "btn btn-3" %>
         <% if user_signed_in? %>
           <%= link_to "訂購紀錄", orders_path, class: "btn btn-3" %>
           <%= link_to "發財車", cart_path, class: "btn btn-3" %>

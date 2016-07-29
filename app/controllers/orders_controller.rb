@@ -7,9 +7,13 @@ class OrdersController < ApplicationController
   def pay2go_cc_notify
     respond = JSON.parse(params["JSONData"])
     if respond["Status"] == "SUCCESS"
-      @order.make_payment!(JSON.parse(respond["Result"]))
+      result = JSON.parse(respond["Result"])
+      binding.pry
+      @order.make_payment!(result)
       if @order.paid?
         flash[:success] = "付款成功！您將會收到一封包含付款資訊的郵件，請至少保留三個月。"
+      elsif result["PaymentType"] == "VAAC"
+        flash[:success] = "取號成功！以下是您的匯款資訊，請記得在期限前完成！"
       end
       #   # UserMailer.pay_rent_success_mail(@rent).deliver_later
       #   flash[:success] = "Thanks!"#I18n.t('flash.messages.rent_payment_success')
@@ -35,12 +39,13 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     # @orders = Order.includes(:order_items, :user, order_items: [:order, :product]).where(user_id: current_user.id).all
-    @orders = Order.includes(:order_items, order_items: [:order]).where(user_id: current_user.id).all
+    @orders = Order.includes(:order_items, order_items: [:order, :product]).where(user_id: current_user.id).all
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @payment_info = @order.payment_infos.first
     @order_item_groups = @order.order_items.order(:id).group_by(&:product_id)
   end
 

@@ -8,6 +8,7 @@ zh-TW:
   order_state:
     user:
       placed: 尚未付款
+      atm: 等待匯款
       paid: 已付款
       jp_ordered: 進貨中
       stocked: 商品抵台
@@ -17,6 +18,7 @@ zh-TW:
       cancel: 已取消
     admin:
       placed: 尚未付款
+      atm: 等待匯款
       paid: 待採購
       jp_ordered: 日本已下單
       stocked: 已入庫

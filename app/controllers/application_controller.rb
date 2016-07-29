@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :user_signed_in?, :current_user, :current_page, :sign_in_as
-  before_action :generate_cart, :set_ransack, :get_settings
+  before_action :generate_cart, :set_ransack, :get_settings, :store_last_page!
 
   def get_settings
     $currency = Setting.first.currency || 0.31
@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     unless user_signed_in?
-      store_last_page!
       redirect_to login_path
     end
   end
@@ -50,8 +49,10 @@ class ApplicationController < ActionController::Base
   end
 
   def store_last_page!
-    session[:my_previous_url] = request.original_fullpath
-    # Rails.logger.debug "上一頁是：#{session[:my_previous_url]}"
+    if request.get? && controller_name != "sessions"
+      session[:my_previous_url] = request.referer
+    end
+    puts "上一頁是：#{session[:my_previous_url]}"
   end
 
   def sign_in_as(user)
