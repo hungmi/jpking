@@ -2,12 +2,12 @@
 
 <% @orders.each do |order| %>
   <div class="clearfix" style="padding: 15px 0px; border-bottom: 1px solid #ccc;">
-    <div class="col-xs-1">
+    <div class="col-md-1 col-xs-2">
       <% if order.placed? %>
         <%= check_box_tag :_merge, 1, false, data: { token: order.token } %>
       <% end %>
     </div>
-    <div class="col-xs-11">
+    <div class="col-md-5 col-xs-12">
       <h2 class="better-num h2" style="margin-top: 0px;">
         <span class="hint">NT$ </span><%= link_to order.total, order_path(order.token) %>
         <%= order.i18n_state_for_user %>
@@ -16,6 +16,15 @@
       <h3 class="better-num"><span class="hint">編號：</span><%= link_to order.num, order_path(order.token) %></h3>
       <h5 class="better-num"><span class="hint">訂購時間：</span><%= order.order_time %></h5>
       <div><%= render_order_state_btns(order) %> <%= contact_us %></div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <% order.order_items.each do |oi| %>
+      <div class="col-xs-2">
+        <%= link_to oi.product do %>
+          <%= image_tag oi.product.attachments.first.image.thumb.url, class: "img100" %>
+        <% end %>
+      </div>
+      <% end %>
     </div>
   </div>
 <% end %>

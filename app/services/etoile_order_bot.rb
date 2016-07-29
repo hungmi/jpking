@@ -26,7 +26,7 @@ class EtoileOrderBot
         fill_in('hinban', with: oi.product.item_code[3..5])
         page.execute_script("searchProduct(getProductCode(), getProductVariationCode())")
         if page.has_selector?('#addCartButton')
-          within("#directInputForm") { fill_in("purchaseQuantity", with: oi.quantity.to_s) }
+          within("#directInputForm") { fill_in("purchaseQuantity", with: (oi.quantity/oi.product.wholesale_amount).to_s) }
           page.execute_script("$('#directInputForm').submit()")
         end
         oi.imported!

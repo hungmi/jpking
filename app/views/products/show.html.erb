@@ -1,4 +1,4 @@
-<div id="product-show-containter">
+<div id="product-show-container">
   <div class="col-sm-5 col-xs-12">
     <%= breadcrumb(@product) %>
 
@@ -9,16 +9,14 @@
           <%= image_tag a.image.url, style: "width: 100%; height: 100%; margin-bottom: 10px; display: none;", class:"product-main-image", id:"image-#{a.id}" %>
         <% end %>      
       </div>
-      <% @images.each_slice(6) do |a6| %>
-        <div class="row">
-        <% a6.each do |a| %>
-          <div class="col-xs-2 product-thumbs" data-image=<%= "image-#{a.id}" %>>
-            <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
-            <%= a.description %>
-          </div>
-        <% end %>
+      <div class="row product-image-thumbs-container flex-height">
+      <% @images.each do |a| %>
+        <div class="col-sm-2 col-xs-3 product-thumbs" data-image=<%= "image-#{a.id}" %>>
+          <%= image_tag a.image.thumb.url, style: "width: 100%;" %>
+          <%= a.description %>
         </div>
       <% end %>
+      </div>
     <% end %>
   </div>
 
@@ -50,6 +48,17 @@
     <%= dead_or_alive_btn(@product) %>
     <%= contact_us %>
   </div>
+
+  <div class="col-xs-12 product-images">
+    <% @images.each do |a| %>
+      <div class="row product-image">
+        <span class="description-on-product-image"><%= a.description %></span>
+        <%= image_tag a.image.url, style: "width: 100%; max-width: 500px;" %>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+
   <div class="col-sm-12 col-xs-12 text-center">
     <hr class="or_divider"></hr>
     <%= link_to "繼續尋寶", "#{session[:my_previous_url]}##{@product.item_code}", class:"btn btn-default btn-easier" %>

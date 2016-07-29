@@ -16,8 +16,7 @@ class CategoriesController < ApplicationController
     @category = Category.includes(:children).find_by_jp_name(params[:id])
     @page_title = @category.name
     @children = @category.children
-    @products = @category.self_and_child_products.page(current_page)
-    @total_page = (@category.self_and_child_products.size / Product.per_page).ceil
+    @products = @category.self_and_child_products.page params[:page]
   end
 
   # GET /categories/new

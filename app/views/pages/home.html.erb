@@ -3,7 +3,7 @@
     <%#= render "categories/categories" %>
   </div> -->
   <%#= render "partials/ad_main" %>
-  <div class="row" id="products">
+  <div class="row flex-height" id="products">
     <div class="col-sm-12 block-title">日本熱銷商品</div>
     <div class="col-xs-12">
       <%= render "partials/pagination" %>
@@ -14,4 +14,6 @@
       <%= render "partials/pagination" %>
     </div>
   </div>
+  <div id="last-page"><%= link_to_previous_page @products, "<<", class: "btn btn-default btn-lg" %></div>
+  <div id="next-page"><%= link_to_next_page @products, ">>", class: "btn btn-default btn-lg" %></div>
 </div>

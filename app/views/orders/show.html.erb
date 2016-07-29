@@ -71,7 +71,7 @@
                 <% end %>
               <% end %>
               </div>
-              <span class="pull-right"><%= I18n.t("order_item_state.#{item.state}") unless item.placed? || item.paid? %></span>
+              <span class="pull-right"><%= (I18n.t("order_item_state.#{item.state}") unless item.placed? || item.paid?) if item.state.present? %></span>
               <hr>
             <% end %>
           </div>
@@ -90,7 +90,9 @@
   <div class="col-xs-12 text-center" style="margin-top: 30px;">
     <%= render_order_state_btns(@order) %>
     <%= contact_us %>
-    <%= link_to "刪除訂單", order_path(@order.token), method: :delete, data: { confirm: "此動作無法復原，確定要刪除訂單嗎？" }, class: "pull-right btn btn-link" %>
+    <% if @order.cancelable? %>
+      <%= link_to "刪除訂單", order_path(@order.token), method: :delete, data: { confirm: "此動作無法復原，確定要刪除訂單嗎？" }, class: "pull-right btn btn-link btn-easier" %>
+    <% end %>
   </div>
 </div>
 <script type="text/javascript">

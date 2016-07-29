@@ -50,6 +50,9 @@
         //font-size: 14px;
         margin-bottom: 5px;
       }
+      .our-price {
+        font-size: 16px;
+      }
     }
     &.col-xs-4 {
       .wish-and-cart a.btn {
@@ -107,8 +110,9 @@
     margin: 20px 0px;
   }
 }
-
 .product-thumbs {
+  border: 1px solid transparent;
+  font-size: 13px;
   &:hover {
     border: 1px solid pink;
   }
@@ -136,5 +140,24 @@
     font-size: 34px;
     color: hotpink;
     font-weight: bold;
+  }
+}
+
+#product-show-container {
+  .product-images {
+    text-align: center;
+    hr:last-child {
+      display: none;
+    }
+  }
+  .product-image {
+    position: relative;
+    .description-on-product-image {
+      position: absolute;
+      left: 5px;
+      top: 25px;
+      background: lightyellow;
+      font-size: 30px;
+    }
   }
 }

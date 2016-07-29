@@ -30,9 +30,11 @@ module Payable
       pi.atm_expire_time = result["ExpireTime"]
     end
 
-    self.order_items.map do |oi|
-      oi.update_column(:ordered_price, oi.product.our_price)
-      oi.paid!
+    if self.paid?
+      self.order_items.map do |oi|
+        oi.update_column(:ordered_price, oi.product.our_price)
+        oi.paid!
+      end
     end
   end
 

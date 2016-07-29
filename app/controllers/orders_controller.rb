@@ -8,11 +8,10 @@ class OrdersController < ApplicationController
     respond = JSON.parse(params["JSONData"])
     if respond["Status"] == "SUCCESS"
       result = JSON.parse(respond["Result"])
-      binding.pry
       @order.make_payment!(result)
       if @order.paid?
         flash[:success] = "付款成功！您將會收到一封包含付款資訊的郵件，請至少保留三個月。"
-      elsif result["PaymentType"] == "VAAC"
+      elsif result["PaymentType"] == "VACC"
         flash[:success] = "取號成功！以下是您的匯款資訊，請記得在期限前完成！"
       end
       #   # UserMailer.pay_rent_success_mail(@rent).deliver_later
@@ -46,7 +45,7 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     @payment_info = @order.payment_infos.first
-    @order_item_groups = @order.order_items.order(:id).group_by(&:product_id)
+    @order_item_groups = @order.order_items.order(state: :desc, updated_at: :desc).group_by(&:product_id)
   end
 
   # GET /orders/new

@@ -48,10 +48,11 @@
         <% if user_signed_in? %>
           <%= link_to "訂購紀錄", orders_path, class: "btn btn-3" %>
           <%= link_to "發財車", cart_path, class: "btn btn-3" %>
-          <%#= link_to "登出", logout_path, class: "btn btn-3", method: :delete %>
+          <%= link_to "登出", logout_path, class: "btn btn-3", method: :delete %>
         <% else %>
           <%= link_to "登入", login_path, class: "btn btn-3" %>
           <%= link_to "加入會員", register_path, class: "btn btn-3" %>
+          <%= link_to "詢問板板", "https://m.me/jpp888/", class: "btn btn-3 contact_us", target: "_blank" %>
         <% end %>
       </ul>
     </div>
