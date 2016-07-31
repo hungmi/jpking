@@ -1,4 +1,38 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="table-like-columns col-sm-offset-3 col-sm-6 col-xs-12">
+  <h1>您的資料</h1>
+  <div class="col-xs-12 tr">
+    <div class="col-xs-5 thead">
+      <h5>使用者名稱<br>即為登入帳號</h5>
+    </div>
+    <div class="col-xs-7 tbody">
+      <p><%= current_user.name %></p>
+    </div>
+  </div>
+  <div class="col-xs-12 tr">
+    <div class="col-xs-5 thead">
+      <h5>手機號碼<br>宅配時需聯絡</h5>
+    </div>
+    <div class="col-xs-7 tbody">
+      <p><%= current_user.phone %></p>
+    </div>
+  </div>
+  <div class="col-xs-12 tr">
+    <div class="col-xs-5 thead">
+      <h5>Email<br>收取訂單證明</h5>
+    </div>
+    <div class="col-xs-7 tbody">
+      <p><%= current_user.email %></p>
+    </div>
+  </div>
+  <div class="col-xs-12 tr">
+    <div class="col-xs-5 thead">
+      <h5>密碼</h5>
+    </div>
+    <div class="col-xs-7 tbody">
+      <p>********</p>
+    </div>
+  </div>
+  <%= link_to '登出', logout_path, class: "btn btn-warning", style: "width: 100%; margin: 15px 0px;", method: :delete %>
+  <%= link_to '編輯', edit_user_path(@user), class: "btn btn-default", style: "width: 100%; margin-bottom: 15px" %>
+  <%= link_to '返回', root_path, class: "btn btn-link", style: "width: 100%;" %>
+</div>

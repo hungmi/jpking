@@ -1,10 +1,23 @@
 <%= simple_form_for @user do |f| %>
-  <%= f.input :name, label: "使用者名稱，將用於登入" %>
+  <%= f.input :name, label: "使用者名稱，即為登入帳號" %>
   <%= f.input :phone, label: "手機號碼，宅配時需聯絡" %>
   <%= f.input :email, label: "Email，收取訂單證明" %>
-  <%= f.input :password, label: "密碼", required: true %>
-  <%= f.input :password_confirmation, label: "密碼確認" %>
-  <%= f.submit "註冊", class:"btn btn-pink", style: "width: 100%" %>
+  <%= f.input :current_password, label: "密碼", required: true %>
+  <% if @user.persisted? %>
+    <hr>
+    <h5 class="text-warning">***如果不需更改密碼，以下請留空***</h5>
+    <%= f.input :password, label: "新密碼" %>
+    <%= f.input :password_confirmation, label: "新密碼確認" %>
+  <% else %>
+    <%= f.input :password_confirmation, label: "密碼確認" %>
+  <% end %>
+  <%= f.button :button, class: "btn btn-pink", style: "width: 100%" do %>
+    <% if @user.new_record? %>
+      註冊
+    <% else %>
+      儲存
+    <% end %>
+  <% end %>
 <% end %>
 <script type="text/javascript">
   $form = $("form#new_user")

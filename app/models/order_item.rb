@@ -11,10 +11,11 @@ class OrderItem < ActiveRecord::Base
   end
 
   def price
-    if self.order.paid?
-      self.ordered_price
+    @order_item = OrderItem.includes(:product, :order).where(id: self.id).first
+    if @order_item.order.paid?
+      @order_item.ordered_price
     else
-      self.product.our_price
+      @order_item.product.our_price
     end
   end
 

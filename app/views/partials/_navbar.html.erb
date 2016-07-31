@@ -36,7 +36,7 @@
           <% end %>
           <%= link_to "訂購紀錄", orders_path, class: "btn btn-pink" %>
           <%= link_to "發財車", cart_path, class: "btn btn-pink" %>
-          <%= link_to "登出", logout_path, class: "btn btn-pink", method: :delete %>
+          <%= link_to "個人頁面", current_user, class: "btn btn-pink" %>
         <% else %>
           <%= link_to "加入會員", register_path, class: "btn btn-pink" %>
           <%= link_to "登入", login_path, class: "btn btn-pink" %>
@@ -48,7 +48,7 @@
         <% if user_signed_in? %>
           <%= link_to "訂購紀錄", orders_path, class: "btn btn-3" %>
           <%= link_to "發財車", cart_path, class: "btn btn-3" %>
-          <%= link_to "登出", logout_path, class: "btn btn-3", method: :delete %>
+          <%= link_to "個人頁面", current_user, class: "btn btn-3" %>
         <% else %>
           <%= link_to "登入", login_path, class: "btn btn-3" %>
           <%= link_to "加入會員", register_path, class: "btn btn-3" %>

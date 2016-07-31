@@ -1,4 +1,12 @@
-<h1 class="better-num"><%= "訂單 ##{@order.num}" %></h1>
+<h1 class="better-num order-num"><%= "訂單 ##{@order.num}" %></h1>
+<% if @payment_info.present? && @payment_info.payment_type == "VACC" %>
+<div class="well">
+  <h2 class="text-danger better-num"><span style="font-size: 20px;">銀行代碼：</span><br class="visible-xs-inline"><%= @payment_info.atm_bank_code %></h2>
+  <h2 class="text-danger better-num"><span style="font-size: 20px;">匯款帳號：</span><br class="visible-xs-inline"><%= @payment_info.atm_code_no %></h2>
+  <h2 class="text-danger better-num"><span style="font-size: 20px;">付款期限：</span><br class="visible-xs-inline"><%= "#{@payment_info.atm_expire_date} #{@payment_info.atm_expire_time}" %></h2>
+  <h2 class="text-danger better-num"><span style="font-size: 20px;">總計NT$：</span><br class="visible-xs-inline"><%= @payment_info.total %> 元</h2>
+</div>
+<% end %>
 <div class="clearfix"></div>
 <div class="table-like-columns">
   <div class="col-xs-12 tr">
@@ -17,18 +25,6 @@
       <p><%= @order.user.name %></p>
     </div>
   </div>
-  <% if @payment_info.present? && @payment_info.payment_type == "VACC" %>
-  <div class="col-xs-12 tr">
-    <div class="col-xs-3 thead">
-      <h5>付款資訊</h5>
-    </div>
-    <div class="col-xs-9 tbody">
-      <p>銀行代碼：<%= @payment_info.atm_bank_code %></p>
-      <p>匯款帳號：<%= @payment_info.atm_code_no %></p>
-      <p>付款期限：<%= "#{@payment_info.atm_expire_date} #{@payment_info.atm_expire_time}" %></p>
-    </div>
-  </div>
-  <% end %>
   <div class="col-xs-12 tr">
     <div class="col-xs-12 thead">
       <h5>訂單內容</h5>
@@ -80,8 +76,18 @@
     </div>
   </div>
   <div class="col-xs-12">
-    <div class="col-xs-3"></div>
-    <div id="total" class="col-xs-9 text-right text-danger" style="font-size: 24px;">總計 NT$ <strong><%= @order.total %></strong> 元</div>
+    <div class="col-sm-8"></div>
+    <div id="total" class="col-sm-4" style="font-size: 24px;">
+      <div>
+        <span class="pull-left">總計</span><span class="pull-right"><strong><%= @order.total %></strong> 元</span><br>
+        <span class="pull-left">折扣</span><span class="pull-right"><strong>100</strong> 元</span>
+      </div>
+      <div class="clearfix"></div>
+      <hr style="margin: 10px 0px; border-color: #333;">
+      <div class="text-danger">
+        <span class="pull-left">結帳</span><span class="pull-right"><strong class="text-danger"><%= @order.total - 100 %></strong> 元</span>
+      </div>
+    </div>
   </div>
   <div class="col-xs-12">
     <div class="col-xs-3"></div>

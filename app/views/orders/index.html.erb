@@ -1,4 +1,7 @@
-<h1>訂購紀錄</h1>
+<h1>
+  訂購紀錄
+  <span class="pull-right">累積下單：NT$ <%= current_user.total_paid_sum %></span>
+</h1>
 
 <% @orders.each do |order| %>
   <div class="clearfix" style="padding: 15px 0px; border-bottom: 1px solid #ccc;">

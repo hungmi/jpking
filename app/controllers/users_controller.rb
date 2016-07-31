@@ -55,12 +55,24 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    # binding.pry
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+      if @user.authenticate(params[:user][:current_password])
+        if @user.update(user_params)
+          format.html {
+            flash[:success] = "修改成功！"
+            redirect_to @user
+          }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit }
+        format.html {
+          flash[:danger] = "請確認您的密碼。"
+          render :edit
+        }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

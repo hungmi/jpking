@@ -8,4 +8,12 @@ class User < ActiveRecord::Base
 
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :destroy
+
+  def total_paid_sum
+    s = 0
+    self.orders.where.not(state: Order.states["paid"] || Order.states["delivered"]).each do |o|
+      s += o.total
+    end
+    return s
+  end
 end
