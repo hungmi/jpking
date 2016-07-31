@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @payment_info = @order.payment_infos.first
+    @payment_info = @order.payment_info
     @order_item_groups = @order.order_items.order(state: :desc, updated_at: :desc).group_by(&:product_id)
   end
 

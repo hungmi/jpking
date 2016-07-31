@@ -1,14 +1,8 @@
 <div class="btn-navs no-space">
-  <%= link_to admin_orders_path(scope: "paid"), class: "btn #{'active' if is_paid?}" do %>
-    未採購 <%= render_notification(@importable_count) %>
-  <% end %>
-  |
-  <%= link_to admin_orders_path(scope: "importing"), class: "btn #{'active' if is_importing?}" do %>
-    採購中 <%= render_notification(@importing_count) %>
-  <% end %>
-  |
-  <%= link_to admin_orders_path(scope: "imported"), class: "btn #{'active' if is_imported?}" do %>
-    已採購  <%= render_notification(@imported_count) %>
+  <% OrderItem.steps.keys.each do |this_step| %>
+    <%= link_to admin_orders_path(scope: this_step), class: "btn" + "#{' active' if send('is_' + this_step + '?')}" do %>
+      <%= I18n.t("order_state.#{this_step}") %> <%= render_notification(instance_variable_get("@#{this_step}_count")) %>
+    <% end %>
   <% end %>
 </div>
 <div style="margin: 10px 0px;">

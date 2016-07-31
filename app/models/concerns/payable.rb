@@ -2,18 +2,18 @@ module Payable
   extend ActiveSupport::Concern
 
   included do 
-    has_many :payment_infos, as: :payable, dependent: :destroy 
+    has_one :payment_info, as: :payable, dependent: :destroy 
   end
 
   def make_payment!(result)
     case result["PaymentType"]
     when "CREDIT"
-      self.paid!
+      self.paid! && self.credit!
     when "VACC"
       self.atm!
     end
 
-    self.payment_infos.create do |pi|
+    self.create_payment_info do |pi|
       pi.merchant_id = result["MerchantID"]
       pi.total = result["Amt"]
       pi.trade_no = result["TradeNo"]

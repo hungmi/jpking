@@ -1,55 +1,29 @@
 zh-TW:
   product_state:
-    dead: 缺貨中
+    short: 缺貨中
     alive: 可訂購
   link_state:
     dead: 失效
     alive: 正常
   order_state:
-    user:
-      placed: 尚未付款
-      atm: 等待匯款
-      paid: 已付款
-      jp_ordered: 進貨中
-      stocked: 商品抵台
-      packaged: 請確認物流
-      ready_to_deliver: 已出貨
-      delivered: 已送達
-      cancel: 已取消
-    admin:
-      placed: 尚未付款
-      atm: 等待匯款
-      paid: 待採購
-      jp_ordered: 日本已下單
-      stocked: 已入庫
-      packaged: 已分貨，待收運費
-      ready_to_deliver: 已出貨
-      delivered: 已送達
-      cancel: 他媽的已取消
-  order_item_state:
-    placed: 下單未付款
+    placed: 尚未付款
     paid: 已付款
-    importing: 訂購中
-    imported: 已訂購
-    stocked: 商品已抵台
-    packaged: 即將配送
+    unavailable: 售完缺貨中
+    refunded: 已轉為購物金
+    wait: 等待進貨
+    importable: 可進貨
+    importing: 進貨中
+    imported: 已進貨
+    stocked: 已抵台
     ready_to_deliver: 配送中
     delivered: 已送達
     cancel: 已取消
-    unavailable: 售完缺貨中
-    wait: 等待進貨
-    admin:
-      placed: 下單未付款
-      paid: 已付款未訂購
-      importing: 訂購中
-      imported: 已訂購
-      stocked: 已入庫
-      packaged: 已分貨
-      ready_to_deliver: 已出貨
-      delivered: 已送達
-      cancel: 他媽的已取消
-      unavailable: 售完缺貨中
-      wait: 等待進貨
+    credit: 信用卡
+    atm: 等待匯款
+    black_cat: 黑貓宅配
+    face: 面交
+    cvs_711: 7-11 交貨便
+    cvs_family: 全家店到店
 
   activerecord:
     attributes:

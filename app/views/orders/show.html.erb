@@ -53,13 +53,22 @@
                   <br>
                   <div class="col-xs-12" style="margin-top:10px;">
                     <%= f.button "確定更新", class: "btn btn-primary", style: "display: none; width: 33.33%;", data: { disable_with: "請稍等..." } %>
-                    <div class="pull-right">
-                      <%= link_to "下次再買", root_path %>
-                      <% if @order.cancelable? %>
-                         |
-                        <%= link_to "刪除", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" } %>
-                      <% end %>
-                    </div>
+                    <% unless item.paid? %>
+                      <div class="pull-right">
+                        <%= link_to "下次再買", root_path %>
+                        <% if @order.cancelable? %>
+                           |
+                          <%= link_to "刪除", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" } %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                    <% if item.refundable? %>
+                      <div class="pull-right">
+                        <%= link_to "退款", root_path %>
+                        |
+                        <%= link_to "等待進貨", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" } %>
+                      </div>
+                    <% end %>
                   </div>
                 <% else %>
                   <%= item.quantity %>
@@ -67,7 +76,7 @@
                 <% end %>
               <% end %>
               </div>
-              <span class="pull-right"><%= (I18n.t("order_item_state.#{item.state}") unless item.placed? || item.paid?) if item.state.present? %></span>
+              <span class="pull-right"><%= item.i18n_state %></span>
               <hr>
             <% end %>
           </div>
@@ -91,7 +100,7 @@
   </div>
   <div class="col-xs-12">
     <div class="col-xs-3"></div>
-    <div class="col-xs-9 text-right"><%= @order.i18n_state_for_user %></div>
+    <div class="col-xs-9 text-right"><%= @order.i18n_state %></div>
   </div>
   <div class="col-xs-12 text-center" style="margin-top: 30px;">
     <%= render_order_state_btns(@order) %>

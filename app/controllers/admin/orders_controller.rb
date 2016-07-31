@@ -3,16 +3,16 @@ class Admin::OrdersController < AdminController
   layout 'admin'
   
   def index
-    params[:scope] = (params[:scope].present? && OrderItem.respond_to?(params[:scope])) ? params[:scope] : "paid"
+    params[:scope] = (params[:scope].present? && OrderItem.respond_to?(params[:scope])) ? params[:scope] : "importable"
     # session[:importable_order_item_view_mode] ||= "orders"
     # session[:importing_order_item_view_mode] ||= "shops"
     # session[:imported_order_item_view_mode] ||= "shops"
-    @orders = Order.includes(:order_items, order_items: [:product, product: [:links] ]).where(order_items: { state: OrderItem.states[params[:scope]] })
+    @orders = Order.includes(:order_items, order_items: [:product, product: [:links] ]).where(order_items: { step: OrderItem.steps[params[:scope]], is_paid: true, state: OrderItem.states[:placed] })
     @etoile_order_items = OrderItem.includes(:product, product: [:shop]).where(products: { shop_id: 1 }).importing
-    @products = Product.includes(:order_items).where(order_items: { state: OrderItem.states[params[:scope]] }).group_by(&:shop_id)
-    @importable_count = OrderItem.paid.size
-    @importing_count = OrderItem.importing.size
-    @imported_count = OrderItem.imported.size
+    @products = Product.includes(:order_items).where(order_items: { step: OrderItem.steps[params[:scope]], is_paid: true, state: OrderItem.states[:placed] }).group_by(&:shop_id)
+    OrderItem.steps.keys.each do |step|
+      instance_variable_set("@#{step}_count", OrderItem.send(step).paid.placed.size)
+    end
     #@order_items = OrderItem.includes(:order, :product, product: [:links]).send(params[:scope])
   end
 

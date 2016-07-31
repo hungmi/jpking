@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729141650) do
+ActiveRecord::Schema.define(version: 20160731040346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,10 +84,12 @@ ActiveRecord::Schema.define(version: 20160729141650) do
     t.integer  "quantity"
     t.integer  "ordered_price"
     t.integer  "state",         default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "item_code"
     t.integer  "variation_id"
+    t.boolean  "is_paid",       default: false
+    t.integer  "step",          default: 0
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
@@ -100,9 +102,12 @@ ActiveRecord::Schema.define(version: 20160729141650) do
     t.integer  "user_id"
     t.integer  "total"
     t.integer  "delivery"
-    t.integer  "state",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "state",             default: 0
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "is_paid",           default: false
+    t.integer  "payment"
+    t.integer  "order_items_count", default: 0
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
@@ -129,6 +134,21 @@ ActiveRecord::Schema.define(version: 20160729141650) do
   end
 
   add_index "payment_infos", ["payable_type", "payable_id"], name: "index_payment_infos_on_payable_type_and_payable_id", using: :btree
+
+  create_table "points", force: :cascade do |t|
+    t.integer  "value"
+    t.integer  "user_id"
+    t.integer  "order_item_id"
+    t.integer  "order_id"
+    t.string   "coupon_code"
+    t.integer  "reason"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "points", ["order_id"], name: "index_points_on_order_id", using: :btree
+  add_index "points", ["order_item_id"], name: "index_points_on_order_item_id", using: :btree
+  add_index "points", ["user_id"], name: "index_points_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "category_id"

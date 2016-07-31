@@ -1,6 +1,7 @@
 <h1>
   訂購紀錄
   <span class="pull-right">累積下單：NT$ <%= current_user.total_paid_sum %></span>
+  <span class="pull-right">購物金：NT$ <%= current_user.points.pluck(:value).try(:sum) %></span>
 </h1>
 
 <% @orders.each do |order| %>
@@ -12,8 +13,8 @@
     </div>
     <div class="col-md-5 col-xs-12">
       <h2 class="better-num h2" style="margin-top: 0px;">
-        <span class="hint">NT$ </span><%= link_to order.total, order_path(order.token) %>
-        <%= order.i18n_state_for_user %>
+        <span class="hint">NT$ </span><%= link_to order.final_total, order_path(order.token) %>
+        <%= order.i18n_state %>
         <%= link_to "檢視", order_path(order.token), class: "pull-right btn btn-link" %>
       </h2>
       <h3 class="better-num"><span class="hint">編號：</span><%= link_to order.num, order_path(order.token) %></h3>

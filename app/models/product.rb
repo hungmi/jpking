@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
   scope :only_img, -> { where("attachments_count > 0 and description IS NULL") }
   scope :ranking, -> { where("ranking IS NOT NULL").alive }
 
-  enum state: { alive: 0, dead: 1, short: 2 }
+  enum state: { alive: 0, short: 1 }
 
   paginates_per 36
 
@@ -109,11 +109,10 @@ class Product < ActiveRecord::Base
     target_link = self.links.last
     page = Nokogiri::HTML open(target_link.value)
     if page.search("p.err_big").present?
-      target_link.dead! && target_link.fetchable.dead!
-      target_link.fetchable.order_items.where(state: [OrderItem.states[:paid], OrderItem.states[:importing]]).update_all(state: OrderItem.states[:unavailable])
+      target_link.dead! && self.short!
       return false
     else
-      target_link.touch && target_link.fetchable.touch
+      target_link.touch && self.touch
       return true
     end
   end

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :points, dependent: :destroy
 
   def total_paid_sum
     s = 0

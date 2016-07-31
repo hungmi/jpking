@@ -91,7 +91,7 @@ class EtoileService
       @product_page = Nokogiri::HTML open(target_link.value)
       # binding.pry
       if @product_page.search("p.err_big").present?
-        target_link.dead! && target_link.fetchable.dead!
+        target_link.dead! && target_link.fetchable.short!
       else
         { 'サイズ' => :product_size, '素材・原材料名・成分' => :material, 'コメント' => :description, '原産国' => :origin }.map do |k,v|
           find_detail_in_table(k, v, product)
