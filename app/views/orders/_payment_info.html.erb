@@ -1,0 +1,13 @@
+<% if payment_info.payment_type == "CREDIT" %>
+  <div class="well">
+    <h2 class="text-success better-num"><span style="font-size: 20px;">使用卡片：</span><br class="visible-xs-inline"><%= "**** **** **** #{payment_info.card_4no}" %></h2>
+    <h2 class="text-success better-num"><span style="font-size: 20px;">支付金額：</span><br class="visible-xs-inline">NT$ <%= payment_info.total %></h2>
+  </div>
+<% elsif payment_info.payment_type == "VACC" %>
+  <div class="well">
+    <h2 class="text-danger better-num"><span style="font-size: 20px;">銀行代碼：</span><br class="visible-xs-inline"><%= payment_info.atm_bank_code %></h2>
+    <h2 class="text-danger better-num"><span style="font-size: 20px;">匯款帳號：</span><br class="visible-xs-inline"><%= payment_info.atm_code_no %></h2>
+    <h2 class="text-danger better-num"><span style="font-size: 20px;">付款期限：</span><br class="visible-xs-inline"><%= "#{payment_info.atm_expire_date} #{payment_info.atm_expire_time}" %></h2>
+    <h2 class="text-danger better-num"><span style="font-size: 20px;">總計NT$：</span><br class="visible-xs-inline"><%= payment_info.total %> 元</h2>
+  </div>
+<% end %>

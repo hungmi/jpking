@@ -1,27 +1,26 @@
-<h1>
-  訂購紀錄
-  <span class="pull-right">累積下單：NT$ <%= current_user.total_paid_sum %></span>
-  <span class="pull-right">購物金：NT$ <%= current_user.points.pluck(:value).try(:sum) %></span>
+<h1>訂購紀錄
+<span class="pull-right" style="font-size: 16px;">
+累積下單：NT$ <%= current_user.total_paid_sum %><br>
+未使用的購物金：NT$ <%= current_user.points.pluck(:value).try(:sum) %>
+</span>
 </h1>
 
 <% @orders.each do |order| %>
   <div class="clearfix" style="padding: 15px 0px; border-bottom: 1px solid #ccc;">
     <div class="col-md-1 col-xs-2">
-      <% if order.placed? %>
+      <% if order.mergeable? %>
         <%= check_box_tag :_merge, 1, false, data: { token: order.token } %>
       <% end %>
     </div>
-    <div class="col-md-5 col-xs-12">
+    <div class="col-md-6 col-xs-12">
       <h2 class="better-num h2" style="margin-top: 0px;">
         <span class="hint">NT$ </span><%= link_to order.final_total, order_path(order.token) %>
         <%= order.i18n_state %>
         <%= link_to "檢視", order_path(order.token), class: "pull-right btn btn-link" %>
       </h2>
-      <h3 class="better-num"><span class="hint">編號：</span><%= link_to order.num, order_path(order.token) %></h3>
-      <h5 class="better-num"><span class="hint">訂購時間：</span><%= order.order_time %></h5>
-      <div><%= render_order_state_btns(order) %> <%= contact_us %></div>
+      <div><%= render_order_state_btns(order) %></div>
     </div>
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-5 col-xs-12">
       <% order.order_items.each do |oi| %>
       <div class="col-xs-2">
         <%= link_to oi.product do %>

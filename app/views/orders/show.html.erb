@@ -1,11 +1,6 @@
 <h1 class="better-num order-num"><%= "訂單 ##{@order.num}" %></h1>
-<% if @payment_info.present? && @payment_info.payment_type == "VACC" %>
-<div class="well">
-  <h2 class="text-danger better-num"><span style="font-size: 20px;">銀行代碼：</span><br class="visible-xs-inline"><%= @payment_info.atm_bank_code %></h2>
-  <h2 class="text-danger better-num"><span style="font-size: 20px;">匯款帳號：</span><br class="visible-xs-inline"><%= @payment_info.atm_code_no %></h2>
-  <h2 class="text-danger better-num"><span style="font-size: 20px;">付款期限：</span><br class="visible-xs-inline"><%= "#{@payment_info.atm_expire_date} #{@payment_info.atm_expire_time}" %></h2>
-  <h2 class="text-danger better-num"><span style="font-size: 20px;">總計NT$：</span><br class="visible-xs-inline"><%= @payment_info.total %> 元</h2>
-</div>
+<% if @payment_info.present? %>
+  <%= render "payment_info", payment_info: @payment_info %>
 <% end %>
 <div class="clearfix"></div>
 <div class="table-like-columns">
@@ -51,7 +46,7 @@
                   <%= f.number_field :quantity, { style: "width: 60px;", max: 999, pattern: "[0-9]*", step: product.wholesale_amount } %>
                   <%#= dead_or_alive(product) %>
                   <br>
-                  <div class="col-xs-12" style="margin-top:10px;">
+                  <div style="margin-top:10px;">
                     <%= f.button "確定更新", class: "btn btn-primary", style: "display: none; width: 33.33%;", data: { disable_with: "請稍等..." } %>
                     <% unless item.paid? %>
                       <div class="pull-right">
@@ -62,13 +57,6 @@
                         <% end %>
                       </div>
                     <% end %>
-                    <% if item.refundable? %>
-                      <div class="pull-right">
-                        <%= link_to "退款", root_path %>
-                        |
-                        <%= link_to "等待進貨", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" } %>
-                      </div>
-                    <% end %>
                   </div>
                 <% else %>
                   <%= item.quantity %>
@@ -76,7 +64,12 @@
                 <% end %>
               <% end %>
               </div>
-              <span class="pull-right"><%= item.i18n_state %></span>
+              <span class="pull-right"><%= item.i18n_state %>
+              <% if item.refundable? %>
+                <%= link_to "退款", refund_order_item_path(item), class: "btn btn-default", method: :post %>
+                <%= link_to "等待進貨", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" }, class: "btn btn-default" %>
+              <% end %>
+              </span>
               <hr>
             <% end %>
           </div>
@@ -104,7 +97,6 @@
   </div>
   <div class="col-xs-12 text-center" style="margin-top: 30px;">
     <%= render_order_state_btns(@order) %>
-    <%= contact_us %>
     <% if @order.cancelable? %>
       <%= link_to "刪除訂單", order_path(@order.token), method: :delete, data: { confirm: "此動作無法復原，確定要刪除訂單嗎？" }, class: "pull-right btn btn-link btn-easier" %>
     <% end %>

@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_order_item, only: [:show, :edit, :update, :destroy, :refund]
 
   # GET /order_items
   # GET /order_items.json
@@ -60,12 +60,37 @@ class OrderItemsController < ApplicationController
       name = @order_item.name
       @order_item.destroy
       respond_to do |format|
-        format.html { redirect_to order_path(@order.token), notice: "已刪除#{name}" }
+        format.html {
+          flash[:success] = "已刪除#{name}。"
+          redirect_to order_path(@order.token)
+        }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to order_path(@order.token), notice: "很抱歉，已無法更改訂單。" }
+        format.html {
+          flash[:warning] = "很抱歉，已無法更改訂單。"
+          redirect_to order_path(@order.token)
+        }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def refund
+    respond_to do |format|
+      if @order_item.refundable?
+        @order_item.refunded!
+        format.html {
+          flash[:success] = "退款NT$ #{@order_item.total}已轉為購物金，您可以直接拿來抵扣其他商品！"
+          redirect_to order_path(@order_item.order.token)
+        }
+        format.json { head :no_content }
+      else
+        format.html {
+          flash[:warning] = "退款失敗！請稍候再試，或是詢問板板，我們將盡快為您處理。"
+          redirect_to order_path(@order_item.order.token)
+        }
         format.json { head :no_content }
       end
     end

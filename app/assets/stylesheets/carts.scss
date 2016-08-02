@@ -42,7 +42,9 @@ div#car-logo {
   left: 180px;
   top: 50%;
   font-size: 50px;
-  font-family: 'Orbitron', sans-serif;
+  &, & > span {
+    font-family: 'Orbitron', sans-serif !important;
+  }
 }
 
 #outside {

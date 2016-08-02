@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     get 'privacy'
   end
   resources :products, except: [:show]
-  resources :order_items
+  resources :order_items do
+    member do
+      post "refund"
+    end
+  end
   resources :orders do
     member do
       # get "pay"

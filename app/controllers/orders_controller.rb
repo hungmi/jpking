@@ -127,7 +127,10 @@ class OrdersController < ApplicationController
   def cancel
     @order.cancel!
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: '訂單已取消。' }
+      format.html {
+        flash[:info] = "我們會暫停處理這筆訂單。"
+        redirect_to orders_url
+      }
       format.json { head :no_content }
     end
   end
@@ -135,7 +138,10 @@ class OrdersController < ApplicationController
   def reorder # 取消後的重新訂購
     @order.placed! if @order.cancel?
     respond_to do |format|
-      format.html { redirect_to order_path(@order.token), notice: '請確認訂單內容。' }
+      format.html { 
+        flash[:success] = '請重新確認訂單內容。'
+        redirect_to order_path(@order.token)
+      }
       format.json { head :no_content }
     end
   end

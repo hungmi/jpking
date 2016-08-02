@@ -1,17 +1,17 @@
-.add_to_cart.btn { color: white !important; }
 .btn.short {
   background-color: gray;
   color: white;
   font-size: 20px;
 }
 @media only screen and (max-width: 480px) {
-  .btn.add_to_cart {
-    background-color: #FF8FA2;
-    &:hover {
-      background-color: #FF8FA2;
-    }
-  }
-  #product-show-containter {
+  // .btn.add_to_cart {
+  //   background-color: #FF8FA2;
+  //   //width: 100%;
+  //   &:hover {
+  //     background-color: #FF8FA2;
+  //   }
+  // }
+  #product-show-container {
     .btn.add_to_cart {
       width: 100%;
       padding: 10px 16px;
@@ -38,8 +38,11 @@
 @media only screen and (min-width: 481px) {
   .btn.add_to_cart {
     background-color: pink;
+    &:hover {
+      background-color: #FF8FA2;
+    }
   }
-  #product-show-containter {
+  #product-show-container {
     .btn.add_to_cart {
       font-size: 20px;
       padding: 10px 16px;
@@ -47,11 +50,9 @@
   }
   #product-index-container {
     .btn.add_to_cart, .btn.choose_variation, .btn.short {
-      font-size: 14px;
-      padding: 4px 6px;
+      color: white;
     }
     .btn.choose_variation {
-      color: white;
       background-color: lightskyblue;
     }
   }

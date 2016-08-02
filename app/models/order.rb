@@ -71,7 +71,11 @@ class Order < ActiveRecord::Base
   end
 
   def cancelable?
-    self.placed?# || self.paid?
+    self.placed? && !self.paid?
+  end
+
+  def mergeable?
+    self.placed? && !self.paid?
   end
 
   def to_order_items

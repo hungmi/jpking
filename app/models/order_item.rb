@@ -22,8 +22,8 @@ class OrderItem < ActiveRecord::Base
 
   def refunded!
     if self.is_paid? && self.unavailable?
+      self.create_point(order_id: self.order.id, value: self.total, user_id: self.order.user_id)
       super
-      self.point.create(order_id: oi.order.id, value: (oi.ordered_price || 1) * (oi.quantity || 1))
     end
   end
 
