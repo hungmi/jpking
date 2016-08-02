@@ -1,11 +1,14 @@
 <div class="col-sm-6 col-xs-12 tool">
   <div class="col-xs-12 text-right" id="row-counts">
     瀏覽模式
-    <%= link_to "大圖", row_count_path(rowCount:2), class: "btn btn-link visible-xs-inline", method: :post %>
+    <%= link_to "大圖", row_count_path(rowCount:2), class: "btn btn-link visible-xs-inline visible-sm-inline", method: :post %>
     <%= link_to "小圖", row_count_path(rowCount:3), class: "btn btn-link visible-xs-inline", method: :post %>
 
-    <%= link_to "大圖", row_count_path(rowCount:3), class: "btn btn-link hidden-xs", method: :post %>
-    <%= link_to "中圖", row_count_path(rowCount:4), class: "btn btn-link hidden-xs", method: :post %>
-    <%= link_to "小圖", row_count_path(rowCount:6), class: "btn btn-link hidden-xs", method: :post %>
+    <%= link_to "中圖", row_count_path(rowCount:3), class: "btn btn-link visible-sm-inline", method: :post %>
+    <%= link_to "小圖", row_count_path(rowCount:4), class: "btn btn-link visible-sm-inline", method: :post %>
+
+    <%= link_to "大圖", row_count_path(rowCount:3), class: "btn btn-link hidden-sm hidden-xs", method: :post %>
+    <%= link_to "中圖", row_count_path(rowCount:4), class: "btn btn-link hidden-sm hidden-xs", method: :post %>
+    <%= link_to "小圖", row_count_path(rowCount:6), class: "btn btn-link hidden-sm hidden-xs", method: :post %>
   </div>
 </div>

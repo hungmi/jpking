@@ -7,12 +7,12 @@
 
 <% @orders.each do |order| %>
   <div class="clearfix" style="padding: 15px 0px; border-bottom: 1px solid #ccc;">
-    <div class="col-md-1 col-xs-2">
+    <div class="col-md-1 col-sm-1 col-xs-2">
       <% if order.mergeable? %>
         <%= check_box_tag :_merge, 1, false, data: { token: order.token } %>
       <% end %>
     </div>
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
       <h2 class="better-num h2" style="margin-top: 0px;">
         <span class="hint">NT$ </span><%= link_to order.deducted_total, order_path(order.token) %>
         <%= order.i18n_state %>
@@ -20,7 +20,7 @@
       </h2>
       <div><%= render_order_state_btns(order) %></div>
     </div>
-    <div class="col-md-5 col-xs-12">
+    <div class="col-md-5 col-sm-5 col-xs-12">
       <% order.order_items.each do |oi| %>
       <div class="col-xs-2">
         <%= link_to oi.product do %>

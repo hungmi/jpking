@@ -1,11 +1,11 @@
 <%= form_for :cart_item, url: cart_items_path, html: { class: "edit_cart_item" } do |f| %>
   <%= f.text_field :product_id, value: product.id, class: "hidden" %>
   <% if product.variations.size > 0 %>
-    <%= f.select :variation_id, product.variations.pluck(:jp_name, :id) %><br>
+    <%= f.select :variation_id, product.variations.pluck(:jp_name, :id) %><br><br>
   <% end %>
   <%= number_field_tag :group_quantity, 1, { style: "width: 40px;", max: 999, pattern: "[0-9]*", data: { whole_sale: product.wholesale_amount } } %>組，共
   <strong class="cart-item-quantity-text"><%= 1 * product.wholesale_amount %></strong>
-  <%= f.number_field :quantity, { style: "width: 40px; margin: 0px;", max: 999, pattern: "[0-9]*", value: product.wholesale_amount, step: product.wholesale_amount, class: "hidden" } %>個
+  <%= f.number_field :quantity, { style: "width: 40px; margin: 0px;", max: 999, pattern: "[0-9]*", value: product.wholesale_amount, step: product.wholesale_amount, class: "hidden" } %>個<br>
   <%= f.button class: "btn add_to_cart btn-pink-alt", style: "margin-top: 20px;" do %>
     <%= content_tag :i, "", class:"glyphicon glyphicon-shopping-cart" %>
     <%= content_tag :span, "加入發財車", class:"add-to-cart-text" %>
