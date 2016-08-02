@@ -21,7 +21,9 @@
           <div class="row">
             <div class="col-xs-12">
               <%= item.variation.present? ? "#{item.variation.jp_name} x " : ""  %>
-              <%= f.number_field :quantity, { style: "width: 60px; margin: 0px;", max: 999, pattern: "[0-9]*", step: product.wholesale_amount } %>
+              <%= number_field_tag :group_quantity, (item.quantity/product.wholesale_amount) || 1, { style: "width: 40px;", max: 999, pattern: "[0-9]*", data: { whole_sale: product.wholesale_amount } } %>組，共
+              <strong class="cart-item-quantity-text"><%= item.quantity %></strong>
+              <%= f.number_field :quantity, { style: "width: 40px; margin: 0px;", max: 999, pattern: "[0-9]*", step: product.wholesale_amount, class: "hidden" } %>個
               <%= dead_or_alive(product) %>
             </div>
             <div class="col-xs-12" style="margin-top:10px;">

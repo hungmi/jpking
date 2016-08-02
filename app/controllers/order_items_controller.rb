@@ -43,6 +43,7 @@ class OrderItemsController < ApplicationController
     respond_to do |format|
       if @order_item.update(order_item_params)
         @order = @order_item.order
+        @order.update_total!
         # format.html { redirect_to order_path(@order_item.order.token), notice: '修改完成' }
         format.json { render json: { total: @order.total }, status: :ok }
       else

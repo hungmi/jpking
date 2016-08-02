@@ -30,13 +30,13 @@ class Order < ActiveRecord::Base
     return self.total - self.deduction
   end
 
-  # def sum_all_oi_totals
-  #   sum = 0
-  #   self.order_items.map do |item|
-  #     sum += item.total
-  #   end
-  #   sum
-  # end
+  def update_total!
+    sum = 0
+    self.order_items.map do |item|
+      sum += item.total
+    end
+    self.update(total: sum)
+  end
 
   def generate_order_num
     self.num = rand(99).to_s.rjust(2,"0") + Time.now.strftime('%m%d%H%M%S')

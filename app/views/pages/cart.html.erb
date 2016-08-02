@@ -27,7 +27,9 @@
 
 
 <script type="text/javascript">
-  $("form.edit_cart_item input").on("input change", function(){
+  $("form.edit_cart_item input[name='group_quantity']").on("input change", function(){
+    $(this).siblings(".cart-item-quantity-text").html($(this).data("whole-sale")*$(this).val())
+    $(this).siblings("input[name='cart_item[quantity]']").val($(this).data("whole-sale")*$(this).val())
     $(this).parents("form").find('button').show()
   })
   $("form.edit_cart_item").on("ajax:success", function(e, data, status, xhr){
