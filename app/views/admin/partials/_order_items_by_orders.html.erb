@@ -24,7 +24,7 @@
           <br>
           <div class="no-space">
           <%= render_order_item_next_state_btn(item) %>
-          <%= link_to "缺貨", admin_unavailable_path(order_item_id: item.id), class: "btn btn-link", style: "padding: 6px 0px; margin: 0px 7%;", method: :post %>
+          <%= link_to "缺貨", admin_unavailable_path(order_item_id: item.id), class: "btn btn-link", style: "padding: 6px 0px; margin: 0px 7%;", method: :post, data: { confirm: "確定將此商品設為缺貨中？" } %>
           </div>
         </div>
         <% end %>

@@ -17,4 +17,13 @@ class User < ActiveRecord::Base
     end
     return s
   end
+
+  # def deductible_points
+  #   self.points.pluck(:value).try(:sum)
+  # end
+
+  def deductible_points_for_this_(total)
+    max = self.deductible_points
+    total > max ? max : total
+  end
 end

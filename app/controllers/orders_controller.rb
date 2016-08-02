@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :cancel, :reorder, :is_cancelable, :pay2go_cc_notify]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :cancel, :reorder, :is_cancelable, :pay2go_cc_notify, :deduct]
   before_action :is_cancelable, only: [:pay, :cancel]
   before_action :authenticate_user!, except: [:pay2go_cc_notify]
   protect_from_forgery except: :pay2go_cc_notify
@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
         flash[:success] = "付款成功！您將會收到一封包含付款資訊的郵件，請至少保留三個月。"
       elsif result["PaymentType"] == "VACC"
         flash[:success] = "取號成功！以下是您的匯款資訊，請記得在期限前完成！"
+      else
+        flash[:danger] = "很抱歉，交易失敗，請稍候再試一次，或聯絡我們。"
       end
       #   # UserMailer.pay_rent_success_mail(@rent).deliver_later
       #   flash[:success] = "Thanks!"#I18n.t('flash.messages.rent_payment_success')
@@ -31,6 +33,26 @@ class OrdersController < ApplicationController
         flash[:danger] = "很抱歉，交易失敗，請稍候再試一次，或聯絡我們。"
       end
       redirect_to order_path(@order.token , status: respond["Status"])
+    end
+  end
+
+  def deduct
+    respond_to do |format|
+      @deduction = params[:deduction].to_i
+      if current_user.deductible_points >= @deduction && @order.make_deduction!(@deduction)
+        current_user.update(deductible_points: current_user.deductible_points - @deduction)
+        format.html {
+          flash[:success] = "折抵成功！"
+          redirect_to @order
+        }
+        format.json { render json: { result: "成功" }, status: :ok }
+      else
+        format.html {
+          flash[:danger] = "餘額不足。"
+          redirect_to @order
+        }
+        format.json { render json: { result: "餘額不足" }, status: :unprocessable_entity }
+      end
     end
   end
 

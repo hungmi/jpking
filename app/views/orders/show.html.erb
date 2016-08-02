@@ -66,7 +66,7 @@
               </div>
               <span class="pull-right"><%= item.i18n_state %>
               <% if item.refundable? %>
-                <%= link_to "退款", refund_order_item_path(item), class: "btn btn-default", method: :post %>
+                <%= link_to "退款", refund_order_item_path(item), class: "btn btn-default", method: :post, data: { confirm: "確定要轉為購物金？" } %>
                 <%= link_to "等待進貨", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" }, class: "btn btn-default" %>
               <% end %>
               </span>
@@ -80,14 +80,20 @@
   <div class="col-xs-12">
     <div class="col-sm-8"></div>
     <div id="total" class="col-sm-4" style="font-size: 24px;">
-      <div>
-        <span class="pull-left">總計</span><span class="pull-right"><strong><%= @order.total %></strong> 元</span><br>
-        <span class="pull-left">折扣</span><span class="pull-right"><strong>100</strong> 元</span>
-      </div>
-      <div class="clearfix"></div>
-      <hr style="margin: 10px 0px; border-color: #333;">
+      <% if @order.deduction > 0 %>
+        <div id="deduction-detail">
+          <span class="pull-left">總計</span><span class="pull-right"><strong><%= @order.total %></strong> 元</span><br>
+          <span class="pull-left text-success">購物金</span><span class="pull-right text-success"><b>-</b> <%= @order.deduction %> 元</span>
+        </div>
+        <div class="clearfix"></div>
+        <hr style="margin: 10px 0px; border-color: #333;">
+      <% elsif @order.cancelable? && current_user.deductible_points > 0 %>
+        <div class="text-right">
+        <%= link_to "使用購物金？", deduct_order_path(@order), class: "btn btn-pink-alt btn-deduct" %>
+        </div>
+      <% end %>
       <div class="text-danger">
-        <span class="pull-left">結帳</span><span class="pull-right"><strong class="text-danger"><%= @order.total - 100 %></strong> 元</span>
+        <span class="pull-left">結帳</span><span class="pull-right"><strong class="text-danger"><%= @order.total - @order.deduction %></strong> 元</span>
       </div>
     </div>
   </div>
@@ -113,6 +119,29 @@
       console.log(name + ": " + data[name])
       $("#" + name).find("strong").html(data[name])
     })
+  })
+  $(".btn-deduct").on("click", function(e){
+    e.preventDefault();
+    var deduction = prompt("本次交易最多可折抵 NT$ <%= current_user.deductible_points_for_this_(@order.total) %>，\n您也可自訂折抵金額", "<%= current_user.deductible_points_for_this_(@order.total) %>");
+    
+    if (deduction != null && deduction >= 0 && deduction <= <%= @order.total %>) {
+      $.ajax({
+        url: window.location.pathname + "/deduct",
+        method: "POST",
+        dataType: "JSON",
+        data: { deduction: deduction }
+      }).done(function(){
+        alert("折抵成功！")
+        location.reload();
+      }).fail(function(jqxhr, status, errorThrown){
+        if (jqxhr.status == 422) {
+          alert("很抱歉，折抵失敗，若您餘額足夠但無法折抵，請聯絡我們。")
+        }
+      })
+    } else if (deduction != null) {
+      alert("很抱歉，輸入金額可能有問題，請您再試一次，若無法折抵，請聯絡我們。")
+    }
+    $(this).blur()
   })
 </script>
 

@@ -1,7 +1,7 @@
 <h1>訂購紀錄
 <span class="pull-right" style="font-size: 16px;">
 累積下單：NT$ <%= current_user.total_paid_sum %><br>
-未使用的購物金：NT$ <%= current_user.points.pluck(:value).try(:sum) %>
+未使用的購物金：NT$ <%= current_user.deductible_points %>
 </span>
 </h1>
 
@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-6 col-xs-12">
       <h2 class="better-num h2" style="margin-top: 0px;">
-        <span class="hint">NT$ </span><%= link_to order.final_total, order_path(order.token) %>
+        <span class="hint">NT$ </span><%= link_to order.deducted_total, order_path(order.token) %>
         <%= order.i18n_state %>
         <%= link_to "檢視", order_path(order.token), class: "pull-right btn btn-link" %>
       </h2>

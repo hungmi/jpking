@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get "cancel"
       get "reorder"
       post "pay2go_cc_notify"
+      post "deduct"
     end
     collection do
       post "merge"

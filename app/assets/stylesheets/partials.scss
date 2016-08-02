@@ -4,13 +4,13 @@
   font-size: 20px;
 }
 @media only screen and (max-width: 480px) {
-  // .btn.add_to_cart {
-  //   background-color: #FF8FA2;
-  //   //width: 100%;
-  //   &:hover {
-  //     background-color: #FF8FA2;
-  //   }
-  // }
+  .btn.add_to_cart {
+    background-color: #FF8FA2;
+    color: white;
+    &:hover {
+      background-color: #FF8FA2;
+    }
+  }
   #product-show-container {
     .btn.add_to_cart {
       width: 100%;

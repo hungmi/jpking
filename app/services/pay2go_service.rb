@@ -4,7 +4,7 @@ class Pay2goService
     @order = order
     @timestamp = order.created_at.to_i
     @merchant_order_no = "#{order.id}s#{Time.now.strftime("%Y%m%d%H%M%S")}"
-    @total_price = order.total
+    @total_price = order.deducted_total
   end
 
   def check_value

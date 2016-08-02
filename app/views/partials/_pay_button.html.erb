@@ -15,7 +15,7 @@
   <%= hidden_field_tag "ItemDesc",        order.num %>
   <%= hidden_field_tag "MerchantOrderNo", "#{order.id}s#{Time.now.strftime("%Y%m%d%H%M%S")}" %>
   <%= hidden_field_tag "TimeStamp",       order.created_at.to_i %>
-  <%= hidden_field_tag "Amt",             order.total %>
+  <%= hidden_field_tag "Amt",             order.deducted_total %>
 
   <%= hidden_field_tag "CREDIT",          "1" %>
   <%= hidden_field_tag "VACC",            "1" %>

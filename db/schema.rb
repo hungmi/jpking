@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731040346) do
+ActiveRecord::Schema.define(version: 20160802133439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160731040346) do
     t.boolean  "is_paid",           default: false
     t.integer  "payment"
     t.integer  "order_items_count", default: 0
+    t.integer  "deduction",         default: 0
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
@@ -139,14 +140,12 @@ ActiveRecord::Schema.define(version: 20160731040346) do
     t.integer  "value"
     t.integer  "user_id"
     t.integer  "order_item_id"
-    t.integer  "order_id"
     t.string   "coupon_code"
     t.integer  "reason"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
-  add_index "points", ["order_id"], name: "index_points_on_order_id", using: :btree
   add_index "points", ["order_item_id"], name: "index_points_on_order_item_id", using: :btree
   add_index "points", ["user_id"], name: "index_points_on_user_id", using: :btree
 
@@ -200,6 +199,7 @@ ActiveRecord::Schema.define(version: 20160731040346) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "role",                  default: 0
+    t.integer  "deductible_points",     default: 0
   end
 
   create_table "variations", force: :cascade do |t|

@@ -9,6 +9,11 @@ module OrdersHelper
         concat link_to "暫時壓單", cancel_order_path(order.token), class: "btn btn-link"
         concat contact_us
       end
+    elsif order.paid?
+      capture do
+        concat link_to "返回", orders_path, class: "btn btn-link"
+        concat contact_us
+      end
     end
   end
 end

@@ -22,7 +22,12 @@ class OrderItem < ActiveRecord::Base
 
   def refunded!
     if self.is_paid? && self.unavailable?
-      self.create_point(order_id: self.order.id, value: self.total, user_id: self.order.user_id)
+      @user = User.find(self.order.user_id)
+      if @user.present?
+        @new_points = self.create_point(value: self.total, user_id: @user.id)
+        @user.deductible_points += @new_points.value
+        @user.save
+      end
       super
     end
   end
