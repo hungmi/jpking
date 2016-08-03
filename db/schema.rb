@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802133439) do
+ActiveRecord::Schema.define(version: 20160803062114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,24 +152,27 @@ ActiveRecord::Schema.define(version: 20160802133439) do
   create_table "products", force: :cascade do |t|
     t.integer  "category_id"
     t.string   "jp_name"
-    t.string   "zh_name",           default: ""
+    t.string   "zh_name",                                    default: ""
     t.integer  "original_price"
     t.integer  "wholesale_price"
     t.integer  "stock"
     t.string   "item_code"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "attachments_count", default: 0
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.integer  "attachments_count",                          default: 0
     t.text     "material"
     t.text     "description"
-    t.integer  "state",             default: 0
+    t.integer  "state",                                      default: 0
     t.string   "product_size"
     t.string   "origin"
-    t.integer  "wholesale_amount",  default: 1
-    t.boolean  "price_in_name",     default: false
+    t.integer  "wholesale_amount",                           default: 1
+    t.boolean  "price_in_name",                              default: false
     t.integer  "shop_id"
     t.integer  "ranking"
-    t.integer  "variations_count",  default: 0
+    t.integer  "variations_count",                           default: 0
+    t.integer  "platform"
+    t.integer  "special_price"
+    t.decimal  "weight",            precision: 10, scale: 3
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

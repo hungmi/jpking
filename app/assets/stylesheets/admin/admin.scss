@@ -1,8 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "mixin";
-@import "navbar";
+// @import "navbar";
 @import "main";
+@import "admin/products";
 
 .btn-navs {
   .btn {

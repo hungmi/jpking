@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
     max = self.deductible_points
     total > max ? max : total
   end
+
+  def searchable
+    "#{self.name}_#{self.email}_#{self.phone}"
+  end
 end

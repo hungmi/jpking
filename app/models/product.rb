@@ -19,6 +19,10 @@ class Product < ActiveRecord::Base
 
   validates :item_code, uniqueness: true, allow_blank: true
 
+  def searchable
+    "#{self.zh_name}_#{self.jp_name}_#{self.item_code}"
+  end
+
   def short!
     super
     self.order_items.find_each do |oi|

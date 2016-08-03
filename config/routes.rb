@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   get 'register' => "users#new", as: :register
   resources :shops
   namespace :admin do
+    controller 'products' do
+      get "products" => :index
+    end
     controller 'orders' do
       get "orders" => :index
       post "importing"

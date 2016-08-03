@@ -1,0 +1,115 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body.admin.products.index {
+  input[type='search'] {
+    padding: 2px 7px;
+    border: 2px solid black;
+    height: 33px;
+    &[name="search_user"] {
+      width: 100%;
+    }
+  }
+
+  input.pretty {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+    &:focus {
+      outline: none;
+      border-color: #222;
+    }
+  }
+
+  .amount-wrapper {
+    .number-btn {
+      font-size: 20px;
+      padding: 0px 12px;
+      &:focus {
+        background: #fff;
+      }
+      &.plus {
+        width: 100px;
+      }
+    }
+    input {
+      line-height: 29px;
+      width: 30px;
+      text-align: center;
+    }
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  #create-orders-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    border-radius: 999px;
+    font-size: 30px;
+    z-index: 999;
+    color: white;
+    padding: 0px 14px 4px 14px;
+  }
+
+  #order-form-wrapper {
+    display: none;
+    height: 500px;
+    width: 500px;
+    position: fixed;
+    left: calc(50% - 250px);
+    top: calc(50% - 250px);
+    background: white;
+    z-index: 999;
+    border: 1px solid black;
+    input {
+      display: none;
+    }
+    #order-form-submit-btn {
+      border-radius: 0px;
+      width: 100%;
+    }
+  }
+
+  #mask {
+    display: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0.8;
+    z-index: 998;
+  }
+
+  #users-wrapper {
+    #users {
+      position: fixed;
+      left: -200px;
+      top: 0px;
+      height: 100%;
+      width: 200px;
+      background: white;
+      z-index: 999;
+    }
+    #open-users-btn {
+      &:focus {
+        outline: none;
+      }
+      position: fixed;
+      top: calc(50% - 25px);
+      left: 0px;
+      width: 40px;
+      height: 50px;
+      background: white;
+      border: 1px solid #333;
+      color: black;
+      z-index: 999;
+      cursor: pointer;
+    }
+  }
+}
