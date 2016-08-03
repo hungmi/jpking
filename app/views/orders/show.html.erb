@@ -95,7 +95,7 @@
         </div>
       <% end %>
       <div class="text-danger">
-        <span class="pull-left">結帳</span><span class="pull-right"><strong class="text-danger"><%= @order.total - @order.deduction %></strong> 元</span>
+        <span class="pull-left">結帳</span><span class="pull-right"><strong class="text-danger"><%= @order.deducted_total %></strong> 元</span>
       </div>
     </div>
   </div>

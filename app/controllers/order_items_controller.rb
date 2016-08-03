@@ -60,12 +60,25 @@ class OrderItemsController < ApplicationController
     if @order.cancelable?
       name = @order_item.name
       @order_item.destroy
-      respond_to do |format|
-        format.html {
-          flash[:success] = "已刪除#{name}。"
-          redirect_to order_path(@order.token)
-        }
-        format.json { head :no_content }
+      @order.update_total!
+
+      if @order.order_items.blank?
+        @order.destroy
+        respond_to do |format|
+          format.html {
+            flash[:success] = "訂單已刪除。"
+            redirect_to orders_path
+          }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html {
+            flash[:success] = "已刪除#{name}。"
+            redirect_to order_path(@order.token)
+          }
+          format.json { head :no_content }
+        end
       end
     else
       respond_to do |format|
@@ -105,6 +118,6 @@ class OrderItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_item_params
-      params.require(:order_item).permit(:order_id, :cart_item_id, :quantity, :price, :state)
+      params.require(:order_item).permit(:order_id, :cart_item_id, :quantity, :price, :state, :name)
     end
 end
