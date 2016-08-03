@@ -5,23 +5,15 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <meta name="viewport" content="width=device-width, user-scalable=no"> -->
-  <%= stylesheet_link_tag    'admin/panel', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'admin/admin', media: 'all', 'data-turbolinks-track' => true %>
   <%= yield :extra_css %>
-  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin/admin', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= audio_tag 'generic_hover.mp3', id: "genericHover" %>
   <%#= favicon_link_tag "favicon.ico" %>
 </head>
 <body>
-  <div class="container responsive">
-    <div class="spinner">
-      <div class="double-bounce1"></div>
-      <div class="double-bounce2"></div>
-    </div>
-    <div class="loading-content">
-      <%= yield %>
-    </div>
-  </div>
+  <%= yield %>
   <%= yield :custom_js %>
 
   <script type="text/javascript">

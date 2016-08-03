@@ -16,11 +16,12 @@ class Product < ActiveRecord::Base
 
   include Fetchable
   include Imageable
+  include Taggable
 
   validates :item_code, uniqueness: true, allow_blank: true
 
   def searchable
-    "#{self.zh_name}_#{self.jp_name}_#{self.item_code}"
+    "全部_#{self.zh_name}_#{self.jp_name}_#{self.item_code}_#{self.tags.pluck(:name).join("")}"
   end
 
   def short!

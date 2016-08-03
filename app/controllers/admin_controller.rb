@@ -1,13 +1,12 @@
 class AdminController < ApplicationController
   before_action :authenticate_admin!
+  layout 'admin'
 
   def panel
-    render layout: 'panel'
   end
 
   def settings
     @setting = Setting.first
-    render layout: 'panel'
   end
 
   def update_settings

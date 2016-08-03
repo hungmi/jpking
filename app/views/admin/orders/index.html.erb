@@ -1,3 +1,4 @@
+<div class="container responsive">
 <div class="btn-navs no-space">
   <% OrderItem.steps.keys.each do |this_step| %>
     <%= link_to admin_orders_path(scope: this_step), class: "btn" + "#{' active' if send('is_' + this_step + '?')}" do %>
@@ -16,4 +17,5 @@
     <%= link_to "按訂單檢視", params.merge("#{params[:scope]}_items_view_mode".to_sym => "orders"), class: "btn btn-default" %>
     <%= render "admin/partials/order_items_by_shops", orders: @orders %>
   <% end %>
+</div>
 </div>
