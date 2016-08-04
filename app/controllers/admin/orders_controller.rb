@@ -6,11 +6,11 @@ class Admin::OrdersController < AdminController
     # session[:importable_order_item_view_mode] ||= "orders"
     # session[:importing_order_item_view_mode] ||= "shops"
     # session[:imported_order_item_view_mode] ||= "shops"
-    @orders = Order.includes(:order_items, order_items: [:product, product: [:links] ]).where(order_items: { step: OrderItem.steps[params[:scope]], is_paid: true, state: OrderItem.states[:placed] })
+    @orders = Order.includes(:order_items, order_items: [:product, product: [:links] ]).where(order_items: { step: OrderItem.steps[params[:scope]], is_paid: true, state: OrderItem.states[:ordered] })
     @etoile_order_items = OrderItem.includes(:product, product: [:shop]).where(products: { shop_id: 1 }).importing
-    @products = Product.includes(:order_items).where(order_items: { step: OrderItem.steps[params[:scope]], is_paid: true, state: OrderItem.states[:placed] }).group_by(&:shop_id)
+    @products = Product.includes(:order_items).where(order_items: { step: OrderItem.steps[params[:scope]], is_paid: true, state: OrderItem.states[:ordered] }).group_by(&:shop_id)
     OrderItem.steps.keys.each do |step|
-      instance_variable_set("@#{step}_count", OrderItem.send(step).paid.placed.size)
+      instance_variable_set("@#{step}_count", OrderItem.send(step).paid.ordered.size)
     end
     #@order_items = OrderItem.includes(:order, :product, product: [:links]).send(params[:scope])
   end
