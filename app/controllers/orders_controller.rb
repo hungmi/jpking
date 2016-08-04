@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :cancel, :reorder, :is_cancelable, :pay2go_cc_notify, :deduct]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :pay, :cancel, :reorder, :is_cancelable, :pay2go_cc_notify, :deduct, :check_pay]
   before_action :is_cancelable, only: [:pay, :cancel]
   before_action :authenticate_user!, except: [:pay2go_cc_notify]
   protect_from_forgery except: :pay2go_cc_notify
@@ -54,6 +54,19 @@ class OrdersController < ApplicationController
         format.json { render json: { result: "餘額不足" }, status: :unprocessable_entity }
       end
     end
+  end
+
+  def check_pay
+    result = JSON.parse Pay2goService.new(@order).check_pay!
+    check_pay_result = @order.make_payment_2nd_step!(result)
+    if check_pay_result && @order.paid?
+      flash[:success] = "已收到您的款項！請確認您的信箱是否有一封包含付款資訊的郵件，請至少保留三個月。"
+    elsif check_pay_result && !@order.paid?
+      flash[:danger] = "很抱歉，我們尚未收到您的款項，若您已匯款，請稍待 20 分鐘後再次查詢。"
+    else
+      flash[:warning] = "很抱歉，目前系統忙碌中，請稍候再試一次，或聯絡我們。"
+    end
+    redirect_to @order
   end
 
   # GET /orders

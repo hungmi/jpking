@@ -1,6 +1,6 @@
 <h1 class="better-num order-num"><%= "訂單 ##{@order.num}" %></h1>
 <% if @payment_info.present? %>
-  <%= render "payment_info", payment_info: @payment_info %>
+  <%= render "payment_info", payment_info: @payment_info, order: @order %>
 <% end %>
 <div class="clearfix"></div>
 <div class="table-like-columns">
@@ -69,7 +69,6 @@
               <span class="pull-right"><%= item.i18n_state %>
               <% if item.refundable? %>
                 <%= link_to "退款", refund_order_item_path(item), class: "btn btn-default", method: :post, data: { confirm: "確定要轉為購物金？" } %>
-                <%#= link_to "等待進貨", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" }, class: "btn btn-default" %>
               <% end %>
               </span>
               <hr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803125410) do
+ActiveRecord::Schema.define(version: 20160804061220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,12 +126,14 @@ ActiveRecord::Schema.define(version: 20160803125410) do
     t.string   "pay_time"
     t.string   "card_6no"
     t.string   "card_4no"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "atm_bank_code"
     t.string   "atm_code_no"
     t.string   "atm_expire_date"
     t.string   "atm_expire_time"
+    t.string   "payer_account_5code"
+    t.string   "pay_bank_code"
   end
 
   add_index "payment_infos", ["payable_type", "payable_id"], name: "index_payment_infos_on_payable_type_and_payable_id", using: :btree
@@ -173,6 +175,7 @@ ActiveRecord::Schema.define(version: 20160803125410) do
     t.integer  "platform"
     t.integer  "special_price"
     t.decimal  "weight",            precision: 10, scale: 3
+    t.integer  "taggings_count",                             default: 0
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

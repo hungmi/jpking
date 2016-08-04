@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
 
   enum state: { placed: 0, delivered: 1, cancel: 2 }
-  enum payment: { credit: 0, atm: 1, deducted: 2 }
+  enum payment: { credit: 0, atm: 1, webatm: 2, deducted: 3 }
   enum delivery: { black_cat: 0, face: 1, cvs_711: 2, cvs_family: 3 }
 
   before_create :generate_order_num

@@ -2,7 +2,7 @@ class OrderItem < ActiveRecord::Base
   # enum state: { placed: 0, paid: 1, importing: 2, imported: 3, stocked: 4, packaged: 5, ready_to_deliver: 6, delivered: 7, cancel: 8, unavailable: 9, wait: 10 }
   enum state: { placed: 0, unavailable: 1, refunded: 2, wait: 3 }
   enum step: { importable: 0, importing: 1, imported: 2, stocked: 3, ready_to_deliver: 4, delivered: 5 }
-  scope :waiting, -> { where(is_paid: true).wait }
+  scope :wait_for_pay, -> { where(is_paid: false).wait }
   scope :paid, -> { where(is_paid: true) }
 
   belongs_to :order
@@ -48,7 +48,7 @@ class OrderItem < ActiveRecord::Base
 
   def price
     @order_item = OrderItem.includes(:product, :order).where(id: self.id).first
-    if @order_item.order.paid?
+    if @order_item.paid? || @order_item.wait?
       @order_item.ordered_price
     else
       @order_item.product.our_price
@@ -64,12 +64,8 @@ class OrderItem < ActiveRecord::Base
   end
 
   def now_state
-    if self.placed?
-      if self.paid?
-        return self.importable? ? "paid" : self.step
-      else
-        return "placed"
-      end
+    if self.paid?
+      return self.importable? ? "paid" : self.step
     else
       return self.state
     end

@@ -1,0 +1,16 @@
+<% @p2g_service = Pay2goService.new(order) %>
+<%= form_tag @p2g_service.check_pay_url, method: :post, id: "pay2go_form" do %>
+<%#= form_tag "https://capi.pay2go.com/MPG/mpg_gateway", method: :post do %>
+
+  <%= hidden_field_tag "MerchantID",      Pay2go.merchant_id %>
+  <%= hidden_field_tag "RespondType",     "JSON" %>
+  <%= hidden_field_tag "Version",         "1.2" %>
+
+  <%= hidden_field_tag "MerchantOrderNo", order.payment_info.merchant_order_no %>
+  <%= hidden_field_tag "TimeStamp",       order.created_at.to_i %>
+  <%= hidden_field_tag "Amt",             order.deducted_total %>
+
+  <%= hidden_field_tag "CheckValue",      @p2g_service.check_value_for_check_pay %>
+
+  <%= submit_tag "按我確認轉帳狀態", class: "btn btn-pink-alt btn-easier", style: "width: 100%;" %>
+<% end %>

@@ -20,6 +20,7 @@
       <th style="min-width: 75px;">台幣成本</th>
       <th style="min-width: 75px;">收購價</th>
       <th style="min-width: 75px;">售價</th>
+      <th style="min-width: 75px;">特價</th>
       <th style="min-width: 50px;">數量</th>
       <th style="min-width: 50px;"></th>
     </tr>
@@ -34,8 +35,8 @@
           <%= link_to product.jp_name.truncate(35), edit_product_path(product), class: "product-zh-name" %>
           <div class="amount-wrapper pull-right">
           <button href="#" class="btn btn-default minus number-btn">-</button>
-          <%= number_field_tag "order[order_items_attributes][][product_id]", product.id, class: "pretty order_item_product_id hidden", pattern: "[0-9]*", min: 0 %>
-          <%= number_field_tag "order[order_items_attributes][][amount]", nil, class: "pretty order_item_amount", pattern: "[0-9]*", min: 0 %>
+          <%#= number_field_tag "order[order_items_attributes][][product_id]", product.id, class: "pretty order_item_product_id hidden", pattern: "[0-9]*", min: 0 %>
+          <%#= number_field_tag "order[order_items_attributes][][amount]", nil, class: "pretty order_item_amount", pattern: "[0-9]*", min: 0 %>
           <button href="#" class="btn btn-default plus number-btn">+</button>
           </div>
         </td>
@@ -45,6 +46,7 @@
         <td><%= product.their_price %></td>
         <td><%#= product.purchase_price %></td>
         <td><%= product.our_price %></td>
+        <td><%= product.special_price %></td>
         <td><%#= product.quantity %></td>
         <td><%= link_to '刪除', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

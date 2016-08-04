@@ -19,8 +19,12 @@
 
   <%= hidden_field_tag "CREDIT",          "1" %>
   <%= hidden_field_tag "VACC",            "1" %>
+  <%= hidden_field_tag "WEBATM",          "1" %>
+  <%#= hidden_field_tag "CVS",             "1" %>
+  <%#= hidden_field_tag "BARCODE",         "1" %>
   <%= hidden_field_tag "CustomerURL",     pay2go_cc_notify_order_url(order.token) %>
   <%= hidden_field_tag "ReturnURL",       pay2go_cc_notify_order_url(order.token) %>
+  <%= hidden_field_tag "ClientBackURL",   order_url(order.token) %>
   <%= hidden_field_tag "CheckValue",      Pay2goService.new(order).check_value %>
 
   <%= submit_tag "前往支付頁面", class: "btn btn-pink-alt btn-easier", style: "width: 100%;" %>
