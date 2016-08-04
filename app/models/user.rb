@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   def total_paid_sum
     s = 0
-    self.orders.where.not(state: Order.states["paid"] || Order.states["delivered"]).each do |o|
+    self.orders.where.not("is_paid = ? OR state = ?", false, Order.states["cancel"]).each do |o|
       s += o.total
     end
     return s

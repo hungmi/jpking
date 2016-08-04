@@ -66,7 +66,7 @@ class OrdersController < ApplicationController
     else
       flash[:warning] = "很抱歉，目前系統忙碌中，請稍候再試一次，或聯絡我們。"
     end
-    redirect_to @order
+    redirect_to order_path(@order.token)
   end
 
   # GET /orders
@@ -243,7 +243,7 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.includes(:order_items, order_items: [:order, :variation, :product ] ).find_by_token(params[:id])
-      redirect_to :back unless @order.present?
+      redirect_to request.env["HTTP_REFERER"] unless @order.present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,21 +1,22 @@
-<div class="container responsive">
-<div class="btn-navs no-space">
-  <% OrderItem.steps.keys.each do |this_step| %>
-    <%= link_to admin_orders_path(scope: this_step), class: "btn" + "#{' active' if send('is_' + this_step + '?')}" do %>
-      <%= I18n.t("order_state.#{this_step}") %> <%= render_notification(instance_variable_get("@#{this_step}_count")) %>
+<div class="container responsive" style="margin-top: 20px;">
+  <%= notice_message %>
+  <div class="btn-navs no-space">
+    <% OrderItem.steps.keys.each do |this_step| %>
+      <%= link_to admin_orders_path(scope: this_step), class: "btn" + "#{' active' if send('is_' + this_step + '?')}" do %>
+        <%= I18n.t("order_state.#{this_step}") %> <%= render_notification(instance_variable_get("@#{this_step}_count")) %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
-<div style="margin: 10px 0px;">
-  <% if is_importing? %>
-    <%= link_to "將海渡商品加入海渡購物車", admin_add_to_etoile_cart_path, method: :post, class: "btn btn-info", data: { disable_with: '正在加入...' }, disabled: (true unless @etoile_order_items.present?) %>
-  <% end %>
-  <% if params["#{params[:scope]}_items_view_mode".to_sym] == "orders" %>
-    <%= link_to "按店家檢視", params.merge("#{params[:scope]}_items_view_mode".to_sym => "shops"), class: "btn btn-default" %>
-    <%= render "admin/partials/order_items_by_orders", orders: @orders %>
-  <% else %>
-    <%= link_to "按訂單檢視", params.merge("#{params[:scope]}_items_view_mode".to_sym => "orders"), class: "btn btn-default" %>
-    <%= render "admin/partials/order_items_by_shops", orders: @orders %>
-  <% end %>
-</div>
+  </div>
+  <div style="margin: 10px 0px;">
+    <% if is_importing? %>
+      <%= link_to "將海渡商品加入海渡購物車", admin_add_to_etoile_cart_path, method: :post, class: "btn btn-info", data: { disable_with: '正在加入...' }, disabled: (true unless @etoile_order_items.present?) %>
+    <% end %>
+    <% if params["#{params[:scope]}_items_view_mode".to_sym] == "orders" %>
+      <%= link_to "按店家檢視", params.merge("#{params[:scope]}_items_view_mode".to_sym => "shops"), class: "btn btn-default" %>
+      <%= render "admin/partials/order_items_by_orders", orders: @orders %>
+    <% else %>
+      <%= link_to "按訂單檢視", params.merge("#{params[:scope]}_items_view_mode".to_sym => "orders"), class: "btn btn-default" %>
+      <%= render "admin/partials/order_items_by_shops", orders: @orders %>
+    <% end %>
+  </div>
 </div>

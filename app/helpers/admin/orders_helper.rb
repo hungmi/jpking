@@ -6,12 +6,11 @@ module Admin::OrdersHelper
   end
 
   def render_order_item_next_state_btn(item)
-    if item.imported?
-      link_to "入庫", root_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
-    elsif item.importing?
-      link_to "完成採購", admin_imported_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
-    elsif item.paid?
-      link_to "採購", admin_importing_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
+    if item.delivered?
+      "已完成"
+    else
+      now_step_index = OrderItem.steps[item.step]
+      link_to I18n.t("order_state.#{OrderItem.steps.keys[now_step_index + 1]}"), admin_next_step_path(order_item_id: item.id), class: "btn btn-primary", style: "width: 33.33%;", method: :post
     end
   end
 

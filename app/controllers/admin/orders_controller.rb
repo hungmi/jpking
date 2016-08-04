@@ -15,42 +15,18 @@ class Admin::OrdersController < AdminController
     #@order_items = OrderItem.includes(:order, :product, product: [:links]).send(params[:scope])
   end
 
-  def importing
+  def next_step
     @order_item = OrderItem.find(params[:order_item_id])
-    if @order_item.present?
-      # @order_item.product.check_availability!
-      # @order_item = @order_item.reload
-      if @order_item.paid?
-        @order_item.importing!
-        flash[:success] = "加入訂購行列。"
-        redirect_to :back
-      # elsif @order_item.unavailable?
-      #   flash[:warning] = "此品項缺貨中。"
-      #   redirect_to :back
+    if @order_item.present? && @order_item.paid?
+      unless @order_item.delivered?
+        now_step_index = OrderItem.steps[@order_item.step]
+        @order_item.send("#{OrderItem.steps.keys[now_step_index + 1]}!")
+        flash[:success] = I18n.t("order_state.#{@order_item.reload.step}")
       end
     else
-      flash[:warning] = "此訂單品項不存在。"
-      redirect_to :back
+      flash[:warning] = "此訂單品項不存在 或 尚未付款。"
     end
-  end
-
-  def imported
-    @order_item = OrderItem.find(params[:order_item_id])
-    if @order_item.present?
-      # @order_item.product.check_availability!
-      # @order_item = @order_item.reload
-      if @order_item.importing?
-        @order_item.imported!
-        flash[:success] = "完成訂購。"
-        redirect_to :back
-      # elsif @order_item.unavailable?
-      #   flash[:warning] = "此品項缺貨中。"
-      #   redirect_to :back
-      end
-    else
-      flash[:warning] = "此訂單品項不存在。"
-      redirect_to :back
-    end
+    redirect_to :back
   end
 
   def unavailable

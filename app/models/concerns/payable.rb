@@ -38,8 +38,8 @@ module Payable
 
     if self.payment.present?
       self.order_items.map do |oi|
-        oi.update_column(:ordered_price, oi.product.our_price)
-        self.paid? ? oi.paid! : oi.wait!
+        oi.ordered!
+        oi.paid! if self.paid?
       end
     end
   end
@@ -52,8 +52,7 @@ module Payable
 
       if self.reload.deducted?
         self.order_items.map do |oi|
-          oi.update_column(:ordered_price, oi.product.our_price)
-          oi.paid!
+          oi.ordered! && oi.paid!
         end
       end
 

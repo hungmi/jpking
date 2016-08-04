@@ -50,9 +50,10 @@ Rails.application.routes.draw do
     end
     controller 'orders' do
       get "orders" => :index
-      post "importing"
-      post "imported"
+      # post "importing"
+      # post "imported"
       post "unavailable"
+      post "next_step"
     end
     get "panel"
     get "fb_bot"
