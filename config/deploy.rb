@@ -1,4 +1,4 @@
-lock '3.6.0'
+lock '3.6.1'
 
 set :application, 'jpking'
 set :repo_url, 'git@github.com:hungmi/jpking.git' # Edit this to match your repository

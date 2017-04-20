@@ -1,0 +1,49 @@
+<div class="col-xs-12 item">
+  <div class="col-xs-3 col-sm-3">
+    <% if product.attachments_count > 0 %>
+      <%= link_to product do %>
+        <%= image_tag product.attachments.first.image.url, class: "img100" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-xs-9 col-sm-6">
+    <%= link_to product.name, product %>
+    <% order_items.each_with_index do |item, index| %>
+      <div class="clearfix" style="margin-top: 10px;">
+      <%= form_for item, url: order_item_path(item.id), remote: true do |f| %>
+        <b class="pull-right">NT$ <%= item.price %></b>
+        <%= item.variation.present? ? "#{item.variation.jp_name} x" : "數量：" %>
+        <% if @order.cancelable? %>
+          <%= number_field_tag :group_quantity, (item.quantity/product.wholesale_amount) || 1, { style: "width: 40px;", max: 999, pattern: "[0-9]*", data: { whole_sale: product.wholesale_amount } } %>組，共
+          <strong class="order-item-quantity-text"><%= item.quantity %></strong>
+          <%= f.number_field :quantity, { style: "width: 40px; margin: 0px;", max: 999, pattern: "[0-9]*", step: product.wholesale_amount, class: "hidden" } %>個
+          <%#= dead_or_alive(product) %>
+          <br>
+          <div style="margin-top:10px;">
+            <%= f.button "確定更新", class: "btn btn-primary", style: "display: none; width: 33.33%;", data: { disable_with: "請稍等..." } %>
+            <% unless item.paid? %>
+              <div class="pull-right">
+                <%= link_to "下次再買", root_path %>
+                <% if @order.cancelable? %>
+                   |
+                  <%= link_to "刪除", order_item_path(item), method: :delete, data: { confirm: "從訂單移除\n#{item.name}#{' - ' + item.variation.jp_name if item.variation.present?}？" } %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <%= item.quantity %>
+          <%#= dead_or_alive(product) %>
+        <% end %>
+      <% end %>
+      </div>
+      <div><%= I18n.t("order_item_basic_status").values.join(" > ") %></div>
+      <span class="pull-right"><%= item.i18n_state %>
+      <% if item.refundable? %>
+        <%= link_to "退款", refund_order_item_path(item), class: "btn btn-default", method: :post, data: { confirm: "確定要轉為購物金？" } %>
+      <% end %>
+      </span>
+      <hr>
+    <% end %>
+  </div>
+</div>

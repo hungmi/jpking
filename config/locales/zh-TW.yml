@@ -25,6 +25,13 @@ zh-TW:
     face: 面交
     cvs_711: 7-11 交貨便
     cvs_family: 全家店到店
+  order_item_basic_status:
+    placed: 尚未付款
+    paid: 已付款
+    importing: 進貨中
+    stocked: 已抵台
+    ready_to_deliver: 配送中
+    delivered: 已送達
 
   activerecord:
     attributes:
